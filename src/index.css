@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-900 text-white antialiased selection:bg-pink-500/30 font-sans cursor-default;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .ios-blur {
+    @apply backdrop-blur-3xl bg-black/70;
+  }
+  
+  .gradient-avatar {
+    @apply p-[3px] rounded-full;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+
+  .spotify-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+  }
+  
+  .spotify-scroll::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.mobile-container {
+  @apply w-full lg:max-w-none mx-auto min-h-screen bg-black shadow-2xl relative flex flex-col lg:flex-row;
+}
+
+.spotify-gradient {
+  background: linear-gradient(to bottom, #2a2a2a 0%, #000000 100%);
+}
