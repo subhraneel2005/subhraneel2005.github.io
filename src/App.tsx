@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
 import { profile, stats, projects, socials, experience, skills } from './data';
 import { 
   Github, 
@@ -11,13 +12,15 @@ import {
   Home,
   ExternalLink,
   Briefcase,
-  UserPlus
+  UserPlus,
+  FileText
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
 export default function App() {
   const [activeTab, setActiveTab] = React.useState<'feed' | 'links'>('feed');
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -98,6 +101,13 @@ export default function App() {
                   Follow
                 </a>
               </div>
+              <button
+                onClick={() => navigate('/resume')}
+                className="w-full mt-2 h-9 border border-neutral-700 hover:border-neutral-500 text-neutral-300 active:scale-95 transition-all text-sm font-bold rounded-lg flex items-center justify-center gap-2"
+              >
+                <FileText className="w-4 h-4" />
+                View Resume
+              </button>
             </div>
           </header>
 
@@ -243,7 +253,15 @@ export default function App() {
             <Home className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
             <span className="text-[9px] font-bold">Home</span>
           </button>
-          
+
+          <button 
+            onClick={() => navigate('/resume')}
+            className="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors"
+          >
+            <FileText className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <span className="text-[9px] font-bold">Resume</span>
+          </button>
+
           <a href="https://github.com/subhraneel2005" target="_blank" className="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors">
             <Github className="w-6 h-6 group-hover:scale-110 transition-transform" />
             <span className="text-[9px] font-bold">Code</span>

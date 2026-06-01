@@ -55,7 +55,7 @@ export const projects = [
     description: "A personal knowledge graph/second brain that connects ideas across sources like youtube videos, research papers, blogs and articles, X posts/arcticles.",
     github: "https://github.com/subhraneel2005/usecerebr",
     tags: ["Python", "FastAPI", "Qdrant", "OpenAI", "Redis", "Docker"],
-    image: "https://raw.githubusercontent.com/subhraneel2005/me-link-in-bio/main/public/usecerebr.png"
+    image: "https://raw.githubusercontent.com/subhraneel2005/subhraneel2005.github.io/main/public/usecerebr.png"
   },
   {
     title: "AI Terminal Coding Agent",
