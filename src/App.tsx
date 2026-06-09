@@ -73,7 +73,7 @@ export default function App() {
         <meta property="og:title" content="Subhraneel Goswami" />
         <meta property="og:description" content="Building, Writing, Breaking. Documenting 0 - ∞" />
         <meta property="og:image" content="https://subhraneel2005.github.io/opengraph.png" />
-        <meta property="og:url" content="https://subhraneel2005.github.io/#/" />
+        <meta property="og:url" content="https://subhraneel2005.github.io/" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://subhraneel2005.github.io/opengraph.png" />

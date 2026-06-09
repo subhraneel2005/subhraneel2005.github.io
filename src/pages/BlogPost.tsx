@@ -80,7 +80,7 @@ export default function BlogPost() {
   const imageUrl = post.cover.startsWith('http')
     ? post.cover
     : `https://subhraneel2005.github.io${post.cover}`
-  const postUrl = `https://subhraneel2005.github.io/#/blogs/${post.slug}`
+  const postUrl = `https://subhraneel2005.github.io/blogs/${post.slug}`
 
   return (
     <>

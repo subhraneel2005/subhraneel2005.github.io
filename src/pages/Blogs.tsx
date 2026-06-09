@@ -46,7 +46,7 @@ export default function Blogs() {
         <meta property="og:title" content="Blogs — Subhraneel Goswami" />
         <meta property="og:description" content="thoughts, experiments, and things I've built" />
         <meta property="og:image" content="https://subhraneel2005.github.io/opengraph.png" />
-        <meta property="og:url" content="https://subhraneel2005.github.io/#/blogs" />
+        <meta property="og:url" content="https://subhraneel2005.github.io/blogs" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>

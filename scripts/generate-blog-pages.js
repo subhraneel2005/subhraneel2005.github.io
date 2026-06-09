@@ -66,14 +66,6 @@ ${distIndex.match(/<link[^>]+rel="stylesheet"[^>]*>/)?.[0] || ''}
 </head>
 <body style="overflow-x: hidden;">
 <div id="root"></div>
-<script>
-  (function() {
-    var hash = '/blogs/${post.slug}';
-    if (window.location.hash !== '#/' + hash.slice(1)) {
-      window.location.replace('/#/' + hash.slice(1));
-    }
-  })();
-</script>
 ${distIndex.match(/<script[^>]+src="\/assets\/index-[^"]+"[^>]*><\/script>/)?.[0] || ''}
 </body>
 </html>`
@@ -83,3 +75,6 @@ ${distIndex.match(/<script[^>]+src="\/assets\/index-[^"]+"[^>]*><\/script>/)?.[0
   fs.writeFileSync(path.join(dir, 'index.html'), html)
   console.log(`Generated ${dir}/index.html`)
 }
+
+fs.writeFileSync('dist/404.html', distIndex)
+console.log('Generated dist/404.html')
