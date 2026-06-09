@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { MDXProvider } from '@mdx-js/react'
 import { ArrowLeft, Calendar } from 'lucide-react'
 import { mdxComponents } from '../components/mdx'
@@ -76,8 +77,24 @@ export default function BlogPost() {
     return <NotFound />
   }
 
+  const imageUrl = post.cover.startsWith('http')
+    ? post.cover
+    : `https://subhraneel2005.github.io${post.cover}`
+  const postUrl = `https://subhraneel2005.github.io/#/blogs/${post.slug}`
+
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>{post.title} — Subhraneel Goswami</title>
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:url" content={postUrl} />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={imageUrl} />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-2xl px-5 py-10 sm:py-16">
         <Link to="/blogs" className="inline-block mb-10">
           <Button variant="ghost" size="sm">
@@ -116,6 +133,16 @@ export default function BlogPost() {
           </div>
         </header>
 
+        {post.cover && (
+          <div className="mb-10 rounded-xl overflow-hidden border border-border/50">
+            <img
+              src={post.cover}
+              alt={post.title}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        )}
+
         <ErrorBoundary>
           <Suspense fallback={<LoadingState />}>
             <div className="blog-content">
@@ -136,5 +163,6 @@ export default function BlogPost() {
         </div>
       </div>
     </div>
+    </>
   )
 }

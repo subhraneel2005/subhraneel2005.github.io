@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async'
 import { ArrowLeft } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
@@ -39,7 +40,17 @@ export default function Blogs() {
   )
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Blogs — Subhraneel Goswami</title>
+        <meta property="og:title" content="Blogs — Subhraneel Goswami" />
+        <meta property="og:description" content="thoughts, experiments, and things I've built" />
+        <meta property="og:image" content="https://subhraneel2005.github.io/opengraph.png" />
+        <meta property="og:url" content="https://subhraneel2005.github.io/#/blogs" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="max-w-2xl mx-auto px-5 py-10 sm:py-16">
         <div className="flex items-center gap-3 mb-10">
           <Link to="/">
@@ -125,5 +136,6 @@ export default function Blogs() {
         </div>
       </div>
     </div>
+    </>
   )
 }

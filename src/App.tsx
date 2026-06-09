@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
 import { MapPin } from 'lucide-react'
@@ -66,7 +67,18 @@ export default function App() {
     : { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 } }
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Subhraneel Goswami</title>
+        <meta property="og:title" content="Subhraneel Goswami" />
+        <meta property="og:description" content="Building, Writing, Breaking. Documenting 0 - ∞" />
+        <meta property="og:image" content="https://subhraneel2005.github.io/opengraph.png" />
+        <meta property="og:url" content="https://subhraneel2005.github.io/#/" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://subhraneel2005.github.io/opengraph.png" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-3xl px-5 py-10 sm:py-16">
         <nav className="flex items-center justify-between mb-10">
           <Link
@@ -360,5 +372,6 @@ export default function App() {
         </motion.footer>
       </div>
     </div>
+    </>
   )
 }
