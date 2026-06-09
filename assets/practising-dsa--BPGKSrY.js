@@ -1,4 +1,4 @@
-import{u as t,j as n}from"./index-Cqsefc6m.js";function s(i){const e={br:"br",code:"code",em:"em",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...t(),...i.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h1,{children:"learning and practicing"}),`
+import{u as t,j as n}from"./index-Bp-AlQ-s.js";function s(i){const e={br:"br",code:"code",em:"em",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...t(),...i.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h1,{children:"learning and practicing"}),`
 `,n.jsx(e.p,{children:"for the past few days, i’ve been learning binary search, solved some practice problems and completed 6 leetcode questions so far."}),`
 `,n.jsx(e.p,{children:"before getting into details, a few important things to mention:"}),`
 `,n.jsxs(e.ul,{children:[`
