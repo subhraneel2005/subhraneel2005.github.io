@@ -15,7 +15,7 @@ export default function Resume() {
           Back
         </button>
         <a
-          href="/Subhraneel_Goswami_SWE.pdf"
+          href="/Subhraneel_Goswami_SDE.pdf"
           download
           className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-xl hover:bg-neutral-200 active:scale-95 transition-all"
         >
@@ -25,7 +25,7 @@ export default function Resume() {
       </div>
       <div className="flex-1 min-h-0">
         <iframe
-          src="/Subhraneel_Goswami_SWE.pdf"
+          src="/Subhraneel_Goswami_SDE.pdf"
           className="w-full h-full border-0"
           title="Resume PDF"
         />

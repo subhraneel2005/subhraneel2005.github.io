@@ -1,0 +1,224 @@
+---
+title: "I Built a Mini Claude Code from Scratch. Here's What I Learned"
+date: 2026-02-01
+excerpt: "reverse engineering claude code and building my own coding agent from scratch"
+cover: "/images/blog3.png"
+tags: ["coding-agent", "typescript", "ai", "cli", "sidequests"]
+---
+
+A few months ago I went down a rabbit hole: reading OpenCode's GitHub repo, studying screenshots of Claude Code's behavior, reverse engineering the flows. I wanted to understand how these terminal coding agents actually work under the hood, not just use them, but build one. This post is about what I built, the real technical challenges I hit, and what I'm planning next.
+
+---
+
+## What I Built
+
+A CLI-based AI coding agent. You open your terminal, run it inside a project, describe a task, and the agent autonomously reads files, edits them, runs commands, searches the web, and commits to Git. This happens all while asking for your approval before changing any of your code.
+
+I started it as a simple sidequest, to read and implement things side by side. It's built in TypeScript, runs on Bun, uses Vercel's AI SDK (Agents, Tools and Loop Control), and uses Google Gemini 2.5 Flash as the model (because it has a free tier, lol), and the terminal UI is built with Ink, I used it because it is very similar to writing frontends in React.
+
+Here's a rough breakdown of what the coding agent can do:
+
+- **filesystem tools**: read, write, search, and edit files
+- **bash tools**: `ls`, `pwd`, `grep`
+- **git tools**: commit, push, pull, create/manage PRs and issues via github cli
+- **command execution**: run `npm`, `pnpm`, `python`, `pip`, `cargo`, etc.
+- **web tools**: search the web with any query, fetch URLs
+- **a planner sub-agent**: breaks big tasks into smaller todos
+- **a memory system**: persists context across sessions in `.agent/` markdown files
+
+Everything is strictly typed end-to-end with Zod schemas, tools have typed inputs and outputs, which I'll get into below.
+
+---
+
+## The Architecture
+
+The core is a **tool-calling agent loop**. The model receives your prompt, a list of available tools, and the conversation history. It decides which tool to call, the agent executes it, the result is fed back, and the loop continues until the task is done or the model stops requesting tools.
+
+I used Vercel's AI SDK to handle the streaming and loop control, and registered all my tools in a central `tools-registry.ts`:
+
+```ts
+export const tools = {
+  write_file: writeFileTool,
+  read_file: readFileTool,
+  search_files: searchFilesTool,
+  edit_file: editFileTool,
+  ls: lsTool,
+  pwd: pwdTool,
+  grep: grepTool,
+  git_tool: gitTool,
+  // planner sub-agent tools
+  createTodoTool,
+  createAllTodosTool,
+  updateTodoStatusTool,
+  getNextPendingTodoTool,
+  checkIfAllTodosAreCompletedTool,
+  // memory + web
+  write_memory: writeMemoryTool,
+  run_command: runCommandTool,
+  web_search: webSearchTool,
+  web_fetch: webfetchTool,
+} satisfies ToolSet;
+```
+
+Every tool is defined with a Zod schema for its input and output. This gives the model a clear, typed contract for what each tool expects and returns, and it gives me safe failure handling throughout , if a tool call has malformed input, Zod can catch it before it touches the filesystem.
+
+---
+
+## Challenge 1: The Edit File Tool and Human-in-the-Loop
+
+This was the an interesting problem to solve.
+
+All other tools: reading files, running commands, searching can execute automatically without any user intervention. But file editing is destructive. If the agent makes a wrong edit, you want a chance to catch it before it's directly written to disk.
+
+The pattern I took inspiration (from studying Claude Code and OpenCode) is:
+
+1. agent calls `read_file` first to read the current file content
+2. agent calls `edit_file` with the old string and the new string it wants to substitute (diff)
+3. **before writing**, show the user a colored diff (red for removed lines, green for added lines)
+4. wait for the user to approve or reject
+
+The tricky part is step 4. The agent loop is running. I can't just `await` a user keypress inside a tool execution without some way to pause the loop itself.
+
+The way I solved this: Vercel's AI SDK's `streamText` (and `generateText`) exposes a `stopWhen` parameter on the loop control. I use this to pause the agent loop when the edit tool is waiting for approval. The TUI sets an `isApproved` flag asynchronously, the user sees the diff rendered in the terminal via Ink components, presses a key to approve or reject, the flag flips, and the loop resumes or the edit is discarded.
+
+The `isApproved` field is actually part of the edit tool's input schema:
+
+```ts
+export const EditFileInputSchema = z.object({
+  filename: z.string(),
+  folder: z.string().optional(),
+  oldStr: z.string(),
+  newStr: z.string(),
+  isApproved: z.boolean().optional().describe("Needs approval before writing new changes"),
+});
+```
+
+And the output schema carries a `needsApproval` flag back:
+
+```ts
+needsApproval: z.boolean().optional().describe(
+  "Needs human approval to be true for the agent to write the changes in the file"
+)
+```
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bs5xtvu7124y3h6ssrlx.png)
+
+This creates a clear handshake: the tool signals it needs approval, the loop pauses, the human decides, the loop resumes. Everything else runs autonomously.
+
+I also added **path traversal protection**, the agent cannot operate outside the project root directory. Every file path is validated against the root before any read or write happens.
+
+---
+
+## Challenge 2: The Planner Sub-Agent
+
+For small, focused tasks, the main agent handles everything directly. But when a user gives a bigger, more open-ended task like "refactor this module", "add authentication to my nodejs backend", a single flat loop gets difficult to handle.
+
+My solution was a **planner sub-agent**. The main agent calls it as a tool when it detects a bigger task. The planner sub-agent has its own system prompt focused entirely on task decomposition. It breaks the task down into a list of structured todos, each with:
+
+- A unique ID
+- The task description
+- A status (`not completed`, `ongoing`, `completed`)
+- A priority (1–5)
+
+These are typed with Zod too:
+
+```ts
+export const SingleTodoSchema = z.object({
+  id: z.string(),
+  todo: z.string(),
+  status: z.enum(["completed", "not completed", "ongoing"]).default("not completed"),
+  priority: z.number().min(1).max(5).default(3),
+});
+```
+
+Once the planner creates the todos, the main agent picks them up one by one using `getNextPendingTodoTool`, executes them using the available filesystem/git/web tools, and marks each one complete before moving to the next. The TUI renders a live todo list so you can watch the agent work through the task.
+
+Right now this is **synchronous**, so one task at a time. That's the current limitation that I'm planning to address next.
+
+---
+
+## What's Next: Parallel Sub-Agents
+
+The natural evolution of the planner is running multiple smaller agents in parallel, each picking up one todo from the breakdown independently. But this introduces an obvious conflict problem: what if two agents try to edit the same file at the same time?
+
+My planned approach is to solve this at the **task metadata level**, not at the execution level. When the planner sub-agent breaks down a task, each todo will also carry metadata about which files it needs to touch:
+
+```ts
+// rough idea, not yet implemented
+{
+  id: "task-3",
+  todo: "Add input validation to auth.ts",
+  files: ["src/auth.ts", "src/validators.ts"], (not guessed, these will be grepped/searched using the tools)
+  status: "not completed",
+  priority: 2
+}
+```
+
+When a smaller agent picks up a task, it only has access to the files assigned to it. The planner ensures no two tasks share the same file. This way, parallel agents work completely independently with well-defined boundaries, no conflict resolution at runtime, because the conflict is prevented structurally at planning time. And to maintain the bigger context the smaller agents will update the main agent about their current status (when it gets updated), e.g: "task1 failed", "task2 succeded", "task 3 in-progress". 
+
+---
+
+## Why Gemini 2.5 Flash?
+
+Cause it has a generous free tier. When you're building something from scratch and running dozens of test runs a day, it matters.
+
+The plan is to make the **model configurable**, so the user will be able to select their **provider** and **model** and bring their own API key. The agent's tool-calling logic doesn't care which model is underneath as long as it supports function/tool calling.
+
+---
+
+## The TUI: Ink (React for Terminals)
+
+The terminal UI is built with [Ink], which lets you write React components that render in the terminal. If you know React, there's almost no learning curve.
+
+I used it for:
+- rendering the diff display during file edits (the red/green approval screen) + used the "diff" npm package as well.
+- showing the live todo list as the planner sub-agent creates and the main agent completes tasks
+- the thinking/loading indicators while the model is streaming
+- the GitHub activity log component
+- the text input field for user prompts
+
+Basically it gets the job done with a simple, clean UI.
+
+---
+
+## Memory System
+
+One thing I wanted from the start was for the agent to remember things across sessions. And get more personalised based on the user. The memory system stores three types of information in a `.agent/` folder in your project root:
+
+| File | What it stores |
+|------|---------------|
+| `USER.md` | Your preferences and habits (e.g. "prefers pnpm") |
+| `PROJECT.md` | Facts about the repo (e.g. "uses Next.js, tests in /tests") |
+| `AGENT.md` | Lessons the agent learned (e.g. "avoid editing generated files") |
+
+The agent can call `write_memory` tool at any point of time to store something. On the next session, these files are loaded into the system prompt so the agent already knows the context without you having to re-explain it.
+
+---
+
+## What I'd Do Differently
+
+A few things I'd approach differently if I started over:
+
+- **start with the edit tool's approval flow first.** It touches the most parts of the system (tool schema, loop control, TUI state, async coordination) and sets the pattern for everything else.
+- **design the todo schema with file metadata from the beginning.** Adding it later to support parallel agents means touching the planner sub-agent's prompt, the schema, and the main agent's task-picking logic all at once.
+- **Add a proper token tracking display earlier.** right now it's in the upcoming features list.
+
+---
+
+## Where to Find It
+
+Here's the github repo: https://github.com/subhraneel2005/sidequests
+I have started to polish this project again and will work on some improvements. You can check them in the issues section of the repo, everything I do will be completely transparent.
+
+If you're thinking about building something similar, the best way to start is reading how tool-calling, loops, sub-agents and orchestration actually work in whatever AI SDK you're using. The rest is just building on top of that foundation.
+
+---
+
+## Thanks for Reading
+
+If you made it this far, I genuinely appreciate. This was a fun project to build and an even more fun one to write about.
+I keep posting about my projects, experiments, and side quests on X. If you want to follow along, here's my X(twitter) account: [@subhraneeltwt](https://x.com/subhraneeltwt)
+
+And if you have thoughts, feedback, criticism, questions, or just want to tell me something is wrong or could be done better, DM me, drop a comment, quote the post, whatever you want. I'm always looking to learn. Nothing is too small to share. See ya' :)
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zijf3vodp12kjpowlv3e.png)

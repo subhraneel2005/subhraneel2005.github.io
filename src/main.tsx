@@ -3,6 +3,9 @@ import {createRoot} from 'react-dom/client';
 import {HashRouter, Routes, Route} from 'react-router-dom';
 import App from './App.tsx';
 import Resume from './pages/Resume.tsx';
+import Cafe from './pages/Cafe.tsx';
+import Blogs from './pages/Blogs.tsx';
+import BlogPost from './pages/BlogPost.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
@@ -11,6 +14,9 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/cafe" element={<Cafe />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/:slug" element={<BlogPost />} />
       </Routes>
     </HashRouter>
   </StrictMode>,
