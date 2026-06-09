@@ -1,35 +1,39 @@
-import { ArrowLeft, Download } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Download } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
 
 export default function Resume() {
-  const navigate = useNavigate();
-
   return (
-    <div className="h-screen w-screen bg-black flex flex-col overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 shrink-0 border-b border-neutral-800">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-sm font-bold text-neutral-400 hover:text-white transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </button>
-        <a
-          href="/Subhraneel_Goswami_SDE.pdf"
-          download
-          className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-xl hover:bg-neutral-200 active:scale-95 transition-all"
-        >
-          <Download className="w-4 h-4" />
-          Download
-        </a>
-      </div>
-      <div className="flex-1 min-h-0">
-        <iframe
-          src="/Subhraneel_Goswami_SDE.pdf"
-          className="w-full h-full border-0"
-          title="Resume PDF"
-        />
+    <div className="min-h-screen bg-background">
+      <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-16">
+        <div className="flex items-center justify-between mb-8">
+          <Link to="/">
+            <Button variant="ghost" size="sm">
+              <ArrowLeft className="size-3.5" aria-hidden="true" />
+              Home
+            </Button>
+          </Link>
+          <a href="/Subhraneel_Goswami_SDE.pdf" download>
+            <Button variant="outline" size="sm">
+              <Download className="size-3.5" aria-hidden="true" />
+              Download
+            </Button>
+          </a>
+        </div>
+
+        <h1 className="text-2xl font-semibold tracking-tight mb-1">Resume</h1>
+        <p className="text-sm text-muted-foreground mb-8">
+        Backend & Applied AI Engineer
+        </p>
+
+        <div className="rounded-xl overflow-hidden border border-border bg-card shadow-sm">
+          <iframe
+            src="/Subhraneel_Goswami_SDE.pdf"
+            className="w-full h-[80vh] border-0"
+            title="Subhraneel Goswami Resume"
+          />
+        </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,307 +1,364 @@
-import * as React from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { useNavigate } from 'react-router-dom';
-import { profile, stats, projects, socials, experience, skills } from './data';
+import { Link } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { MapPin } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
-  Github,
-  Linkedin,
-  Share2,
-  Grid3X3,
-  Clapperboard,
-  Play,
-  Home,
-  ExternalLink,
-  Briefcase,
-  UserPlus,
-  FileText,
-  Coffee,
-  BookOpen
-} from 'lucide-react';
-import { cn } from './lib/utils';
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Separator } from '@/components/ui/separator'
+import { profile, socials, projects, experience, skills, education } from './data'
+
+const companyLogos: Record<string, string> = {
+  'Jobsforce.ai': '/jobsforce-logo.webp',
+  'Kasukabe Labs (Web and App dev Agency)': '/kasukabe-labs-logo.jpg',
+}
+
+function useReducedMotion() {
+  const [prefersReduced, setPrefersReduced] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReduced(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return prefersReduced
+}
+
+const sections = ['Projects', 'Experience', 'Education', 'Skills'] as const
 
 export default function App() {
-  const [activeTab, setActiveTab] = React.useState<'feed' | 'links'>('feed');
-  const scrollRef = React.useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  const reduced = useReducedMotion()
+  const [activeSection, setActiveSection] = useState('')
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: profile.name,
-          text: profile.bio,
-          url: window.location.href,
-        });
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    } else {
-      alert('Link copied to clipboard!');
-      navigator.clipboard.writeText(window.location.href);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setActiveSection(e.target.id)
+          }
+        }
+      },
+      { rootMargin: '-80px 0px -60% 0px' },
+    )
+    for (const id of sections) {
+      const el = document.getElementById(id.toLowerCase())
+      if (el) observer.observe(el)
     }
-  };
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollTo = useCallback((id: string) => {
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }, [])
+
+  const fadeUp = reduced
+    ? {}
+    : { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 } }
 
   return (
-    <div className="min-h-screen bg-black lg:bg-neutral-900 lg:py-6 font-sans selection:bg-pink-500/30">
-      {/* Container Shell */}
-      <div className="mobile-container overflow-hidden lg:max-w-[1000px] lg:rounded-[2.5rem] lg:border lg:border-neutral-800 lg:h-[85vh] lg:my-auto">
-        
-        {/* SIDEBAR FOR DESKTOP / TOP FOR MOBILE */}
-        <div className="w-full lg:w-[380px] lg:h-full lg:overflow-y-auto lg:border-r lg:border-neutral-900 bg-black flex flex-col shrink-0">
-          {/* Header Area */}
-          <header className="px-5 pt-8 pb-4 sticky top-0 lg:static z-50 bg-black">
-            <div className="flex justify-between items-center mb-6">
-              <span className="font-extrabold text-xl tracking-tight">{profile.username}</span>
-              <div className="flex gap-4">
-                <Share2 className="w-6 h-6 cursor-pointer hover:text-white/60 transition-colors" onClick={handleShare} />
-              </div>
-            </div>
-
-            <div className="flex gap-8 lg:flex-col lg:items-start lg:gap-4 items-center mb-6">
-              <div className="gradient-avatar">
-                <div className="w-[86px] h-[86px] lg:w-24 lg:h-24 rounded-full border-[3px] border-black overflow-hidden bg-neutral-900">
-                  <img src={profile.avatar} alt="Profile" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                </div>
-              </div>
-              
-              <div className="flex-1 flex justify-between px-2 lg:px-0 lg:w-full lg:justify-start lg:gap-8 lg:mt-2">
-                {stats.map(stat => (
-                  <div key={stat.label} className="text-center lg:text-left">
-                    <p className="font-extrabold text-lg lg:text-xl">{stat.value}</p>
-                    <p className="text-[11px] font-medium text-neutral-400 capitalize">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <p className="font-bold text-sm tracking-tight lg:text-base">{profile.name}</p>
-                <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-neutral-900 rounded-md mt-1 border border-white/5">
-                  <Briefcase className="w-3 h-3 text-blue-400" />
-                  <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{profile.title}</span>
-                </div>
-                <p className="text-sm mt-2 font-medium text-white/80 leading-relaxed max-w-[90%]">
-                  {profile.bio}
-                </p>
-              </div>
-
-              {/* TikTok Style Buttons */}
-              <div className="flex gap-2 pt-2 lg:pt-4">
-                <a 
-                  href={`mailto:${profile.email}`}
-                  className="flex-1 h-9 bg-neutral-800 hover:bg-neutral-700 active:scale-95 transition-all text-sm font-bold rounded-lg flex items-center justify-center gap-2"
-                >
-                  Hire Me
-                </a>
-                <a 
-                  href={socials.find(s => s.name === 'GitHub')?.url}
-                  target="_blank"
-                  className="flex-1 h-9 bg-white text-black active:scale-95 transition-all text-sm font-bold rounded-lg flex items-center justify-center gap-2"
-                >
-                  <UserPlus className="w-4 h-4" />
-                  Follow
-                </a>
-              </div>
-              <button
-                onClick={() => navigate('/resume')}
-                className="w-full mt-2 h-9 border border-neutral-700 hover:border-neutral-500 text-neutral-300 active:scale-95 transition-all text-sm font-bold rounded-lg flex items-center justify-center gap-2"
-              >
-                <FileText className="w-4 h-4" />
-                View Resume
-              </button>
-            
-              <button
-                onClick={() => navigate('/blogs')}
-                className="w-full mt-2 h-9 border border-neutral-700 hover:border-neutral-500 text-neutral-300 active:scale-95 transition-all text-sm font-bold rounded-lg flex items-center justify-center gap-2"
-              >
-                <BookOpen className="w-4 h-4" />
-                Blog
-              </button>
-            </div>
-          </header>
-
-          {/* Highlights Section */}
-          <section className="px-5 py-4 overflow-x-auto spotify-scroll flex lg:grid lg:grid-cols-2 gap-4 bg-black lg:mt-auto lg:pb-8">
-            {socials.map(social => (
-              <a 
-                key={social.name} 
-                href={social.url} 
-                target="_blank" 
-                className="flex flex-col items-center lg:flex-row lg:bg-neutral-900 lg:p-3 lg:rounded-xl lg:border lg:border-white/5 gap-1.5 lg:gap-3 shrink-0 group transition-all hover:bg-neutral-800"
-              >
-                <div className="w-16 h-16 lg:w-8 lg:h-8 rounded-full border-[1.5px] border-neutral-800 lg:border-0 p-1 lg:p-0 flex items-center justify-center group-hover:border-neutral-400 transition-colors">
-                  <div className="w-full h-full lg:w-auto lg:h-auto bg-neutral-900 lg:bg-transparent rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                    <social.icon className="w-6 h-6 lg:w-4 lg:h-4 text-white/80" />
-                  </div>
-                </div>
-                <span className="text-[10px] lg:text-xs font-bold text-neutral-500 group-hover:text-white transition-colors">{social.name}</span>
-              </a>
-            ))}
-          </section>
-        </div>
-
-        {/* FEED / CONTENT AREA */}
-        <div className="flex-1 flex flex-col min-h-0 bg-black">
-          {/* Tab Selection */}
-          <div className="flex border-b border-neutral-900 bg-black sticky top-[160px] lg:top-0 z-40">
-            <button 
-              onClick={() => setActiveTab('feed')}
-              className={cn(
-                "flex-1 flex justify-center py-3 border-b-2 transition-colors",
-                activeTab === 'feed' ? "border-white text-white" : "border-transparent text-neutral-500"
-              )}
-            >
-              <Grid3X3 className="w-6 h-6" />
-            </button>
-            <button 
-              onClick={() => setActiveTab('links')}
-              className={cn(
-                "flex-1 flex justify-center py-3 border-b-2 transition-colors",
-                activeTab === 'links' ? "border-white text-white" : "border-transparent text-neutral-500"
-              )}
-            >
-              <Clapperboard className="w-6 h-6" />
-            </button>
+    <div className="min-h-screen bg-background">
+      <div className="mx-auto max-w-3xl px-5 py-10 sm:py-16">
+        <nav className="flex items-center justify-between mb-10">
+          <Link
+            to="/"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {profile.username}
+          </Link>
+          <div className="flex items-center gap-1">
+            <Link to="/blogs">
+              <Button variant="secondary" size="sm">
+                Blogs
+              </Button>
+            </Link>
+            <Link to="/resume">
+              <Button variant="secondary" size="sm">
+                Resume
+              </Button>
+            </Link>
           </div>
-
-          <div className="flex-1 overflow-y-auto spotify-scroll" ref={scrollRef}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                className="p-4 md:p-8 space-y-6 pb-24"
-              >
-                {activeTab === 'feed' ? (
-                  <>
-                    <div className="flex items-center justify-between px-1 mb-2">
-                      <h2 className="text-xl font-black tracking-tighter">Featured Projects</h2>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {projects.map((project, i) => (
-                        <motion.a
-                          key={project.id}
-                          href={project.github}
-                          target="_blank"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.1 }}
-                          className="group block relative bg-[#121212] rounded-2xl border border-white/5 overflow-hidden hover:border-white/20 transition-all shadow-xl"
-                        >
-                          <div className="aspect-video w-full bg-neutral-900 relative">
-                             <img 
-                               src={project.image} 
-                               alt={project.title} 
-                               className="w-full h-full object-contain"
-                               referrerPolicy="no-referrer"
-                             />
-                             <div className="absolute inset-0 bg-black/5" />
-                             <div className="absolute bottom-4 right-4 w-12 h-12 bg-[#1DB954] rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100">
-                               <Play className="w-5 h-5 text-black" fill="black" />
-                             </div>
-                          </div>
-                          <div className="p-4">
-                            <div className="flex justify-between items-start mb-2">
-                              <h3 className="font-extrabold text-lg tracking-tight group-hover:text-[#1DB954] transition-colors">{project.title}</h3>
-                              <ExternalLink className="w-4 h-4 opacity-40" />
-                            </div>
-                            <p className="text-white/60 text-sm font-medium leading-relaxed mb-4">
-                              {project.description}
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                               {project.tags.map(t => (
-                                 <span key={t} className="text-[10px] font-black uppercase text-white/30 tracking-tight border border-white/5 px-2 py-0.5 rounded">#{t}</span>
-                               ))}
-                            </div>
-                          </div>
-                        </motion.a>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                     <div className="space-y-6">
-                       <h2 className="text-xl font-black tracking-tighter px-1">Experience</h2>
-                       {experience.map((exp, i) => (
-                         <div key={i} className="bg-neutral-900/50 p-4 rounded-xl border border-white/5">
-                           <div className="flex justify-between items-start mb-2">
-                              <h3 className="font-bold text-sm tracking-tight capitalize">{exp.role}</h3>
-                              <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest">{exp.period}</span>
-                           </div>
-                           <p className="text-blue-400 font-bold text-[11px] mb-2">@ {exp.company}</p>
-                           <p className="text-[11px] text-white/50 leading-relaxed">{exp.description}</p>
-                         </div>
-                       ))}
-                     </div>
-
-                     <div className="space-y-6">
-                       <h2 className="text-xl font-black tracking-tighter px-1">Technical Arsenal</h2>
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                         {skills.map((skill, i) => (
-                           <div key={skill} className="bg-neutral-900 border border-white/5 px-3 py-2.5 rounded-lg flex items-center gap-2 active:scale-95 transition-transform hover:bg-neutral-800">
-                             <div className="w-1 h-1 rounded-full bg-[#1DB954]" />
-                             <span className="font-bold text-[10px] tracking-tight truncate">{skill}</span>
-                           </div>
-                         ))}
-                       </div>
-                     </div>
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* BOTTOM NAV FOR MOBILE ONLY */}
-        <nav className="lg:hidden h-[80px] bg-black/95 backdrop-blur-xl border-t border-white/5 flex items-center justify-around px-8 shrink-0">
-          <button 
-            onClick={() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex flex-col items-center gap-1 group"
-          >
-            <Home className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-            <span className="text-[9px] font-bold">Home</span>
-          </button>
-
-          <button 
-            onClick={() => navigate('/cafe')}
-            className="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors"
-          >
-            <Coffee className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            <span className="text-[9px] font-bold">Cafe</span>
-          </button>
-
-          <button 
-            onClick={() => navigate('/blogs')}
-            className="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors"
-          >
-            <BookOpen className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            <span className="text-[9px] font-bold">Blog</span>
-          </button>
-
-          <button 
-            onClick={() => navigate('/resume')}
-            className="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors"
-          >
-            <FileText className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            <span className="text-[9px] font-bold">Resume</span>
-          </button>
-
-          <a href="https://github.com/subhraneel2005" target="_blank" className="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors">
-            <Github className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            <span className="text-[9px] font-bold">Code</span>
-          </a>
-
-          <a href={`mailto:${profile.email}`} className="flex flex-col items-center gap-1 group text-white/50 hover:text-white transition-colors">
-             <div className="w-6 h-6 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-white transition-colors group-hover:scale-110">
-                <img src={profile.avatar} className="w-full h-full object-cover" />
-             </div>
-             <span className="text-[9px] font-bold tracking-tight">Contact</span>
-          </a>
         </nav>
 
+        <motion.section
+          className="mb-12"
+          {...fadeUp}
+          transition={{ duration: 0.4 }}
+        >
+          <Avatar
+            size="lg"
+            className="mb-5 size-14 ring-1 ring-foreground/10"
+          >
+            <AvatarImage src={profile.avatar} alt={profile.name} />
+            <AvatarFallback>SG</AvatarFallback>
+          </Avatar>
+
+          <h1 className="text-2xl font-semibold tracking-tight mb-1.5 text-pretty">
+            {profile.name}
+          </h1>
+          <p className="text-sm text-muted-foreground mb-1">{profile.title}</p>
+          <p className="text-sm text-muted-foreground mb-5 leading-relaxed text-pretty max-w-prose">
+            {profile.bio}
+          </p>
+
+          <div className="flex items-center gap-1">
+            {socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon" aria-label={social.name}>
+                  <social.icon className="size-4" aria-hidden="true" />
+                </Button>
+              </a>
+            ))}
+          </div>
+        </motion.section>
+
+        <div className="sticky top-0 z-10 -mx-5 px-5 py-3 mb-10 bg-background/80 backdrop-blur-md border-b border-border/50">
+          <nav className="flex items-center gap-1">
+            {sections.map((s) => (
+              <button
+                key={s}
+                onClick={() => scrollTo(s.toLowerCase())}
+                className={`text-xs font-medium px-2.5 py-1 rounded-md transition-colors ${
+                  activeSection === s.toLowerCase()
+                    ? 'text-foreground bg-muted'
+                    : 'text-muted-foreground/80 hover:text-muted-foreground hover:bg-muted/50'
+                }`}
+              >
+                {s}
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        <motion.section
+          id="projects"
+          className="mb-14 scroll-mt-20"
+          {...fadeUp}
+          transition={{ duration: 0.4, delay: 0.1 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="size-1 rounded-full bg-foreground/20" />
+            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+              Projects
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {projects.map((project) => (
+              <Link
+                key={project.id}
+                to={`/projects/${project.id}`}
+                className="block group"
+              >
+                <Card className="h-full overflow-hidden transition-all duration-200 hover:bg-muted/30 hover:border-foreground/15 hover:shadow-sm active:scale-[0.99]">
+                  {project.image && (
+                    <div className="aspect-video bg-muted overflow-hidden relative">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <CardHeader className="flex flex-row items-start justify-between gap-3 px-4 pt-4 pb-2">
+                    <div className="min-w-0 space-y-1">
+                      <CardTitle className="text-sm font-medium">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="leading-relaxed text-pretty text-xs">
+                        {project.description}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="px-4 pb-4">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-[10px]">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </motion.section>
+
+        <Separator className="mb-14" />
+
+        <motion.section
+          id="experience"
+          className="mb-14 scroll-mt-20"
+          {...fadeUp}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="size-1 rounded-full bg-foreground/20" />
+            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+              Experience
+            </h2>
+          </div>
+          <div className="space-y-6">
+            {experience.map((exp, i) => {
+              const logo = companyLogos[exp.company]
+              return (
+                <div
+                  key={i}
+                  className="relative pl-4 border-l border-border hover:border-foreground/20 transition-colors"
+                >
+                  <div className="flex items-baseline justify-between gap-4 mb-1">
+                    <h3 className="text-sm font-medium">{exp.role}</h3>
+                    <span className="shrink-0 text-[11px] text-muted-foreground/80 font-mono">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    {logo && (
+                      <img
+                        src={logo}
+                        alt={`${exp.company} logo`}
+                        width={16}
+                        height={16}
+                        className="size-4 rounded object-contain bg-muted"
+                      />
+                    )}
+                    <p className="text-xs text-muted-foreground">{exp.company}</p>
+                    <span className="text-[11px] text-muted-foreground/80 flex items-center gap-1">
+                      <MapPin className="size-3" aria-hidden="true" />
+                      {exp.location}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed text-pretty mb-2">
+                    {exp.description}
+                  </p>
+                  <ul className="space-y-1.5">
+                    {exp.details.map((detail, j) => (
+                      <li
+                        key={j}
+                        className="text-xs text-muted-foreground/80 leading-relaxed text-pretty pl-3 relative"
+                      >
+                        <span className="absolute left-0 top-[6px] size-1 rounded-full bg-foreground/15" />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
+          </div>
+        </motion.section>
+
+        <Separator className="mb-14" />
+
+        <motion.section
+          id="education"
+          className="mb-14 scroll-mt-20"
+          {...fadeUp}
+          transition={{ duration: 0.4, delay: 0.25 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="size-1 rounded-full bg-foreground/20" />
+            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+              Education
+            </h2>
+          </div>
+          {education.map((edu, i) => (
+            <div
+              key={i}
+              className="relative pl-4 border-l border-border hover:border-foreground/20 transition-colors"
+            >
+              <div className="flex items-baseline justify-between gap-4 mb-1">
+                <h3 className="text-sm font-medium">{edu.degree}</h3>
+                <span className="shrink-0 text-[11px] text-muted-foreground/80 font-mono">
+                  {edu.period}
+                </span>
+              </div>
+              <p className="text-xs text-muted-foreground mb-1">{edu.school}</p>
+              <p className="text-[11px] text-muted-foreground/80 flex items-center gap-1">
+                <MapPin className="size-3" aria-hidden="true" />
+                {edu.location}
+              </p>
+            </div>
+          ))}
+        </motion.section>
+
+        <Separator className="mb-14" />
+
+        <motion.section
+          id="skills"
+          className="mb-14 scroll-mt-20"
+          {...fadeUp}
+          transition={{ duration: 0.4, delay: 0.3 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="size-1 rounded-full bg-foreground/20" />
+            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+              Skills
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {skills.map((group) => (
+              <div key={group.category}>
+                <h3 className="text-[11px] font-medium text-muted-foreground/80 uppercase tracking-wider mb-2">
+                  {group.category}
+                </h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.items.map((skill) => (
+                    <Badge
+                      key={skill}
+                      variant="outline"
+                      className="text-[10px] font-normal hover:bg-muted/50 transition-colors"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        <Separator className="mb-10" />
+
+        <motion.footer
+          className="flex items-center justify-between"
+          {...fadeUp}
+          transition={{ duration: 0.4, delay: 0.35 }}
+        >
+          <p className="text-xs text-muted-foreground/80">
+            &copy; {new Date().getFullYear()} {profile.username}
+          </p>
+          <div className="flex items-center gap-1">
+            {socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon-xs" aria-label={social.name}>
+                  <social.icon className="size-3" aria-hidden="true" />
+                </Button>
+              </a>
+            ))}
+          </div>
+        </motion.footer>
       </div>
     </div>
-  );
+  )
 }

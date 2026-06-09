@@ -1,7 +1,9 @@
 import { ArrowLeft } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { blogPosts } from '../blogs/posts'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 const tagColors: Record<string, string> = {
   dsa: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
@@ -20,17 +22,13 @@ const tagColors: Record<string, string> = {
   sidequests: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
 }
 
-function Tag({ tag }: { tag: string }) {
-  const colorClass =
-    tagColors[tag] ??
-    'bg-neutral-800 text-neutral-400 border-neutral-700'
-  return (
-    <span
-      className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${colorClass}`}
-    >
-      {tag}
-    </span>
-  )
+function dateStr(date: string) {
+  const lang = typeof navigator !== 'undefined' ? navigator.language : 'en-US'
+  return new Date(date).toLocaleDateString(lang, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
 }
 
 export default function Blogs() {
@@ -41,41 +39,45 @@ export default function Blogs() {
   )
 
   return (
-    <div className="min-h-screen bg-black">
-      <div className="max-w-3xl mx-auto px-5 py-8">
-        <div className="flex items-center gap-3 mb-8">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-sm font-bold text-neutral-400 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Home
-          </button>
+    <div className="min-h-screen bg-background">
+      <div className="max-w-2xl mx-auto px-5 py-10 sm:py-16">
+        <div className="flex items-center gap-3 mb-10">
+          <Link to="/">
+            <Button variant="ghost" size="sm">
+              <ArrowLeft className="size-3.5" aria-hidden="true" />
+              Home
+            </Button>
+          </Link>
         </div>
 
-        <h1 className="text-3xl font-black tracking-tighter mb-2">Blog</h1>
-        <p className="text-neutral-500 text-sm font-medium mb-10">
-          thoughts, experiments, and things i've built
+        <h1 className="text-2xl font-semibold tracking-tight mb-2 text-pretty">
+          Blogs
+        </h1>
+        <p className="text-sm text-muted-foreground/60 mb-12">
+          thoughts, experiments, and things i&rsquo;ve built
         </p>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {sorted.map((post, i) => (
             <motion.article
               key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ delay: i * 0.06, duration: 0.35 }}
             >
               <button
                 onClick={() => navigate(`/blogs/${post.slug}`)}
-                className="w-full text-left group block bg-neutral-900/50 hover:bg-neutral-900 rounded-2xl border border-white/5 hover:border-white/10 transition-all overflow-hidden active:scale-[0.98]"
+                className="w-full text-left group block bg-card rounded-xl border border-border/50 transition-all duration-200 hover:border-border hover:shadow-sm active:scale-[0.99] overflow-hidden"
               >
                 <div className="flex flex-col sm:flex-row">
-                  <div className="sm:w-48 h-40 sm:h-auto bg-neutral-800 relative overflow-hidden shrink-0">
+                  <div className="sm:w-44 h-36 sm:h-auto bg-muted relative overflow-hidden shrink-0">
                     <img
                       src={post.cover}
                       alt={post.title}
+                      width={176}
+                      height={192}
                       className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                      loading="lazy"
                       onError={(e) => {
                         const target = e.currentTarget
                         target.style.display = 'none'
@@ -89,24 +91,31 @@ export default function Blogs() {
                   </div>
                   <div className="flex-1 p-5 min-w-0">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[11px] font-bold text-neutral-500">
-                        {new Date(post.date).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric',
-                        })}
+                      <span className="text-[11px] font-medium text-muted-foreground/50">
+                        {dateStr(post.date)}
                       </span>
                     </div>
-                    <h2 className="text-lg font-bold tracking-tight mb-2 group-hover:text-white/80 transition-colors">
+                    <h2 className="text-base font-semibold tracking-tight mb-1.5 group-hover:text-foreground/80 transition-colors text-pretty">
                       {post.title}
                     </h2>
-                    <p className="text-sm text-neutral-500 font-medium leading-relaxed mb-3 line-clamp-2">
+                    <p className="text-sm text-muted-foreground/60 leading-relaxed mb-3 line-clamp-2">
                       {post.excerpt}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
-                      {post.tags.map((tag) => (
-                        <Tag key={tag} tag={tag} />
-                      ))}
+                      {post.tags.map((tag) => {
+                        const color =
+                          tagColors[tag] ??
+                          'bg-neutral-800 text-neutral-400 border-neutral-700'
+                        return (
+                          <Badge
+                            key={tag}
+                            variant="secondary"
+                            className={`text-[10px] ${color}`}
+                          >
+                            {tag}
+                          </Badge>
+                        )
+                      })}
                     </div>
                   </div>
                 </div>

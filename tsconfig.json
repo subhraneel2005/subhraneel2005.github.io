@@ -1,4 +1,5 @@
 {
+  "exclude": ["components/ui/calendar.tsx", "components/ui/spinner.tsx"],
   "compilerOptions": {
     "target": "ES2022",
     "experimentalDecorators": true,
