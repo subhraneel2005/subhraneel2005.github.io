@@ -278,3 +278,26 @@
 .blog-content ::selection {
   background: rgba(236, 72, 153, 0.3);
 }
+
+
+.demogorgon {
+  width: 128px;
+  height: 128px;
+
+  background-image: url("/sprites/demogorgon.png");
+  background-repeat: no-repeat;
+
+  image-rendering: pixelated;
+
+  animation: idle 0.6s steps(4) infinite;
+}
+
+@keyframes idle {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -512px 0;
+  }
+}

@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
+import RoamingCharacter from './components/RoamingCharacter'
 import { useState, useEffect, useCallback } from 'react'
 import { MapPin } from 'lucide-react'
 import { motion } from 'motion/react'
@@ -68,6 +69,7 @@ export default function App() {
 
   return (
     <>
+      <RoamingCharacter />
       <Helmet>
         <title>Subhraneel Goswami</title>
         <meta property="og:title" content="Subhraneel Goswami" />
