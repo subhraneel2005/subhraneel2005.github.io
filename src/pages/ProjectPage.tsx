@@ -37,7 +37,7 @@ export default function ProjectPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-2xl px-5 py-10 sm:py-16">
+      <div className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
         <Link to="/" className="inline-block mb-10">
           <Button variant="ghost" size="sm">
             <ArrowLeft className="size-3.5" aria-hidden="true" />
@@ -48,10 +48,10 @@ export default function ProjectPage() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.25, ease: [0.175, 0.885, 0.32, 1.1] }}
         >
           {project.image && (
-            <div className="aspect-video bg-muted rounded-xl overflow-hidden mb-8 relative">
+            <div className="aspect-video bg-muted rounded-sm overflow-hidden mb-8 relative ring-1 ring-foreground/5">
               <img
                 src={project.image}
                 alt={`${project.title} preview`}
@@ -107,7 +107,7 @@ export default function ProjectPage() {
           <div className="space-y-4">
             {project.details.map((detail, i) => (
               <div key={i} className="flex gap-3">
-                <span className="text-xs text-muted-foreground/60 font-mono mt-0.5 shrink-0 w-5">
+                <span className="text-xs text-muted-foreground/40 font-mono mt-0.5 shrink-0 w-5 tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="text-sm text-muted-foreground leading-relaxed text-pretty">

@@ -1,43 +1,23 @@
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import RoamingCharacter from './components/RoamingCharacter'
 import { useState, useEffect, useCallback } from 'react'
-import { MapPin } from 'lucide-react'
-import { motion } from 'motion/react'
+import { MapPin, ArrowUpRight, Github } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
-import { profile, socials, projects, experience, skills, education } from './data'
+import { profile, socials, projects, experience, skills, education, stats } from './data'
 
 const companyLogos: Record<string, string> = {
   'Jobsforce.ai': '/jobsforce-logo.webp',
   'Kasukabe Labs (Web and App dev Agency)': '/kasukabe-labs-logo.jpg',
 }
 
-function useReducedMotion() {
-  const [prefersReduced, setPrefersReduced] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReduced(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
-  return prefersReduced
-}
-
 const sections = ['Projects', 'Experience', 'Education', 'Skills'] as const
 
 export default function App() {
-  const reduced = useReducedMotion()
+  const navigate = useNavigate()
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
@@ -63,10 +43,6 @@ export default function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }, [])
 
-  const fadeUp = reduced
-    ? {}
-    : { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 } }
-
   return (
     <>
       <RoamingCharacter />
@@ -81,8 +57,8 @@ export default function App() {
         <meta name="twitter:image" content="https://subhraneel2005.github.io/opengraph.png" />
       </Helmet>
       <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-3xl px-5 py-10 sm:py-16">
-        <nav className="flex items-center justify-between mb-10">
+      <div className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
+        <nav className="flex items-center justify-between mb-12">
           <Link
             to="/"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -91,36 +67,29 @@ export default function App() {
           </Link>
           <div className="flex items-center gap-1">
             <Link to="/blogs">
-              <Button variant="secondary" size="sm">
+              <Button variant="ghost" size="sm">
                 Blogs
               </Button>
             </Link>
             <Link to="/resume">
-              <Button variant="secondary" size="sm">
+              <Button variant="ghost" size="sm">
                 Resume
               </Button>
             </Link>
           </div>
         </nav>
 
-        <motion.section
-          className="mb-12"
-          {...fadeUp}
-          transition={{ duration: 0.4 }}
-        >
-          <Avatar
-            size="lg"
-            className="mb-5 size-14 ring-1 ring-foreground/10"
-          >
+        <section className="mb-16">
+          <Avatar size="lg" className="mb-5 size-12 ring-1 ring-foreground/10">
             <AvatarImage src={profile.avatar} alt={profile.name} />
             <AvatarFallback>SG</AvatarFallback>
           </Avatar>
 
-          <h1 className="text-2xl font-semibold tracking-tight mb-1.5 text-pretty">
+          <h1 className="text-[32px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
             {profile.name}
           </h1>
           <p className="text-sm text-muted-foreground mb-1">{profile.title}</p>
-          <p className="text-sm text-muted-foreground mb-5 leading-relaxed text-pretty max-w-prose">
+          <p className="text-sm text-muted-foreground/60 mb-6 leading-relaxed text-pretty max-w-prose">
             {profile.bio}
           </p>
 
@@ -138,18 +107,18 @@ export default function App() {
               </a>
             ))}
           </div>
-        </motion.section>
+        </section>
 
-        <div className="sticky top-0 z-10 -mx-5 px-5 py-3 mb-10 bg-background/80 backdrop-blur-md border-b border-border/50">
-          <nav className="flex items-center gap-1">
+        <div className="sticky top-0 z-10 -mx-6 px-6 py-3 mb-10 bg-background/80 backdrop-blur border-b border-border">
+          <nav className="flex items-center gap-0.5">
             {sections.map((s) => (
               <button
                 key={s}
                 onClick={() => scrollTo(s.toLowerCase())}
-                className={`text-xs font-medium px-2.5 py-1 rounded-md transition-colors ${
+                className={`text-xs font-medium px-2.5 py-1.5 rounded-sm transition-colors ${
                   activeSection === s.toLowerCase()
                     ? 'text-foreground bg-muted'
-                    : 'text-muted-foreground/80 hover:text-muted-foreground hover:bg-muted/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
               >
                 {s}
@@ -158,47 +127,44 @@ export default function App() {
           </nav>
         </div>
 
-        <motion.section
+        <section
           id="projects"
-          className="mb-14 scroll-mt-20"
-          {...fadeUp}
-          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <span className="size-1 rounded-full bg-foreground/20" />
             <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
               Projects
             </h2>
+            <span className="flex-1 h-px bg-border" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {projects.map((project) => (
-              <Link
+              <button
                 key={project.id}
-                to={`/projects/${project.id}`}
-                className="block group"
+                onClick={() => navigate(`/projects/${project.id}`)}
+                className="group block text-left w-full"
               >
-                <Card className="h-full overflow-hidden transition-all duration-200 hover:bg-muted/30 hover:border-foreground/15 hover:shadow-sm active:scale-[0.99]">
+                <div className="h-full overflow-hidden rounded-sm bg-card ring-1 ring-foreground/5 transition-all duration-150 ease-geist hover:ring-foreground/15 active:scale-[0.99]">
                   {project.image && (
                     <div className="aspect-video bg-muted overflow-hidden relative">
                       <img
                         src={project.image}
                         alt={`${project.title} preview`}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 ease-geist group-hover:scale-105"
                         loading="lazy"
                       />
                     </div>
                   )}
-                  <CardHeader className="flex flex-row items-start justify-between gap-3 px-4 pt-4 pb-2">
-                    <div className="min-w-0 space-y-1">
-                      <CardTitle className="text-sm font-medium">
+                  <div className="px-4 py-3">
+                    <div className="flex items-start justify-between gap-3 mb-1.5">
+                      <h3 className="text-sm font-medium">
                         {project.title}
-                      </CardTitle>
-                      <CardDescription className="leading-relaxed text-pretty text-xs">
-                        {project.description}
-                      </CardDescription>
+                      </h3>
+                      <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/40 mt-0.5 transition-colors group-hover:text-foreground/60" aria-hidden="true" />
                     </div>
-                  </CardHeader>
-                  <CardContent className="px-4 pb-4">
+                    <p className="text-xs text-muted-foreground leading-relaxed text-pretty mb-3">
+                      {project.description}
+                    </p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.tags.map((tag) => (
                         <Badge key={tag} variant="secondary" className="text-[10px]">
@@ -206,42 +172,40 @@ export default function App() {
                         </Badge>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                  </div>
+                </div>
+              </button>
             ))}
           </div>
-        </motion.section>
+        </section>
 
-        <Separator className="mb-14" />
+        <Separator className="mb-16" />
 
-        <motion.section
+        <section
           id="experience"
-          className="mb-14 scroll-mt-20"
-          {...fadeUp}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <span className="size-1 rounded-full bg-foreground/20" />
             <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
               Experience
             </h2>
+            <span className="flex-1 h-px bg-border" />
           </div>
-          <div className="space-y-6">
+          <div className="space-y-8">
             {experience.map((exp, i) => {
               const logo = companyLogos[exp.company]
               return (
                 <div
                   key={i}
-                  className="relative pl-4 border-l border-border hover:border-foreground/20 transition-colors"
+                  className="relative pl-5 border-l border-border hover:border-foreground/20 transition-colors"
                 >
-                  <div className="flex items-baseline justify-between gap-4 mb-1">
-                    <h3 className="text-sm font-medium">{exp.role}</h3>
-                    <span className="shrink-0 text-[11px] text-muted-foreground/80 font-mono">
+                  <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                    <h3 className="text-sm font-semibold">{exp.role}</h3>
+                    <span className="shrink-0 text-[11px] text-muted-foreground/60 font-mono tabular-nums">
                       {exp.period}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 mb-1.5">
+                  <div className="flex items-center gap-2 mb-2">
                     {logo && (
                       <img
                         src={logo}
@@ -251,22 +215,22 @@ export default function App() {
                         className="size-4 rounded object-contain bg-muted"
                       />
                     )}
-                    <p className="text-xs text-muted-foreground">{exp.company}</p>
-                    <span className="text-[11px] text-muted-foreground/80 flex items-center gap-1">
+                    <p className="text-xs text-muted-foreground/80">{exp.company}</p>
+                    <span className="text-[11px] text-muted-foreground/60 flex items-center gap-1">
                       <MapPin className="size-3" aria-hidden="true" />
                       {exp.location}
                     </span>
                   </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed text-pretty mb-2">
+                  <p className="text-xs text-muted-foreground/70 leading-relaxed text-pretty mb-3">
                     {exp.description}
                   </p>
                   <ul className="space-y-1.5">
                     {exp.details.map((detail, j) => (
                       <li
                         key={j}
-                        className="text-xs text-muted-foreground/80 leading-relaxed text-pretty pl-3 relative"
+                        className="text-xs text-muted-foreground/60 leading-relaxed text-pretty pl-3 relative"
                       >
-                        <span className="absolute left-0 top-[6px] size-1 rounded-full bg-foreground/15" />
+                        <span className="absolute left-0 top-[6px] size-1 rounded-full bg-foreground/10" />
                         {detail}
                       </li>
                     ))}
@@ -275,60 +239,56 @@ export default function App() {
               )
             })}
           </div>
-        </motion.section>
+        </section>
 
-        <Separator className="mb-14" />
+        <Separator className="mb-16" />
 
-        <motion.section
+        <section
           id="education"
-          className="mb-14 scroll-mt-20"
-          {...fadeUp}
-          transition={{ duration: 0.4, delay: 0.25 }}
+          className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <span className="size-1 rounded-full bg-foreground/20" />
             <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
               Education
             </h2>
+            <span className="flex-1 h-px bg-border" />
           </div>
           {education.map((edu, i) => (
             <div
               key={i}
-              className="relative pl-4 border-l border-border hover:border-foreground/20 transition-colors"
+              className="relative pl-5 border-l border-border hover:border-foreground/20 transition-colors"
             >
-              <div className="flex items-baseline justify-between gap-4 mb-1">
-                <h3 className="text-sm font-medium">{edu.degree}</h3>
-                <span className="shrink-0 text-[11px] text-muted-foreground/80 font-mono">
+              <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                <h3 className="text-sm font-semibold">{edu.degree}</h3>
+                <span className="shrink-0 text-[11px] text-muted-foreground/60 font-mono tabular-nums">
                   {edu.period}
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground mb-1">{edu.school}</p>
-              <p className="text-[11px] text-muted-foreground/80 flex items-center gap-1">
+              <p className="text-xs text-muted-foreground/80 mb-1">{edu.school}</p>
+              <p className="text-[11px] text-muted-foreground/60 flex items-center gap-1">
                 <MapPin className="size-3" aria-hidden="true" />
                 {edu.location}
               </p>
             </div>
           ))}
-        </motion.section>
+        </section>
 
-        <Separator className="mb-14" />
+        <Separator className="mb-16" />
 
-        <motion.section
+        <section
           id="skills"
-          className="mb-14 scroll-mt-20"
-          {...fadeUp}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <span className="size-1 rounded-full bg-foreground/20" />
             <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
               Skills
             </h2>
+            <span className="flex-1 h-px bg-border" />
           </div>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {skills.map((group) => (
               <div key={group.category}>
-                <h3 className="text-[11px] font-medium text-muted-foreground/80 uppercase tracking-wider mb-2">
+                <h3 className="text-[11px] font-medium text-muted-foreground/60 uppercase tracking-wider mb-2.5">
                   {group.category}
                 </h3>
                 <div className="flex flex-wrap gap-1.5">
@@ -336,7 +296,7 @@ export default function App() {
                     <Badge
                       key={skill}
                       variant="outline"
-                      className="text-[10px] font-normal hover:bg-muted/50 transition-colors"
+                      className="text-[10px] font-normal"
                     >
                       {skill}
                     </Badge>
@@ -345,16 +305,12 @@ export default function App() {
               </div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
         <Separator className="mb-10" />
 
-        <motion.footer
-          className="flex items-center justify-between"
-          {...fadeUp}
-          transition={{ duration: 0.4, delay: 0.35 }}
-        >
-          <p className="text-xs text-muted-foreground/80">
+        <footer className="flex items-center justify-between">
+          <p className="text-xs text-muted-foreground/60">
             &copy; {new Date().getFullYear()} {profile.username}
           </p>
           <div className="flex items-center gap-1">
@@ -371,7 +327,7 @@ export default function App() {
               </a>
             ))}
           </div>
-        </motion.footer>
+        </footer>
       </div>
     </div>
     </>

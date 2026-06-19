@@ -7,20 +7,20 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
 const tagColors: Record<string, string> = {
-  dsa: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  'binary-search': 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-  consistency: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-  learning: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
-  discipline: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-  aboutme: 'bg-pink-500/10 text-pink-400 border-pink-500/20',
-  whoami: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
-  work: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
-  'hire me': 'bg-green-500/10 text-green-400 border-green-500/20',
-  'coding-agent': 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-  typescript: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
-  ai: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
-  cli: 'bg-stone-500/10 text-stone-400 border-stone-500/20',
-  sidequests: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+  dsa: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
+  'binary-search': 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
+  consistency: 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
+  learning: 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
+  discipline: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
+  aboutme: 'bg-pink-100 text-pink-800 dark:bg-pink-1000/20 dark:text-pink-600',
+  whoami: 'bg-pink-100 text-pink-800 dark:bg-pink-1000/20 dark:text-pink-600',
+  work: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
+  'hire me': 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
+  'coding-agent': 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
+  typescript: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
+  ai: 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
+  cli: 'bg-gray-100 text-gray-800 dark:bg-gray-1000/20 dark:text-gray-600',
+  sidequests: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
 }
 
 function dateStr(date: string) {
@@ -51,8 +51,8 @@ export default function Blogs() {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <div className="min-h-screen bg-background">
-      <div className="max-w-2xl mx-auto px-5 py-10 sm:py-16">
-        <div className="flex items-center gap-3 mb-10">
+      <div className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
+        <div className="flex items-center gap-3 mb-12">
           <Link to="/">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="size-3.5" aria-hidden="true" />
@@ -61,24 +61,24 @@ export default function Blogs() {
           </Link>
         </div>
 
-        <h1 className="text-2xl font-semibold tracking-tight mb-2 text-pretty">
+        <h1 className="text-[32px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
           Blogs
         </h1>
         <p className="text-sm text-muted-foreground/60 mb-12">
           thoughts, experiments, and things i&rsquo;ve built
         </p>
 
-        <div className="space-y-5">
+        <div className="space-y-4">
           {sorted.map((post, i) => (
             <motion.article
               key={post.slug}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06, duration: 0.35 }}
+              transition={{ delay: i * 0.05, duration: 0.25 }}
             >
               <button
                 onClick={() => navigate(`/blogs/${post.slug}`)}
-                className="w-full text-left group block bg-card rounded-xl border border-border/50 transition-all duration-200 hover:border-border hover:shadow-sm active:scale-[0.99] overflow-hidden"
+                className="w-full text-left group block rounded-sm bg-card ring-1 ring-foreground/5 transition-all duration-150 ease-geist hover:ring-foreground/15 active:scale-[0.99] overflow-hidden"
               >
                 <div className="flex flex-col sm:flex-row">
                   <div className="sm:w-44 h-36 sm:h-auto bg-muted relative overflow-hidden shrink-0">
@@ -87,7 +87,7 @@ export default function Blogs() {
                       alt={post.title}
                       width={176}
                       height={192}
-                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-150 ease-geist"
                       loading="lazy"
                       onError={(e) => {
                         const target = e.currentTarget
@@ -116,7 +116,7 @@ export default function Blogs() {
                       {post.tags.map((tag) => {
                         const color =
                           tagColors[tag] ??
-                          'bg-neutral-800 text-neutral-400 border-neutral-700'
+                          'bg-gray-100 text-gray-800 dark:bg-gray-1000/20 dark:text-gray-600'
                         return (
                           <Badge
                             key={tag}

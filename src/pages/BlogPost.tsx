@@ -10,20 +10,20 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
 const tagColors: Record<string, string> = {
-  dsa: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  'binary-search': 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-  consistency: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-  learning: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
-  discipline: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-  aboutme: 'bg-pink-500/10 text-pink-400 border-pink-500/20',
-  whoami: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
-  work: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
-  'hire me': 'bg-green-500/10 text-green-400 border-green-500/20',
-  'coding-agent': 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-  typescript: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
-  ai: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
-  cli: 'bg-stone-500/10 text-stone-400 border-stone-500/20',
-  sidequests: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+  dsa: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
+  'binary-search': 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
+  consistency: 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
+  learning: 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
+  discipline: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
+  aboutme: 'bg-pink-100 text-pink-800 dark:bg-pink-1000/20 dark:text-pink-600',
+  whoami: 'bg-pink-100 text-pink-800 dark:bg-pink-1000/20 dark:text-pink-600',
+  work: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
+  'hire me': 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
+  'coding-agent': 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
+  typescript: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
+  ai: 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
+  cli: 'bg-gray-100 text-gray-800 dark:bg-gray-1000/20 dark:text-gray-600',
+  sidequests: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
 }
 
 function dateStr(date: string) {
@@ -41,7 +41,7 @@ function LoadingState() {
       <div className="h-4 bg-muted rounded w-16" />
       <div className="h-10 bg-muted rounded w-3/4 mt-8" />
       <div className="h-4 bg-muted rounded w-32" />
-      <div className="h-64 bg-muted rounded-xl mt-8" />
+      <div className="h-64 bg-muted rounded-sm mt-8" />
       <div className="space-y-3 mt-8">
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className="h-4 bg-muted rounded w-full" />
@@ -95,7 +95,7 @@ export default function BlogPost() {
         <meta name="twitter:image" content={imageUrl} />
       </Helmet>
       <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-2xl px-5 py-10 sm:py-16">
+      <div className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
         <Link to="/blogs" className="inline-block mb-10">
           <Button variant="ghost" size="sm">
             <ArrowLeft className="size-3.5" aria-hidden="true" />
@@ -119,7 +119,7 @@ export default function BlogPost() {
             {post.tags.map((tag) => {
               const color =
                 tagColors[tag] ??
-                'bg-neutral-800 text-neutral-400 border-neutral-700'
+                'bg-gray-100 text-gray-800 dark:bg-gray-1000/20 dark:text-gray-600'
               return (
                 <Badge
                   key={tag}
@@ -134,7 +134,7 @@ export default function BlogPost() {
         </header>
 
         {post.cover && (
-          <div className="mb-10 rounded-xl overflow-hidden border border-border/50">
+          <div className="mb-10 rounded-sm overflow-hidden ring-1 ring-foreground/5">
             <img
               src={post.cover}
               alt={post.title}

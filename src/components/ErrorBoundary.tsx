@@ -18,11 +18,11 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.error) {
       return (
-        <div className="p-6 bg-red-900/20 border border-red-500/30 rounded-xl">
-          <h2 className="text-red-400 font-bold text-sm mb-2">
+        <div className="p-4 bg-red-100 border border-red-400 rounded-sm dark:bg-red-1000/10 dark:border-red-800/30">
+          <h2 className="text-red-800 font-semibold text-sm mb-1.5 dark:text-red-600">
             Something went wrong rendering this post
           </h2>
-          <pre className="text-red-300/70 text-xs font-mono whitespace-pre-wrap">
+          <pre className="text-red-900/70 text-xs font-mono whitespace-pre-wrap dark:text-red-400/70">
             {this.state.error.message}
           </pre>
         </div>

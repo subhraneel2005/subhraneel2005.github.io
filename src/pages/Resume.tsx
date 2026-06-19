@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 export default function Resume() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-16">
+      <div className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
         <div className="flex items-center justify-between mb-8">
           <Link to="/">
             <Button variant="ghost" size="sm">
@@ -21,12 +21,12 @@ export default function Resume() {
           </a>
         </div>
 
-        <h1 className="text-2xl font-semibold tracking-tight mb-1">Resume</h1>
+        <h1 className="text-[32px] font-semibold tracking-tight mb-1 leading-tight">Resume</h1>
         <p className="text-sm text-muted-foreground mb-8">
-        Backend & Applied AI Engineer
+          Backend & Applied AI Engineer
         </p>
 
-        <div className="rounded-xl overflow-hidden border border-border bg-card shadow-sm">
+        <div className="rounded-sm overflow-hidden ring-1 ring-foreground/5 bg-card">
           <iframe
             src="/Subhraneel_Goswami_SDE.pdf"
             className="w-full h-[80vh] border-0"

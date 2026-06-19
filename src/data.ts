@@ -56,7 +56,7 @@ export const projects = [
     description: "Built a CLI-based AI coding agent capable of autonomous tool usage for navigating and modifying codebases.",
     github: "https://github.com/subhraneel2005/sidequests",
     tags: ["TypeScript", "OpenRouter", "Google-Gemini", "Tool Calling", "Node.js"],
-    image: "https://raw.githubusercontent.com/subhraneel2005/me-link-in-bio/main/public/coding-agent-gh.jpg",
+    image: "/ai-coding-agent.png",
     details: [
       "Built a CLI-based AI coding agent that autonomously navigates, reads, and modifies codebases using tool calling — supporting 20+ tools (read file, edit, grep, glob, bash, etc.).",
       "Integrated OpenRouter API for multi-model routing, with automatic fallback across Gemini, Claude, and GPT models based on availability/rate-limits.",
@@ -75,7 +75,7 @@ export const projects = [
     description: "A personal knowledge graph/second brain that connects ideas across sources like youtube videos, research papers, blogs and articles, X posts/articles.",
     github: "https://github.com/subhraneel2005/usecerebr",
     tags: ["Python", "FastAPI", "Qdrant", "Gemini 2.5 Flash", "Redis", "Docker"],
-    image: "https://raw.githubusercontent.com/subhraneel2005/subhraneel2005.github.io/main/public/usecerebr.png",
+    image: "/usecerbr.png",
     details: [
       "A personal knowledge graph / second brain connecting ideas across YouTube videos, research papers, blogs, articles, X posts, and GitHub repos.",
       "Ingests content via multiple sources: YouTube transcripts (yt-dlp), ArXiv papers (PDF parsing via PyMuPDF), web articles (trafilatura), and X/Twitter threads.",
@@ -92,7 +92,7 @@ export const projects = [
     github: "https://github.com/subhraneel2005/study-toolkit",
     live: "https://study-toolkit.vercel.app",
     tags: ["Next.js", "TypeScript RSC", "Server Actions", "Vercel AI SDK", "Gemini"],
-    image: "https://raw.githubusercontent.com/subhraneel2005/me-link-in-bio/main/public/study-toolkit-gh.jpg",
+    image: "/study-toolkit.png",
     details: [
       "Built an open-source, student-first productivity platform with AI-powered study tools including flashcard generation, quiz creation, and PDF Q&A.",
       "Used Next.js React Server Components and Server Actions for data fetching and mutations — minimal client JavaScript for fast page loads.",
@@ -104,7 +104,7 @@ export const projects = [
     id: "multi-agent-cs",
     description: "Designed a multi-agent customer support orchestration system with specialized agents for triage, billing, technical, and general queries.",
     github: "https://github.com/subhraneel2005/multi-agent-cs-system",
-    image: "/multi-agent-cs-system.jpg",
+    image: "/multi-agent-cs-system.png",
     tags: ["Python", "LangGraph", "FastAPI", "Qdrant", "Pydantic", "Redis", "Docker"],
     details: [
       "Designed a multi-agent customer support orchestration system where specialized agents (triage, billing, technical, general) handle incoming queries based on intent classification.",

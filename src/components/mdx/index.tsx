@@ -2,7 +2,7 @@ import { cn } from '../../lib/utils'
 
 export function Callout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="border-l-2 border-pink-500/50 bg-neutral-900/50 px-4 py-3 my-4 rounded-r-lg text-sm leading-relaxed">
+    <div className="border-l-2 border-blue-700/30 bg-blue-1000/[0.03] px-4 py-3 my-4 rounded-r-sm text-sm leading-relaxed">
       {children}
     </div>
   )
@@ -19,7 +19,7 @@ export function Link({
     <a
       href={href}
       className={cn(
-        'underline underline-offset-2 decoration-neutral-600 hover:decoration-white transition-colors',
+        'underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-foreground transition-colors',
         className,
       )}
       {...props}
@@ -58,7 +58,7 @@ export function Image({
       alt={alt}
       width={width}
       height={height}
-      className={cn('rounded-lg w-full my-4', className)}
+      className={cn('rounded-sm w-full my-4', className)}
     />
   )
 }
