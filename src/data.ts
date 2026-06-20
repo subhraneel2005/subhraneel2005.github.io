@@ -150,12 +150,125 @@ export const experience = [
   }
 ];
 
+const CDN = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons"
+
+export const projectTagIcons: Record<string, string> = {
+  TypeScript: `${CDN}/typescript/typescript-original.svg`,
+  "TypeScript RSC": `${CDN}/typescript/typescript-original.svg`,
+  JavaScript: `${CDN}/javascript/javascript-original.svg`,
+  Python: `${CDN}/python/python-original.svg`,
+  Java: `${CDN}/java/java-original.svg`,
+  "Go (learning)": `${CDN}/go/go-original-wordmark.svg`,
+  SQL: `${CDN}/mysql/mysql-original-wordmark.svg`,
+  React: `${CDN}/react/react-original.svg`,
+  "Next.js": `${CDN}/nextjs/nextjs-original.svg`,
+  Expo: `${CDN}/expo/expo-original.svg`,
+  HTML5: `${CDN}/html5/html5-original.svg`,
+  CSS3: `${CDN}/css3/css3-original.svg`,
+  "Tailwind CSS": `${CDN}/tailwindcss/tailwindcss-original.svg`,
+  "Node.js": `${CDN}/nodejs/nodejs-original.svg`,
+  Bun: `${CDN}/bun/bun-original.svg`,
+  FastAPI: `${CDN}/fastapi/fastapi-original.svg`,
+  tRPC: `${CDN}/trpc/trpc-original.svg`,
+  Redis: `${CDN}/redis/redis-original.svg`,
+  PostgreSQL: `${CDN}/postgresql/postgresql-original.svg`,
+  MongoDB: `${CDN}/mongodb/mongodb-original.svg`,
+  Prisma: `${CDN}/prisma/prisma-original.svg`,
+  Docker: `${CDN}/docker/docker-original.svg`,
+  AWS: `${CDN}/amazonwebservices/amazonwebservices-original-wordmark.svg`,
+  Git: `${CDN}/git/git-original.svg`,
+  GitHub: `${CDN}/github/github-original.svg`,
+  Vercel: `${CDN}/vercel/vercel-original.svg`,
+  "Vercel AI SDK": `${CDN}/vercel/vercel-original.svg`,
+  Gemini: "/icons/gemini.svg",
+  "Google-Gemini": "/icons/gemini.svg",
+  "Gemini 2.5 Flash": "/icons/gemini.svg",
+  LangGraph: "/icons/langgraph.svg",
+  Qdrant: "/icons/qdrant.svg",
+  shadcn: "/icons/shadcn.svg",
+  Cursor: "/icons/cursor.svg",
+  "Claude Code": "/icons/claude-code.svg",
+  Opencode: "/icons/opencode.svg",
+  Pydantic: "/icons/pydantic.svg",
+  OpenRouter: "/icons/openrouter.svg",
+}
+
 export const skills = [
-  { category: "Languages", items: ["TypeScript", "JavaScript", "Python", "Java", "Go (learning)", "SQL"] },
-  { category: "Frontend", items: ["React", "Next.js (App Router, RSC)", "Expo", "HTML5", "CSS3", "Tailwind CSS", "shadcn/ui"] },
-  { category: "Backend", items: ["Node.js", "Bun", "FastAPI", "REST APIs", "tRPC", "WebSockets", "Server Actions", "Authentication", "Authorization", "JWT", "Redis"] },
-  { category: "Databases & ORM", items: ["PostgreSQL", "MongoDB", "Prisma"] },
-  { category: "AI & LLM Systems", items: ["OpenAI API", "Gemini API", "Vercel AI SDK", "Tool Calling", "Streaming", "AI Agents", "RAG", "Vector Databases", "Qdrant", "Sentence Transformers", "LangGraph"] },
-  { category: "Infrastructure", items: ["Vercel", "NeonDB", "AWS", "Docker", "GCP", "Kubernetes (learning)"] },
-  { category: "Developer Tools", items: ["Git", "GitHub", "Cursor", "Claude Code", "Opencode"] }
+  {
+    category: "Languages", items: [
+      { name: "TypeScript", icon: `${CDN}/typescript/typescript-original.svg` },
+      { name: "JavaScript", icon: `${CDN}/javascript/javascript-original.svg` },
+      { name: "Python", icon: `${CDN}/python/python-original.svg` },
+      { name: "Java", icon: `${CDN}/java/java-original.svg` },
+      { name: "Go (learning)", icon: `${CDN}/go/go-original-wordmark.svg` },
+      { name: "SQL", icon: `${CDN}/mysql/mysql-original-wordmark.svg` },
+    ]
+  },
+  {
+    category: "Frontend", items: [
+      { name: "React", icon: `${CDN}/react/react-original.svg` },
+      { name: "Next.js (App Router, RSC)", icon: `${CDN}/nextjs/nextjs-original.svg` },
+      { name: "Expo", icon: `${CDN}/expo/expo-original.svg` },
+      { name: "HTML5", icon: `${CDN}/html5/html5-original.svg` },
+      { name: "CSS3", icon: `${CDN}/css3/css3-original.svg` },
+      { name: "Tailwind CSS", icon: `${CDN}/tailwindcss/tailwindcss-original.svg` },
+      { name: "shadcn/ui", icon: "/icons/shadcn.svg" },
+    ]
+  },
+  {
+    category: "Backend", items: [
+      { name: "Node.js", icon: `${CDN}/nodejs/nodejs-original.svg` },
+      { name: "Bun", icon: `${CDN}/bun/bun-original.svg` },
+      { name: "FastAPI", icon: `${CDN}/fastapi/fastapi-original.svg` },
+      { name: "REST APIs" },
+      { name: "tRPC", icon: `${CDN}/trpc/trpc-original.svg` },
+      { name: "WebSockets" },
+      { name: "Server Actions" },
+      { name: "Authentication", icon: `${CDN}/oauth/oauth-original.svg` },
+      { name: "Authorization", icon: `${CDN}/oauth/oauth-original.svg` },
+      { name: "JWT", icon: `${CDN}/oauth/oauth-original.svg` },
+      { name: "Redis", icon: `${CDN}/redis/redis-original.svg` },
+    ]
+  },
+  {
+    category: "Databases & ORM", items: [
+      { name: "PostgreSQL", icon: `${CDN}/postgresql/postgresql-original.svg` },
+      { name: "MongoDB", icon: `${CDN}/mongodb/mongodb-original.svg` },
+      { name: "Prisma", icon: `${CDN}/prisma/prisma-original.svg` },
+    ]
+  },
+  {
+    category: "AI & LLM Systems", items: [
+      { name: "OpenAI API" },
+      { name: "Gemini API", icon: "/icons/gemini.svg" },
+      { name: "Vercel AI SDK", icon: `${CDN}/vercel/vercel-original.svg` },
+      { name: "Tool Calling" },
+      { name: "Streaming" },
+      { name: "AI Agents" },
+      { name: "RAG" },
+      { name: "Vector Databases" },
+      { name: "Qdrant", icon: "/icons/qdrant.svg" },
+      { name: "Sentence Transformers" },
+      { name: "LangGraph", icon: "/icons/langgraph.svg" },
+    ]
+  },
+  {
+    category: "Infrastructure", items: [
+      { name: "Vercel", icon: `${CDN}/vercel/vercel-original.svg` },
+      { name: "NeonDB" },
+      { name: "AWS", icon: `${CDN}/amazonwebservices/amazonwebservices-original-wordmark.svg` },
+      { name: "Docker", icon: `${CDN}/docker/docker-original.svg` },
+      { name: "GCP" },
+      { name: "Kubernetes (learning)" },
+    ]
+  },
+  {
+    category: "Developer Tools", items: [
+      { name: "Git", icon: `${CDN}/git/git-original.svg` },
+      { name: "GitHub", icon: `${CDN}/github/github-original.svg` },
+      { name: "Cursor", icon: "/icons/cursor.svg" },
+      { name: "Claude Code", icon: "/icons/claude-code.svg" },
+      { name: "Opencode", icon: "/icons/opencode.svg" },
+    ]
+  }
 ];

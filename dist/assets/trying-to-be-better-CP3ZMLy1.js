@@ -1,4 +1,4 @@
-import{u as d,j as e,G as a}from"./index-DemPHr9R.js";function h(t){const n={h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...d(),...t.components},{Callout:r,Image:l,Link:i,MDXIcon:s}=n;return r||o("Callout"),l||o("Image"),i||o("Link"),s||o("MDXIcon"),e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{children:"trying to do better"}),`
+import{u as d,j as e,G as a}from"./index-DJoz_3e_.js";function h(t){const n={h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...d(),...t.components},{Callout:r,Image:l,Link:i,MDXIcon:s}=n;return r||o("Callout"),l||o("Image"),i||o("Link"),s||o("MDXIcon"),e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{children:"trying to do better"}),`
 `,e.jsxs(n.p,{children:["hey guys👋 u might know me from X(twiiter) as ",e.jsx(i,{href:"https://x.com/subhraneeltwt",className:"text-muted-foreground",alt:"my-twitter",children:`
 @subhraneeltwt`})]}),`
 `,e.jsx(n.p,{children:`most prolly im a stranger to you so, hello im a 21y/o engineer who loves building, breaking and learning things. currently in my final year and tbh i was

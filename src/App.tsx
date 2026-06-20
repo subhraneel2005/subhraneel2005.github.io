@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
-import { profile, socials, projects, experience, skills, education, stats } from './data'
+import { profile, socials, projects, experience, skills, education, stats, projectTagIcons } from './data'
 
 const companyLogos: Record<string, string> = {
   'Jobsforce.ai': '/jobsforce-logo.webp',
@@ -167,7 +167,14 @@ export default function App() {
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-[10px]">
+                        <Badge key={tag} variant="secondary">
+                          {projectTagIcons[tag] && (
+                            <img
+                              src={projectTagIcons[tag]}
+                              alt=""
+                              className="size-3 object-contain"
+                            />
+                          )}
                           {tag}
                         </Badge>
                       ))}
@@ -294,11 +301,18 @@ export default function App() {
                 <div className="flex flex-wrap gap-1.5">
                   {group.items.map((skill) => (
                     <Badge
-                      key={skill}
+                      key={skill.name}
                       variant="outline"
-                      className="text-[10px] font-normal"
+                      className="text-[12px] px-3 py-2 border border-dashed"
                     >
-                      {skill}
+                      {skill.icon && (
+                        <img
+                          src={skill.icon}
+                          alt=""
+                          className="size-3.5 object-contain"
+                        />
+                      )}
+                      {skill.name}
                     </Badge>
                   ))}
                 </div>

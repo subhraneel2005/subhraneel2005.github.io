@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator'
 import { motion } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { projects } from '../data'
+import { projects, projectTagIcons } from '../data'
 
 function NotFound() {
   return (
@@ -71,6 +71,13 @@ export default function ProjectPage() {
           <div className="flex flex-wrap gap-1.5 mb-8">
             {project.tags.map((tag) => (
               <Badge key={tag} variant="secondary" className="text-[10px]">
+                {projectTagIcons[tag] && (
+                  <img
+                    src={projectTagIcons[tag]}
+                    alt=""
+                    className="size-3 object-contain"
+                  />
+                )}
                 {tag}
               </Badge>
             ))}
