@@ -43,6 +43,15 @@ export const blogPosts: BlogPost[] = [
     cover: '/images/blog4.png',
     tags: ['coding-agent', 'typescript', 'ai', 'cli', 'learning', 'implementing'],
   },
+  {
+    slug: 'self-healing-supervisor',
+    title: 'Building a Self-Healing Supervisor in Node.js',
+    date: '2026-06-23',
+    excerpt:
+      'A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail.',
+    cover: '/Self%20Healing%20Supervisor.png',
+    tags: ['nodejs', 'reliability', 'ddia', 'process-supervision', 'distributed-systems'],
+  },
 ]
 
 export const blogComponents: Record<
@@ -55,4 +64,5 @@ export const blogComponents: Record<
   'built-my-own-claude-code': lazy(
     () => import('./built-my-own-claude-code.mdx'),
   ),
+  'self-healing-supervisor': lazy(() => import('./self-healing-supervisor.mdx')),
 }

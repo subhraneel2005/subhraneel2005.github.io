@@ -1,0 +1,106 @@
+---
+title: "Building a Self-Healing Supervisor in Node.js"
+date: 2026-06-23
+excerpt: "A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail."
+cover: "/Self%20Healing%20Supervisor.png"
+tags: ["nodejs", "reliability", "ddia", "process-supervision", "distributed-systems"]
+---
+
+# Building a Self-Healing Supervisor in Node.js
+
+Recently, while reading the Reliability chapter from *Designing Data-Intensive Applications* (DDIA) by Martin Kleppmann, I built a small experiment to better understand one of the core ideas of reliable systems:
+
+> Failures are inevitable. Systems should be designed to detect them and recover automatically.
+
+This experiment is a simple **self-healing supervisor**.
+
+![Image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/s5uhk9ydy46d7inq0z12.png)
+
+The idea is straightforward: a supervisor process monitors worker processes and automatically restarts them whenever they become unhealthy.
+
+In production systems, these workers could be microservices, containers, or background jobs. For this experiment, they're implemented as basic Node.js child processes.
+
+## How It Works
+
+The supervisor is intentionally kept simple.
+
+It spawns a worker process and continuously monitors it. If the worker crashes or becomes unresponsive, the supervisor kills it and starts a new one.
+
+Rather than trying to prevent failures entirely, the system assumes they will happen and focuses on recovery.
+
+## Worker Types
+
+To simulate different real-world failure scenarios, the worker randomly starts in one of three modes:
+
+### Normal Worker
+
+A healthy worker that:
+
+* Sends heartbeat messages every 3 seconds.
+* Performs its task.
+* Exits successfully after completion.
+
+### Hung Worker
+
+A worker that appears healthy initially but later becomes unresponsive.
+
+It sends a few heartbeat messages and then stops sending them entirely by entering an infinite loop. Since no further heartbeats are received, the supervisor detects the worker as unhealthy, terminates it, and starts a replacement.
+
+### Crashed Worker
+
+A worker that intentionally crashes itself.
+
+After sending a few heartbeats, it throws an error and exits with a non-zero exit code. The supervisor detects the failure and automatically restarts it.
+
+## Heartbeat-Based Liveness Detection
+
+Workers periodically send JSON heartbeat messages:
+
+```json
+{
+  "type": "heartbeat",
+  "timestamp": 123456789
+}
+```
+
+The supervisor tracks these heartbeats to determine whether a worker is alive.
+
+If no heartbeat is received for 10 seconds, the worker is considered unhealthy and is terminated. This mechanism allows the supervisor to detect not only crashes but also hung processes that are still running but no longer making progress.
+
+![Image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/x0y0ou6l9pqc5ez5cz0g.png)
+
+## Retry and Recovery
+
+The supervisor includes a simple retry mechanism:
+
+* Waits 1 second before restarting a failed worker.
+* Limits recovery attempts to 10 consecutive failures.
+* Resets the retry counter whenever a worker exits successfully.
+
+This prevents endless restart loops while still allowing recovery from transient failures.
+
+![Image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/kyei21d48zaiious1l97.png)
+
+## What I Learned
+
+This experiment reinforced a key reliability principle from DDIA:
+
+A system does not need to eliminate every failure. Instead, it should be able to detect failures quickly and recover automatically.
+
+It also provided a practical understanding of:
+
+* OS processes and parent-child relationships
+* Process supervision
+* Heartbeat-based liveness detection
+* Failure recovery strategies
+* Restart limits and backoff mechanisms
+
+The supervisor itself is intentionally "dumb". It only monitors health and restarts workers when necessary. Interestingly, that simplicity is often a strength. A small, predictable supervisor can be more reliable than a complex one.
+
+Thanks for reading :)
+
+Github Repo: <Link href="https://github.com/subhraneel2005/ddia-lab" target="_blank" alt="ddia-lab repository">subhraneel2005/ddia-lab</Link>
+
+<Link href="https://github.com/subhraneel2005/ddia-lab" target="_blank" alt="ddia-lab repository">
+  <Image src="https://socialify.git.ci/subhraneel2005/ddia-lab/image" alt="ddia-lab repo social preview" />
+</Link>

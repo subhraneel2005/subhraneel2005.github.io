@@ -28,6 +28,12 @@ const blogPosts = [
     excerpt: 'reverse engineering claude code and building my own coding agent from scratch',
     cover: '/images/blog4.png',
   },
+  {
+    slug: 'self-healing-supervisor',
+    title: 'Building a Self-Healing Supervisor in Node.js',
+    excerpt: 'A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail.',
+    cover: '/Self%20Healing%20Supervisor.png',
+  },
 ]
 
 const distIndex = fs.readFileSync('dist/index.html', 'utf-8')
