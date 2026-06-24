@@ -44,6 +44,15 @@ export const blogPosts: BlogPost[] = [
     tags: ['coding-agent', 'typescript', 'ai', 'cli', 'learning', 'implementing'],
   },
   {
+    slug: 'ai-memory-architectures',
+    title: 'What i learned about ai memory after reading about llm wiki, hermes, and mem0',
+    date: '2026-06-24',
+    excerpt:
+      'Exploring AI memory systems — from Karpathy\'s LLM wiki to Hermes agent and Mem0\'s analysis of how different frameworks handle long-term memory.',
+    cover: '/ai%20memory.png',
+    tags: ['ai', 'memory', 'llm', 'rag', 'agents', 'learning'],
+  },
+  {
     slug: 'self-healing-supervisor',
     title: 'Building a Self-Healing Supervisor in Node.js',
     date: '2026-06-23',
@@ -64,5 +73,6 @@ export const blogComponents: Record<
   'built-my-own-claude-code': lazy(
     () => import('./built-my-own-claude-code.mdx'),
   ),
+  'ai-memory-architectures': lazy(() => import('./ai-memory-architectures.mdx')),
   'self-healing-supervisor': lazy(() => import('./self-healing-supervisor.mdx')),
 }

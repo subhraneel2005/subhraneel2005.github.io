@@ -1,4 +1,4 @@
-import{u as l,j as e}from"./index-CiIdHqI8.js";function i(n){const s={blockquote:"blockquote",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...l(),...n.components},{Image:t,Link:r}=s;return t||a("Image"),r||a("Link"),e.jsxs(e.Fragment,{children:[e.jsx(s.h1,{children:"Building a Self-Healing Supervisor in Node.js"}),`
+import{u as l,j as e}from"./index-DgdxXtfE.js";function i(n){const s={blockquote:"blockquote",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...l(),...n.components},{Image:t,Link:r}=s;return t||a("Image"),r||a("Link"),e.jsxs(e.Fragment,{children:[e.jsx(s.h1,{children:"Building a Self-Healing Supervisor in Node.js"}),`
 `,e.jsxs(s.p,{children:["Recently, while reading the Reliability chapter from ",e.jsx(s.em,{children:"Designing Data-Intensive Applications"})," (DDIA) by Martin Kleppmann, I built a small experiment to better understand one of the core ideas of reliable systems:"]}),`
 `,e.jsxs(s.blockquote,{children:[`
 `,e.jsx(s.p,{children:"Failures are inevitable. Systems should be designed to detect them and recover automatically."}),`
@@ -56,7 +56,7 @@ import{u as l,j as e}from"./index-CiIdHqI8.js";function i(n){const s={blockquote
 `,e.jsx(s.li,{children:"Failure recovery strategies"}),`
 `,e.jsx(s.li,{children:"Restart limits and backoff mechanisms"}),`
 `]}),`
-`,e.jsx(s.p,{children:'The supervisor itself is intentionally "dumb" — it only monitors health and restarts workers when necessary. Interestingly, that simplicity is often a strength. A small, predictable supervisor can be more reliable than a complex one.'}),`
+`,e.jsx(s.p,{children:'The supervisor itself is intentionally "dumb". It only monitors health and restarts workers when necessary. Interestingly, that simplicity is often a strength. A small, predictable supervisor can be more reliable than a complex one.'}),`
 `,e.jsx(s.p,{children:"Thanks for reading :)"}),`
 `,e.jsxs(s.p,{children:["Github Repo: ",e.jsx(r,{href:"https://github.com/subhraneel2005/ddia-lab",target:"_blank",alt:"ddia-lab repository",children:"subhraneel2005/ddia-lab"})]}),`
 `,e.jsx(r,{href:"https://github.com/subhraneel2005/ddia-lab",target:"_blank",alt:"ddia-lab repository",children:e.jsx(t,{src:"https://socialify.git.ci/subhraneel2005/ddia-lab/image",alt:"ddia-lab repo social preview"})})]})}function h(n={}){const{wrapper:s}={...l(),...n.components};return s?e.jsx(s,{...n,children:e.jsx(i,{...n})}):i(n)}function a(n,s){throw new Error("Expected component `"+n+"` to be defined: you likely forgot to import, pass, or provide it.")}export{h as default};

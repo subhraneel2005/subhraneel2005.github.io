@@ -1,0 +1,145 @@
+---
+title: "What i learned about ai memory after reading about llm wiki, hermes, and mem0"
+date: 2026-06-24
+excerpt: "Exploring AI memory systems — from Karpathy's LLM wiki to Hermes agent and Mem0's analysis of how different frameworks handle long-term memory."
+cover: "/ai%20memory.png"
+tags: ["ai", "memory", "llm", "rag", "agents", "learning"]
+---
+
+# What i learned about ai memory after reading about llm wiki, hermes, and mem0
+
+today i spent some time reading about ai memory systems.
+
+i started with karpathy's llm wiki idea, then looked into hermes agent, and later read a couple of posts from mem0 about how different agent frameworks handle memory.
+
+i wasn't researching this for work or building a memory product.
+
+i was mostly curious about a simple question:
+
+what happens when ai systems stop forgetting everything between sessions?
+
+a lot of early llm applications were essentially stateless.
+
+you ask a question, get a response, and move on.
+
+unless you manually stuffed previous context back into the prompt, the model would start fresh every time.
+
+but the more i read, the more it felt like people are moving toward a different idea:
+
+instead of treating ai as a tool you use once, treat it as something that accumulates knowledge over time.
+
+## the llm wiki idea
+
+the most interesting idea i found was the llm wiki pattern.
+
+instead of storing information as chunks in a vector database and retrieving them when needed, the model maintains an actual wiki.
+
+the setup is surprisingly simple:
+
+* raw documents stay untouched
+* the ai maintains markdown pages
+* a schema file defines how everything should be organized
+
+what i like about this approach is that it feels closer to software engineering than traditional rag.
+
+the model isn't just retrieving information.
+
+it's organizing it, connecting it, and maintaining it.
+
+the more documents you add, the more valuable the wiki becomes.
+
+## hermes and procedural memory
+
+while llm wiki focuses on knowledge, hermes focuses more on learning from experience.
+
+the thing that stood out to me was its layered memory system.
+
+it has short-term memory for the current session.
+
+it stores procedural knowledge as reusable skills.
+
+and it can search through previous conversations when it needs historical context.
+
+the skill generation part was especially interesting.
+
+instead of only storing facts, the agent can store processes.
+
+that feels closer to how humans learn.
+
+when we gain experience, we don't just remember information.
+
+we remember how to do things.
+
+## github copilot's approach
+
+i also came across some information about github copilot's memory system.
+
+what stood out was that memories aren't stored as random notes.
+
+they're tied to actual code.
+
+a memory contains:
+
+* what the fact is
+* where it came from
+* why it matters
+
+before using a memory, copilot can re-check the referenced code and verify whether the memory is still valid.
+
+i thought this was clever because memory is only useful if it stays accurate.
+
+otherwise it becomes a source of bugs.
+
+## the memory problem nobody talks about
+
+one thing i kept noticing is that every system seems to have its own memory.
+
+claude has its own approach.
+
+codex has its own.
+
+hermes has its own.
+
+openclaw has its own.
+
+the problem is that these memories often stay trapped inside the tool where they were created.
+
+if an agent learns something useful in one environment, that knowledge doesn't automatically follow you somewhere else.
+
+that's why projects like mem0 caught my attention.
+
+they're trying to make memory more portable instead of tying it to a single application.
+
+## my takeaway
+
+after reading all of this, i don't think the interesting question is whether ai models will become smarter.
+
+the interesting question is how they will remember.
+
+a lot of the progress now seems less about bigger models and more about better systems around those models.
+
+memory.
+
+retrieval.
+
+knowledge organization.
+
+learning from previous interactions.
+
+all of these things seem increasingly important.
+
+i'm still exploring this area, but one thing became clear to me:
+
+the future probably isn't just better models.
+
+it's models that can build on what they learned yesterday.
+
+## references
+
+* [llm wiki pattern (andrej karpathy)](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+* [hermes agent](https://github.com/NousResearch/hermes-agent)
+* [memory architecture of github copilot (mem0 analysis)](https://x.com/mem0ai/status/2064383137338233179)
+* [state of memory harnesses (mem0 analysis)](https://x.com/mem0ai/status/2061822612398014782)
+
+these were the main resources i read while trying to understand how different ai systems approach long-term memory, knowledge organization, and learning from previous interactions.
+

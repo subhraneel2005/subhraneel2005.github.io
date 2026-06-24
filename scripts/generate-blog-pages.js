@@ -29,6 +29,12 @@ const blogPosts = [
     cover: '/images/blog4.png',
   },
   {
+    slug: 'ai-memory-architectures',
+    title: 'What i learned about ai memory after reading about llm wiki, hermes, and mem0',
+    excerpt: 'Exploring AI memory systems — from Karpathy\'s LLM wiki to Hermes agent and Mem0\'s analysis of how different frameworks handle long-term memory.',
+    cover: '/ai%20memory.png',
+  },
+  {
     slug: 'self-healing-supervisor',
     title: 'Building a Self-Healing Supervisor in Node.js',
     excerpt: 'A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail.',
