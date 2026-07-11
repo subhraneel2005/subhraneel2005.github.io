@@ -1,4 +1,4 @@
-import{u as l,j as e}from"./index-DgdxXtfE.js";function i(n){const s={blockquote:"blockquote",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...l(),...n.components},{Image:t,Link:r}=s;return t||a("Image"),r||a("Link"),e.jsxs(e.Fragment,{children:[e.jsx(s.h1,{children:"Building a Self-Healing Supervisor in Node.js"}),`
+import{u as l,j as e}from"./index-DT6dYhX3.js";function i(n){const s={blockquote:"blockquote",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...l(),...n.components},{Image:t,Link:r}=s;return t||a("Image"),r||a("Link"),e.jsxs(e.Fragment,{children:[e.jsx(s.h1,{children:"Building a Self-Healing Supervisor in Node.js"}),`
 `,e.jsxs(s.p,{children:["Recently, while reading the Reliability chapter from ",e.jsx(s.em,{children:"Designing Data-Intensive Applications"})," (DDIA) by Martin Kleppmann, I built a small experiment to better understand one of the core ideas of reliable systems:"]}),`
 `,e.jsxs(s.blockquote,{children:[`
 `,e.jsx(s.p,{children:"Failures are inevitable. Systems should be designed to detect them and recover automatically."}),`
@@ -28,11 +28,11 @@ import{u as l,j as e}from"./index-DgdxXtfE.js";function i(n){const s={blockquote
 `,e.jsx(s.p,{children:"After sending a few heartbeats, it throws an error and exits with a non-zero exit code. The supervisor detects the failure and automatically restarts it."}),`
 `,e.jsx(s.h2,{children:"Heartbeat-Based Liveness Detection"}),`
 `,e.jsx(s.p,{children:"Workers periodically send JSON heartbeat messages:"}),`
-`,e.jsx(s.pre,{children:e.jsx(s.code,{className:"language-json",children:`{
-  "type": "heartbeat",
-  "timestamp": 123456789
-}
-`})}),`
+`,e.jsx(s.pre,{className:"language-json",children:e.jsxs(s.code,{className:"language-json code-highlight",children:[e.jsxs(s.span,{className:"code-line",children:[e.jsx(s.span,{className:"token punctuation",children:"{"}),`
+`]}),e.jsxs(s.span,{className:"code-line",children:["  ",e.jsx(s.span,{className:"token property",children:'"type"'}),e.jsx(s.span,{className:"token operator",children:":"})," ",e.jsx(s.span,{className:"token string",children:'"heartbeat"'}),e.jsx(s.span,{className:"token punctuation",children:","}),`
+`]}),e.jsxs(s.span,{className:"code-line",children:["  ",e.jsx(s.span,{className:"token property",children:'"timestamp"'}),e.jsx(s.span,{className:"token operator",children:":"})," ",e.jsx(s.span,{className:"token number",children:"123456789"}),`
+`]}),e.jsxs(s.span,{className:"code-line",children:[e.jsx(s.span,{className:"token punctuation",children:"}"}),`
+`]})]})}),`
 `,e.jsx(s.p,{children:"The supervisor tracks these heartbeats to determine whether a worker is alive."}),`
 `,e.jsx(s.p,{children:"If no heartbeat is received for 10 seconds, the worker is considered unhealthy and is terminated. This mechanism allows the supervisor to detect not only crashes but also hung processes that are still running but no longer making progress."}),`
 `,e.jsx(s.p,{children:e.jsx(s.img,{src:"https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/x0y0ou6l9pqc5ez5cz0g.png",alt:"Image description"})}),`
@@ -59,4 +59,4 @@ import{u as l,j as e}from"./index-DgdxXtfE.js";function i(n){const s={blockquote
 `,e.jsx(s.p,{children:'The supervisor itself is intentionally "dumb". It only monitors health and restarts workers when necessary. Interestingly, that simplicity is often a strength. A small, predictable supervisor can be more reliable than a complex one.'}),`
 `,e.jsx(s.p,{children:"Thanks for reading :)"}),`
 `,e.jsxs(s.p,{children:["Github Repo: ",e.jsx(r,{href:"https://github.com/subhraneel2005/ddia-lab",target:"_blank",alt:"ddia-lab repository",children:"subhraneel2005/ddia-lab"})]}),`
-`,e.jsx(r,{href:"https://github.com/subhraneel2005/ddia-lab",target:"_blank",alt:"ddia-lab repository",children:e.jsx(t,{src:"https://socialify.git.ci/subhraneel2005/ddia-lab/image",alt:"ddia-lab repo social preview"})})]})}function h(n={}){const{wrapper:s}={...l(),...n.components};return s?e.jsx(s,{...n,children:e.jsx(i,{...n})}):i(n)}function a(n,s){throw new Error("Expected component `"+n+"` to be defined: you likely forgot to import, pass, or provide it.")}export{h as default};
+`,e.jsx(r,{href:"https://github.com/subhraneel2005/ddia-lab",target:"_blank",alt:"ddia-lab repository",children:e.jsx(t,{src:"https://socialify.git.ci/subhraneel2005/ddia-lab/image",alt:"ddia-lab repo social preview"})})]})}function c(n={}){const{wrapper:s}={...l(),...n.components};return s?e.jsx(s,{...n,children:e.jsx(i,{...n})}):i(n)}function a(n,s){throw new Error("Expected component `"+n+"` to be defined: you likely forgot to import, pass, or provide it.")}export{c as default};

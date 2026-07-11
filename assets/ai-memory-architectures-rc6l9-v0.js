@@ -1,4 +1,4 @@
-import{u as i,j as e}from"./index-DgdxXtfE.js";function s(t){const n={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...i(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{children:"What i learned about ai memory after reading about llm wiki, hermes, and mem0"}),`
+import{u as i,j as e}from"./index-DT6dYhX3.js";function s(t){const n={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...i(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{children:"What i learned about ai memory after reading about llm wiki, hermes, and mem0"}),`
 `,e.jsx(n.p,{children:"today i spent some time reading about ai memory systems."}),`
 `,e.jsx(n.p,{children:"i started with karpathy's llm wiki idea, then looked into hermes agent, and later read a couple of posts from mem0 about how different agent frameworks handle memory."}),`
 `,e.jsx(n.p,{children:"i wasn't researching this for work or building a memory product."}),`
