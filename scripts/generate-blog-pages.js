@@ -40,6 +40,12 @@ const blogPosts = [
     excerpt: 'A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail.',
     cover: '/Self%20Healing%20Supervisor.png',
   },
+  {
+    slug: 'twitter-fanout',
+    title: 'Reproducing X fan-out problem in code',
+    excerpt: 'Simulating and comparing Push vs Pull fan-out strategies for delivering tweets to timelines, inspired by Chapter 11 of DDIA.',
+    cover: '/Twiter%20fanout.png',
+  },
 ]
 
 const distIndex = fs.readFileSync('dist/index.html', 'utf-8')

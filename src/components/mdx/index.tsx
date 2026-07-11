@@ -1,4 +1,5 @@
 import { cn } from '../../lib/utils'
+import { Mermaid } from './Mermaid'
 
 export function Callout({ children }: { children: React.ReactNode }) {
   return (
@@ -68,4 +69,7 @@ export const mdxComponents = {
   Link,
   MDXIcon,
   Image,
+  Mermaid,
 }
+
+export { Mermaid }

@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
+@import "prismjs/themes/prism-tomorrow.css";
 
 @custom-variant dark (&:is(.dark *));
 

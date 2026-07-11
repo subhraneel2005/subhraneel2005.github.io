@@ -1,0 +1,307 @@
+---
+title: "Reproducing X fan-out problem in code"
+date: 2026-07-11
+excerpt: "Simulating and comparing Push vs Pull fan-out strategies for delivering tweets to timelines, inspired by Chapter 1 of DDIA."
+cover: "/Twiter%20fanout.png"
+tags: ["ddia", "fan-out", "distributed-systems", "twitter", "nodejs"]
+---
+
+# Reproducing X fan-out problem in code
+
+A small experiment inspired by **Chapter 1's Fan-Out example portion** of **Designing Data-Intensive Applications (DDIA)** by Martin Kleppmann.
+
+I also made a video walking through the whole thing: <Link href="https://x.com/subhraneeltwt/status/2075034293546705035" target="_blank">x.com/subhraneeltwt/status/2075034293546705035</Link>
+
+## Goal
+
+Simulate and compare two fan-out strategies - **Push** (write path) and **Pull** (read path) - for delivering tweets to a user's timeline in a Twitter-like social feed system.
+
+The main idea is that there is a fundamental tradeoff between write amplification and read amplification, and real-world systems often use a hybrid approach.
+
+## Concepts Covered
+
+- **Push** - Writing data to all followers at tweet time
+- **Pull** - Collecting data from followed users at read time
+- **Merge** - Combining pushed and pulled data for a unified feed
+- **Scalability** - Handling millions of followers and reads
+- **Load Balancing** - Distributing fan-out work across the system
+
+## Architecture
+
+<Image src="/x-fanout/a0.png" alt="Architecture diagram of the fan-out simulation" />
+
+### Models
+
+```typescript
+import type { User } from "./User.js";
+
+export class Post{
+    id: string;
+    author: User;
+    timestamp: number;
+
+    constructor(id: string, author: User, timestamp: number){
+        this.id = id;
+        this.author = author;
+        this.timestamp = timestamp
+    }
+
+    getPostData(): Post{
+        return this
+    }
+}
+```
+
+```typescript
+import type { Post } from "./Post.js";
+
+export class User {
+    id: string;
+    isVip: boolean;
+    followers: User[] = [];
+    following: User[] = [];
+    posts: Post[] = [];
+    timeline: Post[] = [];
+
+    constructor(id: string, isVip: boolean){
+        this.id = id;
+        this.isVip = isVip;
+    }
+
+    getUserData(): User {
+        return this
+    }
+}
+```
+
+### Fixtures
+
+The simulation creates three kinds of users:
+
+| User | Followers | Role |
+|---|---|---|
+| `vip` | 500,000 | High-profile author |
+| `regular` | 10 | Typical author |
+| `normalUser` | - | Consumer who follows both |
+
+```typescript
+import { User } from "../models/User.js";
+
+export const vip = new User("vip-15C0B8A5-E4C9-49C8-9480-798C88D28972", true);
+
+export const regular = new User("regular-008D9C95-CC16-4907-9BA4-5F885F1B56E3", false);
+
+// 500 followers for VIP
+export const vipFollowers: User[] = [];
+
+for (let i = 0; i < 500000; i++) {
+    const follower = new User(`vip-follower-${i}`, false);
+
+    vip.followers.push(follower);
+    follower.following.push(vip);
+
+    vipFollowers.push(follower);
+}
+
+// 10 followers for Regular
+export const regularFollowers: User[] = [];
+
+for (let i = 0; i < 10; i++) {
+    const follower = new User(`regular-follower-${i}`, false);
+
+    regular.followers.push(follower);
+    follower.following.push(regular);
+
+    regularFollowers.push(follower);
+}
+```
+
+## Strategies
+
+### Push (Write Fan-Out)
+
+When an author tweets, the post is immediately written to every follower's timeline.
+
+<Image src="/x-fanout/a1.png" alt="Push fan-out diagram" />
+
+- **Work** = number of followers.
+- **Cost**: 500,000 writes for a VIP tweet; 10 for a regular tweet.
+- **Tradeoff**: Expensive for authors with many followers (write amplification), but readers see new content instantly with zero read-time computation.
+
+```typescript
+import type { Post } from "../models/Post.js";
+import type { User } from "../models/User.js";
+
+export class PushStrategy {
+    work = 0;
+
+    pushTweetToAllFollowers(author: User, post: Post){
+        for (const f of author.followers){
+            f.timeline.push(post)
+            author.posts.push(post)
+            this.work++
+        }
+    }
+}
+```
+
+### Pull (Read Fan-Out)
+
+Posts live only on the author's timeline. When a user opens their feed, they iterate over everyone they follow and collect their posts.
+
+<Image src="/x-fanout/a2.png" alt="Pull fan-out diagram" />
+
+- **Work** = number of followed users × their posts.
+- **Cost**: Depends on how many people you follow and how many posts they've made.
+- **Tradeoff**: Cheap on writes (no fan-out needed), but expensive on reads (read amplification).
+
+### VIP-Only Pull Variation
+
+A hybrid variant pulls only posts from VIP authors. This hints at Twitter's real-world approach: VIP (celebrity) tweets are pushed to all followers, while regular users' tweets are pulled at read time.
+
+<Image src="/x-fanout/a3.png" alt="VIP-only pull diagram" />
+
+```typescript
+import type { User } from "../models/User.js";
+
+export class PullStrategy {
+    work = 0;
+
+    pullNewTweetsToTimeline(user: User){
+        user.timeline = [];
+
+        for (const f of user.following){
+            for (const p of f.posts){
+                user.timeline.push(p)
+                this.work++
+            }
+        }
+    }
+
+    pullOnlyVipTweetsToTimeline(user: User){
+        user.timeline = [];
+
+        for (const f of user.following){
+            if(f.isVip){
+                for(const p of f.posts){
+                    user.timeline.push(p)
+                    this.work++
+                }
+            }
+        }
+    }
+}
+```
+
+### Entry Point
+
+```typescript
+import { Post } from "./models/Post.js";
+import { User } from "./models/User.js";
+import { PullStrategy } from "./strategies/Pull.js";
+import { PushStrategy } from "./strategies/Push.js";
+import { regular, vip } from "./utils/generateUsers.js";
+
+const regularTweet = new Post(
+    "regPost-8112303C-480B-4F61-A321-A580A12EB771",
+    regular,
+    Date.now()
+)
+
+const vipTweet = new Post(
+    "vipPost-F3D42E78-5FB6-4AD7-B131-C5595B767E1C",
+    vip,
+    Date.now()
+)
+
+const normalUser = new User(
+    "normalUser-A98F7702-A932-4935-9E09-A4346A903F2B",
+    false
+)
+
+function simulatePush(){
+    console.log("SIMULATING PUSH");
+
+    const push = new PushStrategy();
+
+    push.pushTweetToAllFollowers(regular, regularTweet)
+    console.log("WORKS COUNT FOR REGULAR TWEET PUSH: ", push.work)
+
+    push.work = 0
+
+    push.pushTweetToAllFollowers(vip, vipTweet)
+    console.log("WORKS COUNT FOR VIP TWEET PUSH: ", push.work)
+
+}
+
+function simulatePull(){
+    console.log("SIMULATING PULL");
+
+    regular.posts.push(regularTweet)
+    vip.posts.push(vipTweet)
+
+    normalUser.following.push(regular)
+    normalUser.following.push(vip)
+
+    const pull = new PullStrategy()
+
+    pull.pullNewTweetsToTimeline(normalUser)
+
+    console.log("WORKS COUNT FOR PULL:", pull.work);
+    console.log("TIMELINE SIZE:", normalUser.timeline.length);
+}
+
+function vipOnlyPull(){
+    console.log("SIMULATING VIP ONLY PULL");
+
+    const pull = new PullStrategy()
+
+    normalUser.timeline = []
+
+    pull.pullOnlyVipTweetsToTimeline(normalUser)
+
+    console.log("WORKS COUNT FOR PULL:", pull.work);
+    console.log("TIMELINE SIZE:", normalUser.timeline.length);
+}
+
+function runAll(){
+    simulatePush()
+    simulatePull()
+    vipOnlyPull()
+}
+
+runAll()
+```
+
+## What I Learned
+
+### Write Amplification vs. Read Amplification
+
+The push strategy shifts cost to the write path. For a celebrity with 500K followers, one tweet causes 500K write operations. The pull strategy shifts cost to the read path - reading a feed means checking every followed user's posts.
+
+### The Hybrid Sweet Spot
+
+Real systems (Twitter, Instagram) use both:
+- **VIP users** → Push their tweets to a fan-out cache at write time.
+- **Regular users** → Pull tweets from followed users at read time.
+- A user's feed is then merged from both sources.
+
+### Strategy Pattern
+
+The project cleanly separates the two algorithms into interchangeable strategy classes (`PushStrategy`, `PullStrategy`), making it easy to compare and swap them.
+
+## Example Output
+
+```
+SIMULATING PUSH
+WORKS COUNT FOR REGULAR TWEET PUSH:  10
+WORKS COUNT FOR VIP TWEET PUSH:  500000
+SIMULATING PULL
+WORKS COUNT FOR PULL: 3
+TIMELINE SIZE: 3
+SIMULATING VIP ONLY PULL
+WORKS COUNT FOR PULL: 2
+TIMELINE SIZE: 2
+```
+
+The push counts show the cost of writing to 10 vs. 500K followers. The pull counts reflect how many posts the consumer collects from the two authors they follow.

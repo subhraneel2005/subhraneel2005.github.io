@@ -61,6 +61,15 @@ export const blogPosts: BlogPost[] = [
     cover: '/Self%20Healing%20Supervisor.png',
     tags: ['nodejs', 'reliability', 'ddia', 'process-supervision', 'distributed-systems'],
   },
+  {
+    slug: 'twitter-fanout',
+    title: 'Reproducing X fan-out problem in code',
+    date: '2026-07-11',
+    excerpt:
+      'Simulating and comparing Push vs Pull fan-out strategies for delivering tweets to timelines, inspired by Chapter 11 of DDIA.',
+    cover: '/Twiter%20fanout.png',
+    tags: ['ddia', 'fan-out', 'distributed-systems', 'twitter', 'nodejs'],
+  },
 ]
 
 export const blogComponents: Record<
@@ -75,4 +84,5 @@ export const blogComponents: Record<
   ),
   'ai-memory-architectures': lazy(() => import('./ai-memory-architectures.mdx')),
   'self-healing-supervisor': lazy(() => import('./self-healing-supervisor.mdx')),
+  'twitter-fanout': lazy(() => import('./twitter-fanout.mdx')),
 }
