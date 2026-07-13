@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
 import RoamingCharacter from './components/RoamingCharacter'
 import { useState, useEffect, useCallback } from 'react'
-import { MapPin, ArrowUpRight, Github } from 'lucide-react'
+import { MapPin, ArrowUpRight, Github, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
@@ -11,7 +11,7 @@ import { profile, socials, projects, experience, skills, education, stats, proje
 
 const companyLogos: Record<string, string> = {
   'Jobsforce.ai': '/jobsforce-logo.webp',
-  'Kasukabe Labs (Web and App dev Agency)': '/kasukabe-labs-logo.jpg',
+  'Kasukabe Labs': '/kasukabe-labs-logo.jpg',
 }
 
 const sections = ['Projects', 'Experience', 'Education', 'Skills'] as const
@@ -209,7 +209,9 @@ export default function App() {
                   <div className="flex items-baseline justify-between gap-4 mb-1.5">
                     <h3 className="text-sm font-semibold">{exp.role}</h3>
                     <span className="shrink-0 text-[11px] text-muted-foreground/60 font-mono tabular-nums">
-                      {exp.period}
+                    <span className="flex justify-center items-center gap-1">
+                    <Calendar className="mb-0.4" size={12}/> {exp.period}
+                    </span>
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mb-2">
@@ -228,14 +230,14 @@ export default function App() {
                       {exp.location}
                     </span>
                   </div>
-                  <p className="text-xs text-muted-foreground/70 leading-relaxed text-pretty mb-3">
+                  <p className="text-xs text-muted-foreground leading-relaxed text-pretty mb-3">
                     {exp.description}
                   </p>
                   <ul className="space-y-1.5">
                     {exp.details.map((detail, j) => (
                       <li
                         key={j}
-                        className="text-xs text-muted-foreground/60 leading-relaxed text-pretty pl-3 relative"
+                        className="text-xs text-muted-foreground leading-relaxed text-pretty pl-3 relative"
                       >
                         <span className="absolute left-0 top-[6px] size-1 rounded-full bg-foreground/10" />
                         {detail}
