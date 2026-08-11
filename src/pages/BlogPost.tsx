@@ -109,7 +109,7 @@ export default function BlogPost() {
           </h1>
 
           <div className="flex items-center gap-4 mb-4">
-            <div className="flex items-center gap-1.5 text-muted-foreground/50">
+            <div className="flex items-center gap-1.5 text-muted-foreground/70">
               <Calendar className="size-3.5" aria-hidden="true" />
               <span className="text-sm">{dateStr(post.date)}</span>
             </div>
@@ -124,7 +124,7 @@ export default function BlogPost() {
                 <Badge
                   key={tag}
                   variant="secondary"
-                  className={`text-[10px] ${color}`}
+                  className={`text-[12px] ${color}`}
                 >
                   {tag}
                 </Badge>

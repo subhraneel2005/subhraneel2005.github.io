@@ -61,10 +61,10 @@ export default function Blogs() {
           </Link>
         </div>
 
-        <h1 className="text-[32px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
+        <h1 className="text-[40px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
           Blogs
         </h1>
-        <p className="text-sm text-muted-foreground/60 mb-12">
+        <p className="text-sm text-muted-foreground mb-12">
           thoughts, experiments, and things i&rsquo;ve built
         </p>
 
@@ -102,14 +102,14 @@ export default function Blogs() {
                   </div>
                   <div className="flex-1 p-5 min-w-0">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[11px] font-medium text-muted-foreground/50">
+                      <span className="text-[14px] font-medium text-muted-foreground/70">
                         {dateStr(post.date)}
                       </span>
                     </div>
                     <h2 className="text-base font-semibold tracking-tight mb-1.5 group-hover:text-foreground/80 transition-colors text-pretty">
                       {post.title}
                     </h2>
-                    <p className="text-sm text-muted-foreground/60 leading-relaxed mb-3 line-clamp-2">
+                    <p className="text-sm text-muted-foreground/90 leading-relaxed mb-3 line-clamp-2">
                       {post.excerpt}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -121,7 +121,7 @@ export default function Blogs() {
                           <Badge
                             key={tag}
                             variant="secondary"
-                            className={`text-[10px] ${color}`}
+                            className={`text-[12px] ${color}`}
                           >
                             {tag}
                           </Badge>

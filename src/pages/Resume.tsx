@@ -21,7 +21,7 @@ export default function Resume() {
           </a>
         </div>
 
-        <h1 className="text-[32px] font-semibold tracking-tight mb-1 leading-tight">Resume</h1>
+        <h1 className="text-[40px] font-semibold tracking-tight mb-1 leading-tight">Resume</h1>
         <p className="text-sm text-muted-foreground mb-8">
           Backend & AI Engineer
         </p>

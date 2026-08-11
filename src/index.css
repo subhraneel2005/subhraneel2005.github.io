@@ -146,7 +146,7 @@
   --secondary: #f2f2f2;
   --secondary-foreground: #4d4d4d;
   --muted: #f2f2f2;
-  --muted-foreground: #4d4d4d;
+  --muted-foreground: #3a3a3a;
   --accent: #f2f2f2;
   --accent-foreground: #171717;
   --destructive: #ea001d;
@@ -184,7 +184,7 @@
   --secondary: #2a2a2a;
   --secondary-foreground: #a8a8a8;
   --muted: #2a2a2a;
-  --muted-foreground: #8f8f8f;
+  --muted-foreground: #c9c9c9;
   --accent: #2a2a2a;
   --accent-foreground: #f2f2f2;
   --destructive: #ff676d;
@@ -207,6 +207,9 @@
 }
 
 @layer base {
+  html {
+    font-size: 20px;
+  }
   body {
     @apply antialiased bg-background text-foreground;
     font-family: "Fira Sans", sans-serif;
@@ -259,7 +262,7 @@
 .blog-content p {
   margin-bottom: 1.25em;
   line-height: 1.75;
-  color: #a8a8a8;
+  color: var(--muted-foreground);
   font-size: 0.9375rem;
 }
 
@@ -278,14 +281,14 @@
 
 .blog-content strong {
   font-weight: 700;
-  color: #ebebeb;
+  color: var(--foreground);
 }
 
 .blog-content blockquote {
   border-left: 3px solid #3d3d3d;
   padding-left: 1rem;
   margin: 1.5em 0;
-  color: #8f8f8f;
+  color: var(--muted-foreground);
   font-style: italic;
 }
 
@@ -293,7 +296,7 @@
 .blog-content ol {
   margin: 1em 0;
   padding-left: 1.5em;
-  color: #a8a8a8;
+  color: var(--muted-foreground);
   font-size: 0.9375rem;
 }
 
@@ -313,23 +316,23 @@
 .blog-content hr {
   border: none;
   height: 1px;
-  background: #2a2a2a;
+  background: var(--border);
   margin: 2.5em 0;
 }
 
 .blog-content code {
   font-family: "Geist Mono Variable", ui-monospace, monospace;
   font-size: 0.8125rem;
-  background: #1f1f1f;
+  background: var(--muted);
   padding: 0.15em 0.4em;
   border-radius: 4px;
-  color: #ebebeb;
-  border: 1px solid #2a2a2a;
+  color: var(--foreground);
+  border: 1px solid var(--border);
 }
 
 .blog-content pre {
-  background: #141414;
-  border: 1px solid #2a2a2a;
+  background: var(--muted);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 1.25rem;
   overflow-x: auto;
@@ -342,7 +345,7 @@
   border: none;
   font-size: 0.8125rem;
   line-height: 1.6;
-  color: #d4d4d8;
+  color: var(--foreground);
 }
 
 .blog-content table {
@@ -354,26 +357,26 @@
 
 .blog-content th,
 .blog-content td {
-  border: 1px solid #2a2a2a;
+  border: 1px solid var(--border);
   padding: 0.625rem 0.875rem;
   text-align: left;
 }
 
 .blog-content th {
-  background: #1f1f1f;
+  background: var(--muted);
   font-weight: 600;
-  color: #ebebeb;
+  color: var(--foreground);
 }
 
 .blog-content td {
-  color: #a8a8a8;
+  color: var(--muted-foreground);
 }
 
 .blog-content img:not([class]) {
   border-radius: 6px;
   width: 100%;
   margin: 1.5em 0;
-  border: 1px solid #2a2a2a;
+  border: 1px solid var(--border);
 }
 
 .blog-content ::selection {

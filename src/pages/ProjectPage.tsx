@@ -70,7 +70,7 @@ export default function ProjectPage() {
 
           <div className="flex flex-wrap gap-1.5 mb-8">
             {project.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-[10px]">
+              <Badge key={tag} variant="secondary" className="text-[12px]">
                 {projectTagIcons[tag] && (
                   <img
                     src={projectTagIcons[tag]}
@@ -114,7 +114,7 @@ export default function ProjectPage() {
           <div className="space-y-4">
             {project.details.map((detail, i) => (
               <div key={i} className="flex gap-3">
-                <span className="text-xs text-muted-foreground/40 font-mono mt-0.5 shrink-0 w-5 tabular-nums">
+                <span className="text-xs text-muted-foreground/70 font-mono mt-0.5 shrink-0 w-5 tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="text-sm text-muted-foreground leading-relaxed text-pretty">

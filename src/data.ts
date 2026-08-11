@@ -33,21 +33,29 @@ export const socials = [
     name: "GitHub",
     url: "https://github.com/subhraneel2005",
     icon: Github,
+    img: "/icons8-github-96.png",
+    label: "GitHub",
   },
   {
     name: "X/Twitter",
     url: "https://x.com/subhraneeltwt",
     icon: Twitter,
+    img: "/icons8-x-96.png",
+    label: "X",
   },
   {
     name: "LinkedIn",
     url: "https://www.linkedin.com/in/subhraneel-goswami-599931282/",
     icon: Linkedin,
+    img: "/icons8-linkedin-96.png",
+    label: "LinkedIn",
   },
   {
     name: "Email",
     url: "mailto:subhraneeljobs@gmail.com",
     icon: Mail,
+    img: "/icons8-gmail-96.png",
+    label: "Gmail",
   },
 ];
 

@@ -86,25 +86,34 @@ export default function App() {
             <AvatarFallback>SG</AvatarFallback>
           </Avatar>
 
-          <h1 className="text-[32px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
+          <h1 className="text-[40px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
             {profile.name}
           </h1>
           <p className="text-sm text-muted-foreground mb-1">{profile.title}</p>
-          <p className="text-sm text-muted-foreground/60 mb-6 leading-relaxed text-pretty max-w-prose">
+          <p className="text-sm text-muted-foreground/90 mb-6 leading-relaxed text-pretty max-w-prose">
             {profile.bio}
           </p>
 
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center gap-3">
             {socials.map((social) => (
               <a
                 key={social.name}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={social.name}
+                className="group flex flex-col items-center gap-1.5"
               >
-                <Button variant="ghost" size="icon" aria-label={social.name}>
-                  <social.icon className="size-4" aria-hidden="true" />
-                </Button>
+                <span className="flex size-10 items-center justify-center rounded-md bg-muted ring-1 ring-border shadow-sm transition-transform duration-150 ease-geist group-hover:scale-105">
+                  <img
+                    src={social.img}
+                    alt=""
+                    className="size-5 object-contain"
+                  />
+                </span>
+                <span className="text-xs font-medium text-muted-foreground">
+                  {social.label}
+                </span>
               </a>
             ))}
           </div>
@@ -209,7 +218,7 @@ export default function App() {
                 >
                   <div className="flex items-baseline justify-between gap-4 mb-1.5">
                     <h3 className="text-sm font-semibold">{exp.role}</h3>
-                    <span className="shrink-0 text-[11px] text-muted-foreground/60 font-mono tabular-nums">
+                    <span className="shrink-0 text-[14px] text-muted-foreground/60 font-mono tabular-nums">
                     <span className="flex justify-center items-center gap-1">
                     <Calendar className="mb-0.4" size={12}/> {exp.period}
                     </span>
@@ -225,8 +234,8 @@ export default function App() {
                         className="size-4 rounded object-contain bg-muted"
                       />
                     )}
-                    <p className="text-xs text-muted-foreground/80">{exp.company}</p>
-                    <span className="text-[11px] text-muted-foreground/60 flex items-center gap-1">
+                    <p className="text-xs text-muted-foreground">{exp.company}</p>
+                    <span className="text-[14px] text-muted-foreground/90 flex items-center gap-1">
                       <MapPin className="size-3" aria-hidden="true" />
                       {exp.location}
                     </span>
@@ -270,12 +279,12 @@ export default function App() {
             >
               <div className="flex items-baseline justify-between gap-4 mb-1.5">
                 <h3 className="text-sm font-semibold">{edu.degree}</h3>
-                <span className="shrink-0 text-[11px] text-muted-foreground/60 font-mono tabular-nums">
+                <span className="shrink-0 text-[14px] text-muted-foreground/60 font-mono tabular-nums">
                   {edu.period}
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground/80 mb-1">{edu.school}</p>
-              <p className="text-[11px] text-muted-foreground/60 flex items-center gap-1">
+              <p className="text-xs text-muted-foreground mb-1">{edu.school}</p>
+              <p className="text-[14px] text-muted-foreground/90 flex items-center gap-1">
                 <MapPin className="size-3" aria-hidden="true" />
                 {edu.location}
               </p>
@@ -298,7 +307,7 @@ export default function App() {
           <div className="space-y-5">
             {skills.map((group) => (
               <div key={group.category}>
-                <h3 className="text-[11px] font-medium text-muted-foreground/60 uppercase tracking-wider mb-2.5">
+                <h3 className="text-[14px] font-medium text-muted-foreground/60 uppercase tracking-wider mb-2.5">
                   {group.category}
                 </h3>
                 <div className="flex flex-wrap gap-1.5">
@@ -306,7 +315,7 @@ export default function App() {
                     <Badge
                       key={skill.name}
                       variant="outline"
-                      className="text-[12px] px-3 py-2 border border-dashed"
+                      className="text-[15px] px-3 py-2 border border-dashed"
                     >
                       {skill.icon && (
                         <img
@@ -327,20 +336,24 @@ export default function App() {
         <Separator className="mb-10" />
 
         <footer className="flex items-center justify-between">
-          <p className="text-xs text-muted-foreground/60">
+          <p className="text-xs text-muted-foreground/80">
             &copy; {new Date().getFullYear()} {profile.username}
           </p>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             {socials.map((social) => (
               <a
                 key={social.name}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={social.name}
+                className="flex size-7 items-center justify-center rounded-md bg-muted ring-1 ring-border transition-transform duration-150 ease-geist hover:scale-105"
               >
-                <Button variant="ghost" size="icon-xs" aria-label={social.name}>
-                  <social.icon className="size-3" aria-hidden="true" />
-                </Button>
+                <img
+                  src={social.img}
+                  alt=""
+                  className="size-4 object-contain"
+                />
               </a>
             ))}
           </div>
