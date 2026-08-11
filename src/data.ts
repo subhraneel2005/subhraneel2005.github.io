@@ -14,12 +14,12 @@ import {
 export const profile = {
   name: "Subhraneel Goswami",
   username: "subhraneel2005",
-  title: "Backend & Applied AI Engineer",
+  title: "Backend & AI Engineer",
   bio: "Building, Writing, Breaking. Documenting 0 - ∞",
   email: "subhraneeljobs@gmail.com",
   status: "Job Hunting",
   openToWork: true,
-  avatar: "/me.jpg",
+  avatar: "/new-me.png",
 };
 
 export const stats = [
@@ -88,27 +88,27 @@ export const projects = [
     ],
   },
   {
-    title: "Usecerebr",
-    id: "usecerebr",
+    title: "DDIA Labs",
+    id: "ddia-labs",
     description:
-      "A personal knowledge graph/second brain that connects ideas across sources like youtube videos, research papers, blogs and articles, X posts/articles.",
-    github: "https://github.com/subhraneel2005/usecerebr",
+      "Hands-on experiments replicating ideas from Designing Data-Intensive Applications by Martin Kleppmann — self-healing process supervision and Twitter-style fan-out strategies.",
+    github: "https://github.com/subhraneel2005/ddia-lab",
     tags: [
-      "Python",
-      "FastAPI",
-      "Qdrant",
-      "Gemini 2.5 Flash",
-      "Redis",
-      "Docker",
+      "TypeScript",
+      "Node.js",
+      "Process Supervision",
+      "Heartbeats",
+      "Fan-Out",
+      "Strategy Pattern",
     ],
-    image: "/usecerbr.png",
+    image: "/ddia-lab.png",
     details: [
-      "A personal knowledge graph / second brain connecting ideas across YouTube videos, research papers, blogs, articles, X posts, and GitHub repos.",
-      "Ingests content via multiple sources: YouTube transcripts (yt-dlp), ArXiv papers (PDF parsing via PyMuPDF), web articles (trafilatura), and X/Twitter threads.",
-      "Chunks and embeds content using sentence-transformers (all-MiniLM-L6-v2) and Gemini 2.5 Flash for high-quality semantic embeddings.",
-      "Stores vectors in Qdrant with rich metadata (source type, URL, timestamp) for hybrid search (semantic + keyword + metadata filtering).",
-      "Uses Redis for caching frequent queries and managing ingestion job queues, reducing response times by ~40%.",
-      "Docker Compose setup with FastAPI, Qdrant, and Redis for easy local deployment.",
+      "Experiment 1 — Self-Healing Supervisor: a supervisor process spawns and monitors a worker, restarting it on non-zero exit codes. Instead of preventing every failure, the system detects faults and recovers automatically.",
+      "Workers now randomly pick a behavior (normal, hung, or crashed). Hang detection is done via JSON heartbeats — the supervisor kills a worker that goes silent for 10s.",
+      "Restarts are limited to 10 consecutive failures with backoff, resetting on successful exit to avoid infinite restart loops.",
+      "Experiment 2 — Twitter Fan-Out: simulates and compares Push (write-path) and Pull (read-path) delivery, showing the write-amplification vs read-amplification tradeoff.",
+      "Measures work counts for VIP (500K followers) vs regular users; a hybrid VIP-only pull variant hints at how real systems merge pushed celebrity tweets with pulled regular ones.",
+      "Cleanly separates the algorithms into interchangeable strategy classes (PushStrategy, PullStrategy) for easy comparison and swapping.",
     ],
   },
   {
@@ -160,6 +160,27 @@ export const projects = [
 ];
 
 export const experience = [
+  {
+    role: "AI Engineer",
+
+    company: "Zenera Labs",
+
+    period: "Aug 2026 - Present",
+
+    location: "Bengaluru, Remote",
+
+    description:
+      "Building applied ML models and a fully offline, real-time edge AI detection system for CCTV feeds and mobile monitoring.",
+
+    details: [
+      "Developed and evaluated a Breast Cancer Classification model using Python and scikit-learn, analyzing classification performance across multiple evaluation metrics including precision, recall, F1-score, and confusion matrix.",
+
+      "Taking end-to-end ownership of a fully offline, real-time AI weapon detection inference system for CCTV feeds, covering model inference, video ingestion, backend services, local deployment, and mobile integration; reviewed asynchronously by the manager and founder.",
+
+      "Engineering an edge-first detection pipeline using YOLOv8, ONNX/NCNN, OpenCV, FastAPI, WebSockets, SQLite, Docker, and Expo/React Native, enabling local RTSP inference, real-time alerts, detection logs, and mobile monitoring without cloud dependency.",
+    ],
+  },
+
   {
     role: "Backend & Applied AI Intern",
 

@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="dark" style="color-scheme: dark;">
+<html lang="en" style="color-scheme: light;">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/x-icon" href="/pfp3.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#171717" />
     <title>Subhraneel Goswami</title>
+    <script>
+      (function () {
+        var theme = localStorage.getItem('theme') || 'system'
+        var isDark =
+          theme === 'dark' ||
+          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.toggle('dark', isDark)
+        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
+      })()
+    </script>
     <meta property="og:title" content="Subhraneel Goswami" />
     <meta property="og:description" content="Full-stack developer & student passionate about building impactful software." />
     <meta property="og:image" content="https://subhraneel2005.github.io/opengraph.png" />

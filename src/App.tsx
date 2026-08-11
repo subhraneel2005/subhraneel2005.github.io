@@ -1,17 +1,18 @@
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
-import RoamingCharacter from './components/RoamingCharacter'
 import { useState, useEffect, useCallback } from 'react'
 import { MapPin, ArrowUpRight, Github, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
+import { ThemeToggle } from './components/ThemeToggle'
 import { profile, socials, projects, experience, skills, education, stats, projectTagIcons } from './data'
 
 const companyLogos: Record<string, string> = {
   'Jobsforce.ai': '/jobsforce-logo.webp',
   'Kasukabe Labs': '/kasukabe-labs-logo.jpg',
+  'Zenera Labs': '/zenera-labs.png',
 }
 
 const sections = ['Projects', 'Experience', 'Education', 'Skills'] as const
@@ -45,7 +46,6 @@ export default function App() {
 
   return (
     <>
-      <RoamingCharacter />
       <Helmet>
         <title>Subhraneel Goswami</title>
         <meta property="og:title" content="Subhraneel Goswami" />
@@ -76,11 +76,12 @@ export default function App() {
                 Resume
               </Button>
             </Link>
+            <ThemeToggle />
           </div>
         </nav>
 
         <section className="mb-16">
-          <Avatar size="lg" className="mb-5 size-12 ring-1 ring-foreground/10">
+          <Avatar size="lg" className="mb-5 size-20 ring-1 ring-foreground/10">
             <AvatarImage src={profile.avatar} alt={profile.name} />
             <AvatarFallback>SG</AvatarFallback>
           </Avatar>

@@ -13,7 +13,7 @@ export default function Resume() {
               Home
             </Button>
           </Link>
-          <a href="/Subhraneel_Goswami_SDE.pdf" download>
+          <a href="/Subhraneel_Goswami_SWE_2026.pdf" download>
             <Button variant="outline" size="sm">
               <Download className="size-3.5" aria-hidden="true" />
               Download
@@ -23,12 +23,12 @@ export default function Resume() {
 
         <h1 className="text-[32px] font-semibold tracking-tight mb-1 leading-tight">Resume</h1>
         <p className="text-sm text-muted-foreground mb-8">
-          Backend & Applied AI Engineer
+          Backend & AI Engineer
         </p>
 
         <div className="rounded-sm overflow-hidden ring-1 ring-foreground/5 bg-card">
           <iframe
-            src="/Subhraneel_Goswami_SDE.pdf"
+            src="/Subhraneel_Goswami_SWE_2026.pdf"
             className="w-full h-[80vh] border-0"
             title="Subhraneel Goswami Resume"
           />
