@@ -70,6 +70,15 @@ export const blogPosts: BlogPost[] = [
     cover: '/Twiter%20fanout.png',
     tags: ['ddia', 'fan-out', 'distributed-systems', 'twitter', 'nodejs'],
   },
+  {
+    slug: 'openai-dots',
+    title: "I broke down OpenAI's new Dots",
+    date: '2026-10-03',
+    excerpt:
+      "Breaking down what actually sits underneath OpenAI's always-on Dots — a persistent agent with memory, a cloud computer, and connected apps.",
+    cover: '/dots-article-thumbnail.png',
+    tags: ['ai', 'agents', 'openai', 'learning'],
+  },
 ]
 
 export const blogComponents: Record<
@@ -85,4 +94,5 @@ export const blogComponents: Record<
   'ai-memory-architectures': lazy(() => import('./ai-memory-architectures.mdx')),
   'self-healing-supervisor': lazy(() => import('./self-healing-supervisor.mdx')),
   'twitter-fanout': lazy(() => import('./twitter-fanout.mdx')),
+  'openai-dots': lazy(() => import('./openai-dots.mdx')),
 }

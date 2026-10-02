@@ -1,0 +1,186 @@
+---
+title: "I broke down OpenAI's new Dots"
+date: 2026-10-03
+excerpt: "Breaking down what actually sits underneath OpenAI's always-on Dots — a persistent agent with memory, a cloud computer, and connected apps."
+cover: "/dots-article-thumbnail.png"
+tags: ["ai", "agents", "openai", "learning"]
+---
+
+# I broke down OpenAI's new "Dots"
+
+OpenAI just dropped **Dots**, and honestly, I think the interesting part isn't any one feature.
+
+It's the way they stitched a bunch of things we've already seen in AI agents into one persistent system.
+
+I went through the official Dots announcement and the launch video, and tried to break down what actually sits underneath it.
+
+Here's how I see it.
+
+## 1. the main thing: it's always there
+
+A normal AI is basically:
+
+**you ask → AI responds → done**
+
+Dots is trying to change that into:
+
+**you give it a goal → it works → keeps working → comes back when there's something useful**
+
+OpenAI describes Dots as always-on agents that can work toward your goals 24/7 and handle multiple projects at the same time.
+
+That's a pretty big shift.
+
+You're not just chatting with an AI anymore.
+
+You're basically giving it a job.
+
+---
+
+## 2. it gets its own computer
+
+This is probably one of the coolest parts.
+
+Every Dot gets its **own cloud computer and browser**.
+
+So instead of the model just telling you *what* to do, the agent actually has an environment where it can do the work.
+
+It can use its browser, connected apps, files, etc.
+
+And you can apparently open up its computer and actually see what it's doing.
+
+So the architecture starts looking more like:
+
+**AI model + computer + tools**
+
+instead of just:
+
+**AI model + chat box**
+
+---
+
+## 3. it remembers how you work
+
+This is another huge part.
+
+Dots aren't supposed to forget everything after every task.
+
+OpenAI says they learn your goals, preferences, standards and what "good" looks like to you through your interactions and feedback.
+
+So over time, ideally:
+
+you give it feedback
+↓
+it learns your preferences
+↓
+next task needs less explanation
+↓
+eventually it starts doing things more like *you*
+
+That's where this starts becoming genuinely interesting for things like coding, research, writing, content creation, etc.
+
+---
+
+## 4. you can literally talk to it
+
+Dots aren't limited to a chat window.
+
+You can interact with them through ChatGPT, Slack and Teams, and OpenAI also lets you **voice call your Dot**.
+
+So voice becomes another interface into the same agent.
+
+Something like:
+
+**voice → STT → agent → tools → work → response → TTS**
+
+Which makes the whole thing feel much more like having an assistant you can just talk to.
+
+---
+
+## 5. then you give it access to your apps
+
+This is where the agent becomes actually useful.
+
+OpenAI says Dots can connect to **4,000+ apps** through its plugin ecosystem.
+
+So instead of the model existing in isolation, it gets access to the software you already use.
+
+Think:
+
+**reasoning → tools → apps → actions**
+
+That's basically the difference between an AI that can *talk about doing something* and an AI that can potentially *actually do it*.
+
+---
+
+## 6. the browser is basically another tool
+
+Because the Dot has its own cloud computer and browser, browser automation becomes part of the system too.
+
+And this is one of the things I find really interesting.
+
+Imagine telling your agent:
+
+> "go through these websites, collect the information, compare everything, and prepare the result."
+
+Instead of giving you instructions, the goal is for the agent to actually go and do it.
+
+That's the direction a lot of agent systems are heading toward.
+
+---
+
+## 7. and it doesn't really care where you talk to it
+
+This part is easy to miss.
+
+You can start something in ChatGPT, continue through Slack, talk to it through voice, etc.
+
+The Dot is supposed to carry the context across those interfaces.
+
+So the **Dot is the actual persistent entity**.
+
+ChatGPT / Slack / Teams / voice are basically interfaces into it.
+
+And that's a pretty interesting mental model.
+
+---
+
+# so what is a Dot actually made of?
+
+My simplified breakdown would be:
+
+**persistent agent**
++ **memory**
++ **cloud computer**
++ **browser**
++ **connected apps**
++ **voice**
++ **background execution**
++ **permissions / approvals**
+
+Put all of those together and you get something that's much closer to a **persistent digital worker** than a chatbot.
+
+And OpenAI is already talking about going further with specialist Dots for organizations, where different agents can have their own identity, credentials, tools and responsibilities.
+
+So the progression could basically be:
+
+**one AI assistant**
+
+→ **one persistent agent**
+
+→ **multiple specialized agents**
+
+→ **a whole team of agents**
+
+That's the part of Dots I find the most interesting.
+
+Not because any individual component is completely new, but because **the pieces are finally being packaged into one persistent system.**
+
+---
+
+### architecture
+
+<Image src="/dots-arch.png" alt="Simplified architecture breakdown of an OpenAI Dot" />
+
+*Architecture above is my simplified breakdown based on OpenAI's public Dots announcement, not an official OpenAI architecture diagram.*
+
+Source: <Link href="https://openai.com/index/introducing-dots/?utm_source=chatgpt.com">OpenAI — Introducing dots</Link>

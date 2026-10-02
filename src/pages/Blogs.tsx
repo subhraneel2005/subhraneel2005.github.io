@@ -21,6 +21,8 @@ const tagColors: Record<string, string> = {
   ai: 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
   cli: 'bg-gray-100 text-gray-800 dark:bg-gray-1000/20 dark:text-gray-600',
   sidequests: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
+  agents: 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
+  openai: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
 }
 
 function dateStr(date: string) {

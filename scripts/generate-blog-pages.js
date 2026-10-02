@@ -46,6 +46,13 @@ const blogPosts = [
     excerpt: 'Simulating and comparing Push vs Pull fan-out strategies for delivering tweets to timelines, inspired by Chapter 11 of DDIA.',
     cover: '/Twiter%20fanout.png',
   },
+  {
+    slug: 'openai-dots',
+    title: "I broke down OpenAI's new Dots",
+    excerpt:
+      "Breaking down what actually sits underneath OpenAI's always-on Dots — a persistent agent with memory, a cloud computer, and connected apps.",
+    cover: '/dots-article-thumbnail.png',
+  },
 ]
 
 const distIndex = fs.readFileSync('dist/index.html', 'utf-8')
