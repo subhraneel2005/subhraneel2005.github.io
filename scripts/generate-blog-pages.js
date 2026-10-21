@@ -55,6 +55,65 @@ const blogPosts = [
   },
 ]
 
+const workProjects = [
+  {
+    slug: 'dummy',
+    title: 'Dummy — Local-first AI Desktop Assistant',
+    description:
+      'A local-first desktop AI assistant for macOS, Linux & Windows — push-to-talk dictation, circle-capture screenshots, and a tool-using chat that drives a real browser, all running on your own machine with your own API keys.',
+    image: '/dummy-thumbnail.png',
+  },
+  {
+    slug: 'fuck-my-resume',
+    title: 'Fuck My Resume — 1,000+ users, 22K page views',
+    description:
+      'An AI resume tailoring platform that turns a boring PDF into a job-tailored resume, then helps you land the role with cold outreach, a voice mock interviewer, and a public leaderboard.',
+    image: '/fmr-thumbnail.png',
+  },
+  {
+    slug: 'ai-terminal-coding-agent',
+    title: 'AI Terminal Coding Agent',
+    description:
+      'Built a CLI-based AI coding agent capable of autonomous tool usage for navigating and modifying codebases.',
+    image: '/ai-coding-agent.png',
+  },
+  {
+    slug: 'study-toolkit',
+    title: 'Agentic AI Study Platform',
+    description:
+      'Built an open-source, student-first productivity platform to help students manage real academic workflows.',
+    image: '/study-toolkit.png',
+  },
+  {
+    slug: 'ai-edumark',
+    title: 'AI EduMark',
+    description:
+      'AI answer-sheet scanning and marks-card automation platform built at Zenera Labs — a Turborepo monorepo that rasterizes scans, preprocesses pages, and extracts candidate marks with an OpenAI vision model for human review.',
+    image: '/projects/ai-edumark.png',
+  },
+  {
+    slug: 'deep-research-multi-agent',
+    title: 'Deep Research Multi-Agent System',
+    description:
+      'A LangGraph multi-agent deep research pipeline built at Zenera Labs that decomposes questions, gathers and quality-scores evidence, critiques its own findings, and synthesizes citation-traceable reports streamed over SSE to a Next.js UI.',
+    image: '/projects/deep-research.png',
+  },
+  {
+    slug: 'healthos-claims-rag',
+    title: 'HealthOS — Claims Intelligence RAG',
+    description:
+      'Claims intelligence service built at Zenera Labs — a deterministic claim validator plus a RAG interpreter that turns payer policies and denial letters into evidence-cited, confidence-scored findings.',
+    image: '/projects/healthos.png',
+  },
+  {
+    slug: 'weapon-detection',
+    title: 'Offline AI Weapon Detection System',
+    description:
+      'A fully offline, real-time weapon detection system built at Zenera Labs for CCTV feeds and mobile monitoring — edge-first YOLOv8 inference over RTSP, real-time WebSocket alerts, and an Expo operator app, with no cloud dependency.',
+    image: '/projects/weapon-detection.png',
+  },
+]
+
 const distIndex = fs.readFileSync('dist/index.html', 'utf-8')
 
 function resolveCover(cover) {
@@ -67,6 +126,54 @@ function escapeHtml(str) {
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
+}
+
+function renderPage({
+  title,
+  description,
+  image,
+  imageWidth,
+  imageHeight,
+  imageAlt,
+  url,
+  type,
+}) {
+  const dimensions =
+    imageWidth && imageHeight
+      ? `<meta property="og:image:width" content="${imageWidth}" />
+<meta property="og:image:height" content="${imageHeight}" />`
+      : ''
+  const alt = escapeHtml(imageAlt || title)
+
+  return `<!DOCTYPE html>
+<html lang="en" class="dark" style="color-scheme: dark;">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#171717" />
+<title>${escapeHtml(title)}</title>
+<meta name="description" content="${escapeHtml(description)}" />
+<link rel="canonical" href="${url}" />
+<meta property="og:title" content="${escapeHtml(title)}" />
+<meta property="og:description" content="${escapeHtml(description)}" />
+<meta property="og:image" content="${image}" />
+${dimensions}
+<meta property="og:image:alt" content="${alt}" />
+<meta property="og:url" content="${url}" />
+<meta property="og:type" content="${type}" />
+<meta property="og:site_name" content="Subhraneel Goswami" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${escapeHtml(title)}" />
+<meta name="twitter:description" content="${escapeHtml(description)}" />
+<meta name="twitter:image" content="${image}" />
+<meta name="twitter:image:alt" content="${alt}" />
+${distIndex.match(/<link[^>]+rel="stylesheet"[^>]*>/)?.[0] || ''}
+</head>
+<body style="overflow-x: hidden;">
+<div id="root"></div>
+${distIndex.match(/<script[^>]+src="\/assets\/index-[^"]+"[^>]*><\/script>/)?.[0] || ''}
+</body>
+</html>`
 }
 
 for (const post of blogPosts) {
@@ -96,6 +203,44 @@ ${distIndex.match(/<script[^>]+src="\/assets\/index-[^"]+"[^>]*><\/script>/)?.[0
 </html>`
 
   const dir = `dist/blogs/${post.slug}`
+  fs.mkdirSync(dir, { recursive: true })
+  fs.writeFileSync(path.join(dir, 'index.html'), html)
+  console.log(`Generated ${dir}/index.html`)
+}
+
+const worksDescription =
+  'Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups.'
+const worksImage = `${SITE_URL}/works-opengraph.png`
+
+const worksHtml = renderPage({
+  title: 'Works — Subhraneel Goswami',
+  description: worksDescription,
+  image: worksImage,
+  imageWidth: 1600,
+  imageHeight: 900,
+  imageAlt: "Subhraneel Goswami's works ranked on a tier list — the goat.",
+  url: `${SITE_URL}/works`,
+  type: 'website',
+})
+
+fs.mkdirSync('dist/works', { recursive: true })
+fs.writeFileSync(path.join('dist/works', 'index.html'), worksHtml)
+console.log('Generated dist/works/index.html')
+
+for (const project of workProjects) {
+  const imageUrl = resolveCover(project.image)
+  const projectUrl = `${SITE_URL}/works/${project.slug}`
+
+  const html = renderPage({
+    title: `${project.title} — Subhraneel Goswami`,
+    description: project.description,
+    image: imageUrl,
+    imageAlt: `${project.title} preview`,
+    url: projectUrl,
+    type: 'article',
+  })
+
+  const dir = `dist/works/${project.slug}`
   fs.mkdirSync(dir, { recursive: true })
   fs.writeFileSync(path.join(dir, 'index.html'), html)
   console.log(`Generated ${dir}/index.html`)
