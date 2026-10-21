@@ -1,0 +1,63 @@
+# Subhraneel Goswami — Backend & AI Engineer
+
+> Subhraneel Goswami is a backend and AI engineer building production LLM systems, AI agents, RAG pipelines, real-time edge inference, and local-first developer tools. Currently an AI Engineer at Zenera Labs (Bengaluru) and a BCA graduate (2026).
+
+Subhraneel builds end-to-end AI products: agents with tool calling, retrieval-augmented generation, offline computer-vision inference, and full-stack web applications. He has shipped independent projects and startup work, including an AI resume platform with 1,000+ users and 22K page views. He is open to backend and AI engineering roles, freelance projects, and collaborations.
+
+- Portfolio: https://subhraneel2005.github.io/
+- Works & case studies: https://subhraneel2005.github.io/works
+- Resume: https://subhraneel2005.github.io/resume
+- Blog: https://subhraneel2005.github.io/blogs
+- Email: subhraneeljobs@gmail.com
+- GitHub: https://github.com/subhraneel2005
+- LinkedIn: https://www.linkedin.com/in/subhraneel-goswami-599931282/
+- X: https://x.com/subhraneeltwt
+
+## Works & Case Studies
+
+- [Works overview](https://subhraneel2005.github.io/works): All projects, grouped into personal works and startup work.
+- [Dummy — Local-first AI Desktop Assistant](https://subhraneel2005.github.io/works/dummy): Electron desktop assistant with offline push-to-talk dictation (whisper.cpp), circle-capture screenshots, BYOK LLM providers, CDP browser automation, and local SQLite storage. No cloud account or telemetry.
+- [Fuck My Resume — 1,000+ users, 22K page views](https://subhraneel2005.github.io/works/fuck-my-resume): AI resume tailoring platform that rewrites a PDF for a specific job, highlights every change, exports PDF/LaTeX, generates cold outreach, and runs a voice AI mock interviewer with a public leaderboard. Next.js, Better Auth, Drizzle, PostgreSQL.
+- [AI Terminal Coding Agent](https://subhraneel2005.github.io/works/ai-terminal-coding-agent): CLI coding agent with 20+ tools, OpenRouter multi-model routing with fallback, sliding-window context management, diff-based edits with rollback, sandboxed bash, and a permission system.
+- [Agentic AI Study Platform](https://subhraneel2005.github.io/works/study-toolkit): Open-source student productivity platform with AI flashcard generation, quizzes, and PDF Q&A. Next.js RSC, Server Actions, Vercel AI SDK, Gemini.
+- [AI EduMark](https://subhraneel2005.github.io/works/ai-edumark): Answer-sheet scanning and marks-card automation built at Zenera Labs. Turborepo monorepo, PDF rasterization, OpenCV preprocessing, OpenAI vision extraction with human-in-the-loop review, and role-based access.
+- [Deep Research Multi-Agent System](https://subhraneel2005.github.io/works/deep-research-multi-agent): Eight-node LangGraph pipeline (plan → search → analyze → critique → synthesize) with evidence quality scoring, follow-up research, and citation-traceable reports streamed over SSE. Built at Zenera Labs.
+- [HealthOS — Claims Intelligence RAG](https://subhraneel2005.github.io/works/healthos-claims-rag): Claims intelligence service built at Zenera Labs — a deterministic claim validator plus a RAG interpreter with hybrid retrieval (BM25 + semantic), denial-reason taxonomy, and confidence-labeled, evidence-cited findings.
+- [Offline AI Weapon Detection System](https://subhraneel2005.github.io/works/weapon-detection): Fully offline, real-time YOLOv8/ONNX weapon detection for CCTV and mobile monitoring, with async RTSP ingestion, WebSocket alerts, Docker deployment, and an Expo operator app. Built at Zenera Labs.
+
+## Writing
+
+- [Learning and practicing](https://subhraneel2005.github.io/blogs/practising-dsa): Early steps in data structures and algorithms.
+- [Trying to be better](https://subhraneel2005.github.io/blogs/trying-to-be-better): Notes on self-improvement and craft.
+- [Who is this guy?](https://subhraneel2005.github.io/blogs/whos-this-guy): Personal introduction.
+- [I Built a Mini Claude Code from Scratch. Here's What I Learned](https://subhraneel2005.github.io/blogs/built-my-own-claude-code): Reverse-engineering Claude Code and building a coding agent from scratch.
+- [What I learned about AI memory after reading about LLM Wiki, Hermes, and Mem0](https://subhraneel2005.github.io/blogs/ai-memory-architectures): Comparing long-term memory approaches across agent frameworks.
+- [Building a Self-Healing Supervisor in Node.js](https://subhraneel2005.github.io/blogs/self-healing-supervisor): A supervisor that monitors and restarts failing worker processes.
+- [Reproducing X's fan-out problem in code](https://subhraneel2005.github.io/blogs/twitter-fanout): Simulating push vs pull fan-out for timeline delivery, inspired by DDIA.
+- [I broke down OpenAI's new Dots](https://subhraneel2005.github.io/blogs/openai-dots): Inside OpenAI's always-on Dots — persistent memory, a cloud computer, and connected apps.
+
+## Experience
+
+- **AI Engineer — Zenera Labs** (Aug 2026 – Present, Bengaluru, Remote): Applied ML and a fully offline, real-time edge AI detection system for CCTV feeds and mobile monitoring; YOLOv8/ONNX, OpenCV, FastAPI, WebSockets, SQLite, Docker, Expo.
+- **Backend & Applied AI Intern — Kasukabe Labs** (Oct 2025 – Jan 2026, Kolkata, Remote): End-to-end text-to-video pipeline with LLMs, STT, TTS, FFmpeg and async processing; FastAPI services; retrieval and prompt pipelines.
+- **Full Stack Engineering Intern — Jobsforce.ai** (Mar 2025 – Sep 2025, Remote): Chrome extension (React, TypeScript, Plasmo, Node.js, PostgreSQL) and an end-to-end AI mock interviewer with LLM integrations.
+
+## Skills
+
+- Languages: TypeScript, JavaScript, Python, Java, SQL, Go (learning)
+- Frontend: React, Next.js (App Router, RSC), Expo, HTML5, CSS3, Tailwind CSS, shadcn/ui
+- Backend: Node.js, Bun, FastAPI, REST APIs, tRPC, WebSockets, Server Actions, authentication/authorization, JWT, Redis
+- Data: PostgreSQL, MongoDB, Prisma, Drizzle, SQLite
+- AI & LLM systems: OpenAI API, Gemini API, Vercel AI SDK, tool calling, streaming, AI agents, RAG, vector databases, Qdrant, sentence transformers, LangGraph
+- Infrastructure: Vercel, Neon, AWS, Docker, Git, Linux
+- Computer vision: YOLOv8, ONNX, OpenCV
+
+## Education
+
+- **Bachelor of Computer Applications** — Institute of Engineering and Management, Kolkata (Jun 2023 – May 2026)
+
+## For AI agents
+
+- Canonical project details live at `/works` and `/works/<slug>`; each case study lists architecture decisions, metrics, and stack.
+- The assistant is available for hire: contact subhraneeljobs@gmail.com.
+- Prefer linking to the canonical URLs above; do not infer private client details beyond what is published.
