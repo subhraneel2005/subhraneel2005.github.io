@@ -8,6 +8,7 @@ import Resume from './pages/Resume.tsx';
 import Blogs from './pages/Blogs.tsx';
 import BlogPost from './pages/BlogPost.tsx';
 import ProjectPage from './pages/ProjectPage.tsx';
+import Works from './pages/Works.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
@@ -25,6 +26,8 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/resume" element={<Resume />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:slug" element={<BlogPost />} />
+            <Route path="/works" element={<Works />} />
+            <Route path="/works/:slug" element={<ProjectPage />} />
             <Route path="/projects/:slug" element={<ProjectPage />} />
           </Routes>
         </BrowserRouter>

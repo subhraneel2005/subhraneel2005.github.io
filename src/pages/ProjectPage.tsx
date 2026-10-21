@@ -1,21 +1,23 @@
 import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, ArrowUpRight, Github } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Github, Mail } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { motion } from 'motion/react'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { projects, projectTagIcons } from '../data'
+import { projects, profile, projectTagIcons } from '../data'
+
+const hireHref = `mailto:${profile.email}?subject=Let%27s%20work%20together`
 
 function NotFound() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl font-semibold mb-2 tracking-tight">404</h1>
-        <p className="text-muted-foreground mb-6 text-sm">project not found</p>
-        <Link to="/">
+        <p className="text-muted-foreground mb-6 text-sm">case study not found</p>
+        <Link to="/works">
           <Button variant="link" size="sm">
-            &larr; back home
+            &larr; back to works
           </Button>
         </Link>
       </div>
@@ -38,10 +40,10 @@ export default function ProjectPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
-        <Link to="/" className="inline-block mb-10">
+        <Link to="/works" className="inline-block mb-10">
           <Button variant="ghost" size="sm">
             <ArrowLeft className="size-3.5" aria-hidden="true" />
-            Back
+            Works
           </Button>
         </Link>
 
@@ -115,6 +117,10 @@ export default function ProjectPage() {
 
           <Separator className="mb-8" />
 
+          <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">
+            Case Study
+          </h2>
+
           <div className="space-y-4">
             {project.details.map((detail, i) => (
               <div key={i} className="flex gap-3">
@@ -128,12 +134,19 @@ export default function ProjectPage() {
             ))}
           </div>
 
+          <div className="mt-10">
+            <a href={hireHref} className={buttonVariants()}>
+              <Mail className="size-4" />
+              Hire this guy
+            </a>
+          </div>
+
           <Separator className="my-10" />
 
-          <Link to="/">
+          <Link to="/works">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="size-3.5" aria-hidden="true" />
-              Back home
+              Back to works
             </Button>
           </Link>
         </motion.div>
