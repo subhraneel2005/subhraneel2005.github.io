@@ -82,7 +82,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "dummy",
+    title: "Dummy — Local-first AI Desktop Assistant",
     id: "dummy",
     group: "personal",
     description:
@@ -109,7 +109,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Fuck My Resume",
+    title: "Fuck My Resume — 1,000+ users, 22K page views",
     id: "fuck-my-resume",
     group: "personal",
     description:

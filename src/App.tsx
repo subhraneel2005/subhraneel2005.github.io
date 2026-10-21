@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
-import { MapPin, ArrowUpRight, Github, Calendar } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { MapPin, ArrowUpRight, Github, Calendar, Mail } from 'lucide-react'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
@@ -134,7 +134,7 @@ export default function App() {
           </div>
         </nav>
 
-        <section className="mb-16">
+        <section className="mb-6">
           <Avatar size="lg" className="mb-5 size-20 ring-1 ring-foreground/10">
             <AvatarImage src={profile.avatar} alt={profile.name} />
             <AvatarFallback>SG</AvatarFallback>
@@ -170,6 +170,16 @@ export default function App() {
                 </span>
               </a>
             ))}
+          </div>
+
+          <div className="mt-6">
+            <a
+              href={`mailto:${profile.email}?subject=Let%27s%20work%20together`}
+              className={buttonVariants()}
+            >
+              <Mail className="size-4" />
+              Get in touch
+            </a>
           </div>
         </section>
 
