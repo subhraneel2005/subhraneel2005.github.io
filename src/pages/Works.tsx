@@ -18,18 +18,43 @@ export default function Works() {
     <>
       <Helmet>
         <title>Works — Subhraneel Goswami</title>
+        <meta
+          name="description"
+          content="Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups."
+        />
+        <link rel="canonical" href="https://subhraneel2005.github.io/works" />
         <meta property="og:title" content="Works — Subhraneel Goswami" />
         <meta
           property="og:description"
-          content="Selected projects and the case studies behind them."
+          content="Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups."
         />
         <meta
           property="og:image"
-          content="https://subhraneel2005.github.io/opengraph.png"
+          content="https://subhraneel2005.github.io/works-opengraph.png"
+        />
+        <meta property="og:image:width" content="1600" />
+        <meta property="og:image:height" content="900" />
+        <meta
+          property="og:image:alt"
+          content="Subhraneel Goswami's works ranked on a tier list — the goat."
         />
         <meta property="og:url" content="https://subhraneel2005.github.io/works" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Subhraneel Goswami" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Works — Subhraneel Goswami" />
+        <meta
+          name="twitter:description"
+          content="Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups."
+        />
+        <meta
+          name="twitter:image"
+          content="https://subhraneel2005.github.io/works-opengraph.png"
+        />
+        <meta
+          name="twitter:image:alt"
+          content="Subhraneel Goswami's works ranked on a tier list — the goat."
+        />
       </Helmet>
       <div className="min-h-screen bg-background">
         <div className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
