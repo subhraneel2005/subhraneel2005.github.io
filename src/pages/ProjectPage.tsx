@@ -83,31 +83,35 @@ export default function ProjectPage() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3 mb-10">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="default" size="default">
-                <Github className="size-4 mr-2" aria-hidden="true" />
-                View Source
-                <ArrowUpRight className="size-3.5 ml-1.5" aria-hidden="true" />
-              </Button>
-            </a>
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="secondary" size="default">
-                  Live Demo
-                  <ArrowUpRight className="size-3.5 ml-1.5" aria-hidden="true" />
-                </Button>
-              </a>
-            )}
-          </div>
+          {(project.github || project.live) && (
+            <div className="flex items-center gap-3 mb-10">
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="default" size="default">
+                    <Github className="size-4 mr-2" aria-hidden="true" />
+                    View Source
+                    <ArrowUpRight className="size-3.5 ml-1.5" aria-hidden="true" />
+                  </Button>
+                </a>
+              )}
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="secondary" size="default">
+                    Live Demo
+                    <ArrowUpRight className="size-3.5 ml-1.5" aria-hidden="true" />
+                  </Button>
+                </a>
+              )}
+            </div>
+          )}
 
           <Separator className="mb-8" />
 

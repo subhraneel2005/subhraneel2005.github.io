@@ -23,7 +23,7 @@ export const profile = {
 };
 
 export const stats = [
-  { label: "Projects", value: "6+" },
+  { label: "Projects", value: "8+" },
   { label: "Commits (2026)", value: "347" },
   { label: "Bugs", value: "∞" },
 ];
@@ -68,10 +68,77 @@ export const education = [
   },
 ];
 
-export const projects = [
+export interface Project {
+  id: string;
+  group: "personal" | "startup";
+  title: string;
+  description: string;
+  github?: string;
+  live?: string;
+  image?: string;
+  tags: string[];
+  details: string[];
+}
+
+export const projects: Project[] = [
+  {
+    title: "dummy",
+    id: "dummy",
+    group: "personal",
+    description:
+      "A local-first desktop AI assistant for macOS, Linux & Windows — push-to-talk dictation, circle-capture screenshots, and a tool-using chat that drives a real browser, all running on your own machine with your own API keys.",
+    github: "https://github.com/subhraneel2005/dummy",
+    tags: [
+      "Electron",
+      "TypeScript",
+      "Next.js",
+      "Node.js",
+      "Vercel AI SDK",
+      "SQLite",
+    ],
+    image: "/dummy-thumbnail.png",
+    details: [
+      "Local-first Electron desktop app: hold Alt+D to dictate, transcribed entirely offline with whisper.cpp (base.en), polished by your chosen model, then copied to the clipboard.",
+      "BYOK AI providers — OpenAI, Anthropic, Google, xAI, or OpenRouter — with API keys encrypted at rest via the OS keychain (safeStorage) and live model catalogs fetched per provider.",
+      "Circle-capture screenshots and PDF/Markdown/text/CSV attachments with provider-aware encoding, per-category byte caps, and content sniffing.",
+      "Two browser-automation lanes on the same ToolLoopAgent: an embedded Chromium page driven over raw CDP (8 tools, approval-gated writes) and an autonomous deep-task agent in its own Chrome window.",
+      "Human-in-the-loop CAPTCHA handoff (pauses for you instead of bypassing), rate-limit resilience with backoff, and a mutex-guarded browser session pinned by regression tests.",
+      "A / skills system with a bundled Reverse Engineering skill (rea-agents) that streams analysis and answers with rendered Mermaid diagrams.",
+      "Embedded PTY terminal (node-pty + xterm.js) that is human-only — no model tool can reach the shell.",
+      "Persistent chat, settings, keys, and attachments live in local SQLite (libsql + Drizzle); no cloud account, no telemetry, nothing leaves the device except model calls.",
+    ],
+  },
+  {
+    title: "Fuck My Resume",
+    id: "fuck-my-resume",
+    group: "personal",
+    description:
+      "An AI resume tailoring platform that turns a boring PDF into a job-tailored resume, then helps you land the role with cold outreach, a voice mock interviewer, and a public leaderboard.",
+    live: "https://fuck-my-resume.vercel.app/",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Better Auth",
+      "Drizzle",
+      "PostgreSQL",
+    ],
+    image: "/fmr-thumbnail.png",
+    details: [
+      "Launched to 1,000+ users with 18K+ impressions and 300+ likes on its X.com launch post.",
+      "Uploads a resume PDF + job description and uses an LLM to rewrite/tailor the resume to that exact role, color-coding every AI change (added/rewritten bullets, new skills) so users can audit what changed before downloading.",
+      "Renders the tailored resume to PDF entirely in the browser with @react-pdf/renderer (no server-side LaTeX toolchain) and also exports LaTeX (.tex); LinkedIn/GitHub contact links are parsed straight from the uploaded PDF.",
+      "Generates copy-paste-ready cold outreach emails and DMs written with the tailored resume in hand.",
+      "Voice AI mock interviewer with Minecraft-style seeded interview configs (difficulty, duration, deterministic questions), a hold-to-talk STT → LLM → TTS loop, scored feedback out of 10, and saved transcripts.",
+      "Free in-browser voice via transformers.js (Whisper-tiny + Kokoro) or premium OpenAI voice; Google keys fall back to the local browser voice since @ai-sdk/google exposes no STT.",
+      "Bring-your-own-key design: OpenAI or Google keys are encrypted server-side and every AI call is billed to the user — no server-side secrets or subscription wall.",
+      "Better Auth (Google + GitHub OAuth) on Postgres/Neon with Drizzle ORM; a public leaderboard ranks completed mock interviews by average score, then interview count.",
+    ],
+  },
   {
     title: "AI Terminal Coding Agent",
     id: "ai-terminal-coding-agent",
+    group: "personal",
     description:
       "Built a CLI-based AI coding agent capable of autonomous tool usage for navigating and modifying codebases.",
     github: "https://github.com/subhraneel2005/sidequests",
@@ -96,32 +163,9 @@ export const projects = [
     ],
   },
   {
-    title: "DDIA Labs",
-    id: "ddia-labs",
-    description:
-      "Hands-on experiments replicating ideas from Designing Data-Intensive Applications by Martin Kleppmann — self-healing process supervision and Twitter-style fan-out strategies.",
-    github: "https://github.com/subhraneel2005/ddia-lab",
-    tags: [
-      "TypeScript",
-      "Node.js",
-      "Process Supervision",
-      "Heartbeats",
-      "Fan-Out",
-      "Strategy Pattern",
-    ],
-    image: "/ddia-lab.png",
-    details: [
-      "Experiment 1 — Self-Healing Supervisor: a supervisor process spawns and monitors a worker, restarting it on non-zero exit codes. Instead of preventing every failure, the system detects faults and recovers automatically.",
-      "Workers now randomly pick a behavior (normal, hung, or crashed). Hang detection is done via JSON heartbeats — the supervisor kills a worker that goes silent for 10s.",
-      "Restarts are limited to 10 consecutive failures with backoff, resetting on successful exit to avoid infinite restart loops.",
-      "Experiment 2 — Twitter Fan-Out: simulates and compares Push (write-path) and Pull (read-path) delivery, showing the write-amplification vs read-amplification tradeoff.",
-      "Measures work counts for VIP (500K followers) vs regular users; a hybrid VIP-only pull variant hints at how real systems merge pushed celebrity tweets with pulled regular ones.",
-      "Cleanly separates the algorithms into interchangeable strategy classes (PushStrategy, PullStrategy) for easy comparison and swapping.",
-    ],
-  },
-  {
     title: "Agentic AI Study Platform",
     id: "study-toolkit",
+    group: "personal",
     description:
       "Built an open-source, student-first productivity platform to help students manage real academic workflows.",
     github: "https://github.com/subhraneel2005/study-toolkit",
@@ -141,28 +185,103 @@ export const projects = [
     ],
   },
   {
-    title: "Multi-Agent Customer Support System",
-    id: "multi-agent-cs",
+    title: "AI EduMark",
+    id: "ai-edumark",
+    group: "startup",
     description:
-      "Designed a multi-agent customer support orchestration system with specialized agents for triage, billing, technical, and general queries.",
-    github: "https://github.com/subhraneel2005/multi-agent-cs-system",
-    image: "/multi-agent-cs-system.png",
+      "AI answer-sheet scanning and marks-card automation platform built at Zenera Labs — a Turborepo monorepo that rasterizes scans, preprocesses pages, and extracts candidate marks with an OpenAI vision model for human review.",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Turborepo",
+      "PostgreSQL",
+      "OpenCV",
+      "Vercel AI SDK",
+    ],
+    image: "/projects/ai-edumark.png",
+    details: [
+      "Built as a Turborepo monorepo: a Next.js 16 web app plus two background workers (image preprocessing and AI evaluation) sharing Drizzle/Neon Postgres, Better Auth, and a shared UI package.",
+      "Single-PDF upload pipeline rasterizes multi-page answer booklets into per-page PNGs with pdf-to-img, then stores them per organization and per sheet for downstream processing.",
+      "Image worker cleans every page: EXIF auto-rotate, OpenCV.js perspective correction (Canny → quad → warp), denoise, contrast normalization, and blur/resolution quality checks that flag bad scans as needs_review.",
+      "AI evaluation worker calls an OpenAI vision model through the Vercel AI SDK with a constrained Zod schema, returning structured per-question marks and confidence — with a no-fabrication boundary that returns null + needsReview when uncertain.",
+      "Human-in-the-loop review UI shows reviewers the exact preprocessed images the model saw, lets them edit candidate marks, and finalizes/locks a sheet before it is released.",
+      "Question-paper upload + AI extraction bootstraps exams; teachers review/publish drafts, and students join via exam links.",
+      "Role-based access (owner/admin/teacher/student) via Better Auth organizations and custom RBAC; students only see released marksheets, with ownership-checked reads.",
+    ],
+  },
+  {
+    title: "Deep Research Multi-Agent System",
+    id: "deep-research-multi-agent",
+    group: "startup",
+    description:
+      "A LangGraph multi-agent deep research pipeline built at Zenera Labs that decomposes questions, gathers and quality-scores evidence, critiques its own findings, and synthesizes citation-traceable reports streamed over SSE to a Next.js UI.",
     tags: [
       "Python",
       "LangGraph",
       "FastAPI",
-      "Qdrant",
       "Pydantic",
-      "Redis",
-      "Docker",
+      "Next.js",
+      "React",
     ],
+    image: "/projects/deep-research.png",
     details: [
-      "Designed a multi-agent customer support orchestration system where specialized agents (triage, billing, technical, general) handle incoming queries based on intent classification.",
-      "Used LangGraph to define agent state graphs — each agent has a structured workflow with tool-binding, conditional edges, and human-in-the-loop escalation.",
-      "Built a FastAPI gateway that routes incoming requests to the appropriate agent graph based on LLM-based intent classification with fallback to general agent.",
-      "Integrated Qdrant as a knowledge base vector store for FAQ retrieval — agents can query stored documentation and past resolutions to answer accurately.",
-      "All agents share a structured Pydantic state schema for consistent message history, tool call tracking, and escalation management.",
-      "Docker Compose setup with FastAPI, Qdrant, and Redis for easy local deployment.",
+      "Eight-node LangGraph pipeline: intent extraction → planning → task generation → search/fetch → analysis → critique → follow-up search → synthesis.",
+      "EvidenceStore normalizes, deduplicates, and quality-scores every source with a weighted composite (relevance 35%, freshness 25%, author 20%, content 20%).",
+      "Search-and-fetch uses Exa for discovery and Firecrawl for full-page content; follow-up search appends new evidence without overwriting prior results.",
+      "A critique agent checks unsupported claims, missing evidence, weak sources, contradictions, and research gaps, then loops back for targeted follow-up research.",
+      "Synthesis produces a structured report where every claim links to specific evidence IDs and source URLs for claim-level traceability.",
+      "FastAPI exposes synchronous and SSE streaming endpoints; a Next.js frontend renders live pipeline progress across Report/Intent/Planning/Tasks/Sources/Evidence/Analysis/Critique tabs.",
+      "70 pytest tests run fully offline in ~5s with mocked LLM and API clients.",
+    ],
+  },
+  {
+    title: "HealthOS — Claims Intelligence RAG",
+    id: "healthos-claims-rag",
+    group: "startup",
+    description:
+      "Claims intelligence service built at Zenera Labs — a deterministic claim validator plus a RAG interpreter that turns payer policies and denial letters into evidence-cited, confidence-scored findings.",
+    tags: [
+      "Python",
+      "FastAPI",
+      "RAG",
+      "PostgreSQL",
+      "Pydantic",
+      "Vector Databases",
+    ],
+    image: "/projects/healthos.png",
+    details: [
+      "Led the Claims Intelligence track as Claims Intelligence Lead — authored the denial-reason taxonomy, the payer claim-requirements knowledge base, and the end-to-end RAG architecture design.",
+      "Track A validator: a rule engine that loads claim-type × payer requirements and returns a readiness score, violations, warnings, and missing-document reports before submission.",
+      "Track B RAG interpreter: document ingestion + hybrid retrieval (BM25 + semantic with reciprocal rank fusion and MMR dedupe) feeding the shared AI gateway for denial interpretation.",
+      "Every answer cites source documents and is labeled by confidence (found / not found / potentially applicable / requires human confirmation), with below-threshold results routed to a human review queue.",
+      "Integrated four services (ai-gateway, claims-rag, document-intelligence, claim-risk) behind one integration facade, with a document-intelligence ingestion adapter and a claim-risk snapshot client.",
+      "Built denial taxonomy v1.0 (7 categories, L1/L2/L3 reasons) and a 6-claim-type × 6-payer requirements knowledge base covering coding rules, filing deadlines, and payer-specific rules.",
+      "Verified end-to-end with a live integrated-flow demo across process → ingest → interpret → validate → risk assessment.",
+    ],
+  },
+  {
+    title: "Offline AI Weapon Detection System",
+    id: "weapon-detection",
+    group: "startup",
+    description:
+      "A fully offline, real-time weapon detection system built at Zenera Labs for CCTV feeds and mobile monitoring — edge-first YOLOv8 inference over RTSP, real-time WebSocket alerts, and an Expo operator app, with no cloud dependency.",
+    tags: [
+      "Python",
+      "YOLOv8",
+      "ONNX",
+      "FastAPI",
+      "Docker",
+      "Expo",
+    ],
+    image: "/projects/weapon-detection.png",
+    details: [
+      "Took end-to-end ownership of a fully offline, real-time inference system covering model inference, video ingestion, backend services, local deployment, and mobile integration.",
+      "Edge-first detection pipeline using YOLOv8 exported to ONNX (opset 17), OpenCV, FastAPI, WebSockets, SQLite, Docker, and an Expo/React Native app.",
+      "Per-camera async RTSP ingestion with capped inference concurrency; 13 REST endpoints plus a WebSocket alert feed, snapshot capture, and a detection log.",
+      "Retraining workflow in Colab (150 epochs, mixup/copy-paste/erasing, hard-negative mining) with ONNX export validated against PyTorch at IoU ≈ 0.98.",
+      "Live-tunable sensitivity thresholds and alert cooldowns via the API without restarts; alerts are acknowledged and audited through the mobile operator app.",
+      "Docker Compose bundles the backend with a MediaMTX RTSP relay for local test feeds; 15 API contract tests cover the endpoint surface.",
+      "Mobile operator view provides live per-camera feeds, alerts with snapshots, logs, and settings over the LAN.",
     ],
   },
 ];
@@ -259,6 +378,9 @@ export const projectTagIcons: Record<string, string> = {
   React: `${CDN}/react/react-original.svg`,
   "Next.js": `${CDN}/nextjs/nextjs-original.svg`,
   Expo: `${CDN}/expo/expo-original.svg`,
+  Electron: `${CDN}/electron/electron-original.svg`,
+  SQLite: `${CDN}/sqlite/sqlite-original.svg`,
+  OpenCV: `${CDN}/opencv/opencv-original.svg`,
   HTML5: `${CDN}/html5/html5-original.svg`,
   CSS3: `${CDN}/css3/css3-original.svg`,
   "Tailwind CSS": `${CDN}/tailwindcss/tailwindcss-original.svg`,

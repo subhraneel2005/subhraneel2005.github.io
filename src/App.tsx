@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import { ThemeToggle } from './components/ThemeToggle'
-import { profile, socials, projects, experience, skills, education, stats, projectTagIcons } from './data'
+import { profile, socials, projects, experience, skills, education, stats, projectTagIcons, type Project } from './data'
 
 const companyLogos: Record<string, string> = {
   'Jobsforce.ai': '/jobsforce-logo.webp',
@@ -15,7 +15,61 @@ const companyLogos: Record<string, string> = {
   'Zenera Labs': '/zenera-labs.png',
 }
 
-const sections = ['Projects', 'Experience', 'Education', 'Skills'] as const
+const sections = ['Works', 'Experience', 'Education', 'Skills'] as const
+
+function ProjectCard({
+  project,
+  onOpen,
+}: {
+  project: Project
+  onOpen: (id: string) => void
+}) {
+  return (
+    <button
+      onClick={() => onOpen(project.id)}
+      className="group block text-left w-full"
+    >
+      <div className="h-full overflow-hidden rounded-sm bg-card ring-1 ring-foreground/5 transition-all duration-150 ease-geist hover:ring-foreground/15 active:scale-[0.99]">
+        {project.image && (
+          <div className="aspect-video bg-muted overflow-hidden relative">
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 ease-geist group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+        )}
+        <div className="px-4 py-3">
+          <div className="flex items-start justify-between gap-3 mb-1.5">
+            <h3 className="text-sm font-medium">{project.title}</h3>
+            <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/40 mt-0.5 transition-colors group-hover:text-foreground/60" aria-hidden="true" />
+          </div>
+          <p className="text-xs text-muted-foreground leading-relaxed text-pretty mb-3">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <Badge key={tag} variant="secondary">
+                {projectTagIcons[tag] && (
+                  <img
+                    src={projectTagIcons[tag]}
+                    alt=""
+                    className="size-3 object-contain"
+                  />
+                )}
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+const personalProjects = projects.filter((p) => p.group === 'personal')
+const startupProjects = projects.filter((p) => p.group === 'startup')
 
 export default function App() {
   const navigate = useNavigate()
@@ -138,61 +192,64 @@ export default function App() {
         </div>
 
         <section
-          id="projects"
+          id="works"
           className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
             <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-              Projects
+              Works
             </h2>
             <span className="flex-1 h-px bg-border" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {projects.map((project) => (
-              <button
-                key={project.id}
-                onClick={() => navigate(`/projects/${project.id}`)}
-                className="group block text-left w-full"
-              >
-                <div className="h-full overflow-hidden rounded-sm bg-card ring-1 ring-foreground/5 transition-all duration-150 ease-geist hover:ring-foreground/15 active:scale-[0.99]">
-                  {project.image && (
-                    <div className="aspect-video bg-muted overflow-hidden relative">
-                      <img
-                        src={project.image}
-                        alt={`${project.title} preview`}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 ease-geist group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                  <div className="px-4 py-3">
-                    <div className="flex items-start justify-between gap-3 mb-1.5">
-                      <h3 className="text-sm font-medium">
-                        {project.title}
-                      </h3>
-                      <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/40 mt-0.5 transition-colors group-hover:text-foreground/60" aria-hidden="true" />
-                    </div>
-                    <p className="text-xs text-muted-foreground leading-relaxed text-pretty mb-3">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary">
-                          {projectTagIcons[tag] && (
-                            <img
-                              src={projectTagIcons[tag]}
-                              alt=""
-                              className="size-3 object-contain"
-                            />
-                          )}
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))}
+
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="size-1.5 rounded-full bg-blue-700" />
+              <h3 className="text-sm font-semibold tracking-tight">
+                Personal Works
+              </h3>
+              <span className="text-[13px] text-muted-foreground/70 tabular-nums">
+                {personalProjects.length}
+              </span>
+              <span className="flex-1 h-px bg-border" />
+            </div>
+            <p className="text-[13px] text-muted-foreground mb-4 pl-3.5">
+              Projects I&rsquo;ve designed and built on my own time.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {personalProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onOpen={(id) => navigate(`/projects/${id}`)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="size-1.5 rounded-full bg-green-700" />
+              <h3 className="text-sm font-semibold tracking-tight">
+                Works with Startups
+              </h3>
+              <span className="text-[13px] text-muted-foreground/70 tabular-nums">
+                {startupProjects.length}
+              </span>
+              <span className="flex-1 h-px bg-border" />
+            </div>
+            <p className="text-[13px] text-muted-foreground mb-4 pl-3.5">
+              Shipped while working with startups — all at Zenera Labs.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {startupProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onOpen={(id) => navigate(`/projects/${id}`)}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
