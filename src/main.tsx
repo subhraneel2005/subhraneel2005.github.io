@@ -2,7 +2,7 @@ import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {ThemeProvider} from 'next-themes';
+import {GeistSans} from 'geist/font/sans';
 import App from './App.tsx';
 import Resume from './pages/Resume.tsx';
 import Blogs from './pages/Blogs.tsx';
@@ -13,12 +13,7 @@ import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <div className={GeistSans.className}>
       <HelmetProvider>
         <BrowserRouter>
           <Routes>
@@ -32,6 +27,6 @@ createRoot(document.getElementById('root')!).render(
           </Routes>
         </BrowserRouter>
       </HelmetProvider>
-    </ThemeProvider>
+    </div>
   </StrictMode>,
 );

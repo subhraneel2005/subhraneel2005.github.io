@@ -6,17 +6,16 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
-import { ThemeToggle } from './components/ThemeToggle'
 import { ProjectCard } from './components/project-card'
 import { profile, socials, projects, experience, skills, education, stats } from './data'
 
 const companyLogos: Record<string, string> = {
-  'Jobsforce.ai': '/jobsforce-logo.webp',
-  'Kasukabe Labs': '/kasukabe-labs-logo.jpg',
-  'Zenera Labs': '/zenera-labs.png',
+  'jobsforce.ai': '/jobsforce-logo.webp',
+  'kasukabe labs': '/kasukabe-labs-logo.jpg',
+  'zenera labs': '/zenera-labs.png',
 }
 
-const sections = ['Works', 'Experience', 'Education', 'Skills'] as const
+const sections = ['works', 'experience', 'education', 'skills'] as const
 
 const personalProjects = projects.filter((p) => p.group === 'personal')
 const startupProjects = projects.filter((p) => p.group === 'startup')
@@ -51,9 +50,9 @@ export default function App() {
   return (
     <>
       <Helmet>
-        <title>Subhraneel Goswami</title>
-        <meta property="og:title" content="Subhraneel Goswami" />
-        <meta property="og:description" content="Building, Writing, Breaking. Documenting 0 - ∞" />
+        <title>subhraneel goswami</title>
+        <meta property="og:title" content="subhraneel goswami" />
+        <meta property="og:description" content="building, writing, breaking. documenting 0 - ∞" />
         <meta property="og:image" content="https://subhraneel2005.github.io/opengraph.png" />
         <meta property="og:url" content="https://subhraneel2005.github.io/" />
         <meta property="og:type" content="website" />
@@ -72,22 +71,21 @@ export default function App() {
           <div className="flex items-center gap-1">
             <Link to="/blogs">
               <Button variant="ghost" size="sm">
-                Blogs
+                blogs
               </Button>
             </Link>
             <Link to="/resume">
               <Button variant="ghost" size="sm">
-                Resume
+                resume
               </Button>
             </Link>
-            <ThemeToggle />
           </div>
         </nav>
 
         <section className="mb-6">
           <Avatar size="lg" className="mb-5 size-20 ring-1 ring-foreground/10">
             <AvatarImage src={profile.avatar} alt={profile.name} />
-            <AvatarFallback>SG</AvatarFallback>
+            <AvatarFallback>sg</AvatarFallback>
           </Avatar>
 
           <h1 className="text-[40px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
@@ -124,11 +122,11 @@ export default function App() {
 
           <div className="mt-6">
             <a
-              href={`mailto:${profile.email}?subject=Let%27s%20work%20together`}
+              href={`mailto:${profile.email}?subject=let%27s%20work%20together`}
               className={buttonVariants()}
             >
               <Mail className="size-4" />
-              Get in touch
+              get in touch
             </a>
           </div>
         </section>
@@ -156,15 +154,15 @@ export default function App() {
           className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-              Works
+            <h2 className="text-xs font-semibold tracking-widest text-muted-foreground">
+              works
             </h2>
             <span className="flex-1 h-px bg-border" />
             <Link
               to="/works"
               className="shrink-0 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              View all works &rarr;
+              view all works &rarr;
             </Link>
           </div>
 
@@ -172,7 +170,7 @@ export default function App() {
             <div className="flex items-center gap-2 mb-1.5">
               <span className="size-1.5 rounded-full bg-blue-700" />
               <h3 className="text-sm font-semibold tracking-tight">
-                Personal Works
+                personal works
               </h3>
               <span className="text-[13px] text-muted-foreground/70 tabular-nums">
                 {personalProjects.length}
@@ -180,7 +178,7 @@ export default function App() {
               <span className="flex-1 h-px bg-border" />
             </div>
             <p className="text-[13px] text-muted-foreground mb-4 pl-3.5">
-              Projects I&rsquo;ve designed and built on my own time.
+              projects i&rsquo;ve designed and built on my own time.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {personalProjects.map((project) => (
@@ -197,7 +195,7 @@ export default function App() {
             <div className="flex items-center gap-2 mb-1.5">
               <span className="size-1.5 rounded-full bg-green-700" />
               <h3 className="text-sm font-semibold tracking-tight">
-                Works with Startups
+                works with startups
               </h3>
               <span className="text-[13px] text-muted-foreground/70 tabular-nums">
                 {startupProjects.length}
@@ -205,7 +203,7 @@ export default function App() {
               <span className="flex-1 h-px bg-border" />
             </div>
             <p className="text-[13px] text-muted-foreground mb-4 pl-3.5">
-              Shipped as an AI engineer for a Bangalore-based startup — Zenera Labs.
+              shipped as an ai engineer for a bangalore-based startup - zenera labs.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {startupProjects.map((project) => (
@@ -226,8 +224,8 @@ export default function App() {
           className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-              Experience
+            <h2 className="text-xs font-semibold tracking-widest text-muted-foreground">
+              experience
             </h2>
             <span className="flex-1 h-px bg-border" />
           </div>
@@ -290,8 +288,8 @@ export default function App() {
           className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-              Education
+            <h2 className="text-xs font-semibold tracking-widest text-muted-foreground">
+              education
             </h2>
             <span className="flex-1 h-px bg-border" />
           </div>
@@ -322,15 +320,15 @@ export default function App() {
           className="mb-16 scroll-mt-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-              Skills
+            <h2 className="text-xs font-semibold tracking-widest text-muted-foreground">
+              skills
             </h2>
             <span className="flex-1 h-px bg-border" />
           </div>
           <div className="space-y-5">
             {skills.map((group) => (
               <div key={group.category}>
-                <h3 className="text-[14px] font-medium text-muted-foreground/60 uppercase tracking-wider mb-2.5">
+                <h3 className="text-[14px] font-medium text-muted-foreground/60 tracking-wider mb-2.5">
                   {group.category}
                 </h3>
                 <div className="flex flex-wrap gap-1.5">

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connecting to Spotify...</title>
+  <title>connecting to spotify...</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -36,7 +36,7 @@
 <body>
   <div class="container">
     <div class="spinner"></div>
-    <p>Connecting to Spotify...</p>
+    <p>connecting to spotify...</p>
     <p class="error" id="error"></p>
   </div>
   <script>
@@ -52,14 +52,14 @@
       }
 
       if (!code) {
-        localStorage.setItem('spotify_error', 'No authorization code received');
+        localStorage.setItem('spotify_error', 'no authorization code received');
         window.location.href = '/#/cafe';
         return;
       }
 
       const verifier = localStorage.getItem('spotify_code_verifier');
       if (!verifier) {
-        localStorage.setItem('spotify_error', 'Session expired. Please try again.');
+        localStorage.setItem('spotify_error', 'session expired. please try again.');
         window.location.href = '/#/cafe';
         return;
       }

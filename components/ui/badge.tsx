@@ -13,12 +13,12 @@ const badgeVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground",
         destructive:
-          "bg-red-100 text-red-800 dark:bg-red-1000/20 dark:text-red-600",
+          "bg-red-100 text-red-800",
         outline:
           "border-border bg-background text-foreground",
         ghost:
           "hover:bg-gray-alpha-100 text-muted-foreground",
-        link: "text-blue-700 underline-offset-4 hover:underline dark:text-blue-600",
+        link: "text-blue-700 underline-offset-4 hover:underline",
       },
     },
     defaultVariants: {

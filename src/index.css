@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 @import "prismjs/themes/prism-tomorrow.css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme {
+
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
 
   --color-gray-100: #f2f2f2;
   --color-gray-200: #ebebeb;
@@ -135,7 +133,7 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #F7F7F3;
   --foreground: #171717;
   --card: #ffffff;
   --card-foreground: #171717;
@@ -172,51 +170,22 @@
   --chart-5: #c9c9c9;
 }
 
-.dark {
-  --background: #171717;
-  --foreground: #f2f2f2;
-  --card: #1f1f1f;
-  --card-foreground: #f2f2f2;
-  --popover: #1f1f1f;
-  --popover-foreground: #f2f2f2;
-  --primary: #f2f2f2;
-  --primary-foreground: #171717;
-  --secondary: #2a2a2a;
-  --secondary-foreground: #a8a8a8;
-  --muted: #2a2a2a;
-  --muted-foreground: #c9c9c9;
-  --accent: #2a2a2a;
-  --accent-foreground: #f2f2f2;
-  --destructive: #ff676d;
-  --border: #2a2a2a;
-  --input: #2a2a2a;
-  --ring: #48aeff;
-  --sidebar: #1f1f1f;
-  --sidebar-foreground: #f2f2f2;
-  --sidebar-primary: #006bff;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2a2a2a;
-  --sidebar-accent-foreground: #f2f2f2;
-  --sidebar-border: #2a2a2a;
-  --sidebar-ring: #48aeff;
-  --chart-1: #f2f2f2;
-  --chart-2: #a8a8a8;
-  --chart-3: #8f8f8f;
-  --chart-4: #7d7d7d;
-  --chart-5: #4d4d4d;
-}
-
 @layer base {
   html {
     font-size: 20px;
+    background-color: #F7F7F3;
   }
   body {
     @apply antialiased bg-background text-foreground;
-    font-family: "Fira Sans", sans-serif;
+    background-color: #F7F7F3;
+    font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
     font-style: normal;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+  }
+  .font-geist-sans {
+    font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   }
   * {
     @apply border-border;

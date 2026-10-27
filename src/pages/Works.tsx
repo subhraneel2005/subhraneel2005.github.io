@@ -9,7 +9,7 @@ import { Button, buttonVariants } from '@/components/ui/button'
 const personalProjects = projects.filter((p) => p.group === 'personal')
 const startupProjects = projects.filter((p) => p.group === 'startup')
 
-const hireHref = `mailto:${profile.email}?subject=Let%27s%20work%20together`
+const hireHref = `mailto:${profile.email}?subject=let%27s%20work%20together`
 
 export default function Works() {
   const navigate = useNavigate()
@@ -17,16 +17,16 @@ export default function Works() {
   return (
     <>
       <Helmet>
-        <title>Works — Subhraneel Goswami</title>
+        <title>works - subhraneel goswami</title>
         <meta
           name="description"
-          content="Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups."
+          content="selected projects and case studies by subhraneel goswami - ai and backend engineering work shipped solo and with startups."
         />
         <link rel="canonical" href="https://subhraneel2005.github.io/works" />
-        <meta property="og:title" content="Works — Subhraneel Goswami" />
+        <meta property="og:title" content="works - subhraneel goswami" />
         <meta
           property="og:description"
-          content="Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups."
+          content="selected projects and case studies by subhraneel goswami - ai and backend engineering work shipped solo and with startups."
         />
         <meta
           property="og:image"
@@ -36,16 +36,16 @@ export default function Works() {
         <meta property="og:image:height" content="900" />
         <meta
           property="og:image:alt"
-          content="Subhraneel Goswami's works ranked on a tier list — the goat."
+          content="subhraneel goswami's works ranked on a tier list - the goat."
         />
         <meta property="og:url" content="https://subhraneel2005.github.io/works" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Subhraneel Goswami" />
+        <meta property="og:site_name" content="subhraneel goswami" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Works — Subhraneel Goswami" />
+        <meta name="twitter:title" content="works - subhraneel goswami" />
         <meta
           name="twitter:description"
-          content="Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups."
+          content="selected projects and case studies by subhraneel goswami - ai and backend engineering work shipped solo and with startups."
         />
         <meta
           name="twitter:image"
@@ -53,7 +53,7 @@ export default function Works() {
         />
         <meta
           name="twitter:image:alt"
-          content="Subhraneel Goswami's works ranked on a tier list — the goat."
+          content="subhraneel goswami's works ranked on a tier list - the goat."
         />
       </Helmet>
       <div className="min-h-screen bg-background">
@@ -62,7 +62,7 @@ export default function Works() {
             <Link to="/">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="size-3.5" aria-hidden="true" />
-                Home
+                home
               </Button>
             </Link>
           </div>
@@ -70,15 +70,15 @@ export default function Works() {
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between mb-12">
             <div>
               <h1 className="text-[40px] font-semibold tracking-tight mb-2 text-pretty leading-tight">
-                Works
+                works
               </h1>
               <p className="text-sm text-muted-foreground text-pretty">
-                Selected projects and the case studies behind them.
+                selected projects and the case studies behind them.
               </p>
             </div>
             <a href={hireHref} className={`${buttonVariants()} shrink-0`}>
               <Mail className="size-4" />
-              Hire this guy
+              hire this guy
             </a>
           </div>
 
@@ -86,7 +86,7 @@ export default function Works() {
             <div className="flex items-center gap-2 mb-1.5">
               <span className="size-1.5 rounded-full bg-blue-700" />
               <h2 className="text-sm font-semibold tracking-tight">
-                Personal Works
+                personal works
               </h2>
               <span className="text-[13px] text-muted-foreground/70 tabular-nums">
                 {personalProjects.length}
@@ -94,7 +94,7 @@ export default function Works() {
               <span className="flex-1 h-px bg-border" />
             </div>
             <p className="text-[13px] text-muted-foreground mb-4 pl-3.5">
-              Projects I&rsquo;ve designed and built on my own time.
+              projects i&rsquo;ve designed and built on my own time.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {personalProjects.map((project, i) => (
@@ -117,7 +117,7 @@ export default function Works() {
             <div className="flex items-center gap-2 mb-1.5">
               <span className="size-1.5 rounded-full bg-green-700" />
               <h2 className="text-sm font-semibold tracking-tight">
-                Works with Startups
+                works with startups
               </h2>
               <span className="text-[13px] text-muted-foreground/70 tabular-nums">
                 {startupProjects.length}
@@ -125,7 +125,7 @@ export default function Works() {
               <span className="flex-1 h-px bg-border" />
             </div>
             <p className="text-[13px] text-muted-foreground mb-4 pl-3.5">
-              Shipped as an AI engineer for a Bangalore-based startup — Zenera Labs.
+              shipped as an ai engineer for a bangalore-based startup - zenera labs.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {startupProjects.map((project, i) => (

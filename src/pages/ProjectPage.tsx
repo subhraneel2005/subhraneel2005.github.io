@@ -7,7 +7,7 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { projects, profile, projectTagIcons } from '../data'
 
-const hireHref = `mailto:${profile.email}?subject=Let%27s%20work%20together`
+const hireHref = `mailto:${profile.email}?subject=let%27s%20work%20together`
 
 function NotFound() {
   return (
@@ -43,7 +43,7 @@ export default function ProjectPage() {
         <Link to="/works" className="inline-block mb-10">
           <Button variant="ghost" size="sm">
             <ArrowLeft className="size-3.5" aria-hidden="true" />
-            Works
+            works
           </Button>
         </Link>
 
@@ -95,7 +95,7 @@ export default function ProjectPage() {
                 >
                   <Button variant="default" size="default">
                     <Github className="size-4 mr-2" aria-hidden="true" />
-                    View Source
+                    view source
                     <ArrowUpRight className="size-3.5 ml-1.5" aria-hidden="true" />
                   </Button>
                 </a>
@@ -107,7 +107,7 @@ export default function ProjectPage() {
                   rel="noopener noreferrer"
                 >
                   <Button variant="secondary" size="default">
-                    Live Demo
+                    live demo
                     <ArrowUpRight className="size-3.5 ml-1.5" aria-hidden="true" />
                   </Button>
                 </a>
@@ -117,8 +117,8 @@ export default function ProjectPage() {
 
           <Separator className="mb-8" />
 
-          <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">
-            Case Study
+          <h2 className="text-xs font-semibold tracking-widest text-muted-foreground mb-4">
+            case study
           </h2>
 
           <div className="space-y-4">
@@ -137,7 +137,7 @@ export default function ProjectPage() {
           <div className="mt-10">
             <a href={hireHref} className={buttonVariants()}>
               <Mail className="size-4" />
-              Hire this guy
+              hire this guy
             </a>
           </div>
 
@@ -146,7 +146,7 @@ export default function ProjectPage() {
           <Link to="/works">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="size-3.5" aria-hidden="true" />
-              Back to works
+              back to works
             </Button>
           </Link>
         </motion.div>

@@ -10,27 +10,27 @@ export default function Resume() {
           <Link to="/">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="size-3.5" aria-hidden="true" />
-              Home
+              home
             </Button>
           </Link>
           <a href="/Subhraneel_Goswami_SWE_2026.pdf" download>
             <Button variant="outline" size="sm">
               <Download className="size-3.5" aria-hidden="true" />
-              Download
+              download
             </Button>
           </a>
         </div>
 
-        <h1 className="text-[40px] font-semibold tracking-tight mb-1 leading-tight">Resume</h1>
+        <h1 className="text-[40px] font-semibold tracking-tight mb-1 leading-tight">resume</h1>
         <p className="text-sm text-muted-foreground mb-8">
-          Backend & AI Engineer
+          backend & ai engineer
         </p>
 
         <div className="rounded-sm overflow-hidden ring-1 ring-foreground/5 bg-card">
           <iframe
             src="/Subhraneel_Goswami_SWE_2026.pdf"
             className="w-full h-[80vh] border-0"
-            title="Subhraneel Goswami Resume"
+            title="subhraneel goswami resume"
           />
         </div>
       </div>

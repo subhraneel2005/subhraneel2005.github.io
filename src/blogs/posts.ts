@@ -12,7 +12,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: 'practising-dsa',
-    title: 'Learning and practicing',
+    title: 'learning and practicing',
     date: '2026-01-04',
     excerpt: 'my baby steps in the world of data structures and algorithms',
     cover: 'https://subhraneel.vercel.app/_next/image?url=%2Fimages%2Fblog0.png&w=3840&q=75',
@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'trying-to-be-better',
-    title: 'Trying to be better',
+    title: 'trying to be better',
     date: '2026-01-22',
     excerpt: 'just me trying to be better at what i do',
     cover: 'https://subhraneel.vercel.app/_next/image?url=%2Fimages%2Fblog1.png&w=3840&q=75',
@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'whos-this-guy',
-    title: 'Who is this guy?',
+    title: 'who is this guy?',
     date: '2026-01-27',
     excerpt: 'here ive yapped about myself',
     cover: '/images/blog2.png',
@@ -36,7 +36,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'built-my-own-claude-code',
-    title: "I Built a Mini Claude Code from Scratch. Here's What I Learned",
+    title: "i built a mini claude code from scratch. here's what i learned",
     date: '2026-02-01',
     excerpt:
       'reverse engineering claude code and building my own coding agent from scratch',
@@ -45,37 +45,37 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'ai-memory-architectures',
-    title: 'What i learned about ai memory after reading about llm wiki, hermes, and mem0',
+    title: 'what i learned about ai memory after reading about llm wiki, hermes, and mem0',
     date: '2026-06-24',
     excerpt:
-      'Exploring AI memory systems — from Karpathy\'s LLM wiki to Hermes agent and Mem0\'s analysis of how different frameworks handle long-term memory.',
+      'exploring ai memory systems - from karpathy\'s llm wiki to hermes agent and mem0\'s analysis of how different frameworks handle long-term memory.',
     cover: '/ai%20memory.png',
     tags: ['ai', 'memory', 'llm', 'rag', 'agents', 'learning'],
   },
   {
     slug: 'self-healing-supervisor',
-    title: 'Building a Self-Healing Supervisor in Node.js',
+    title: 'building a self-healing supervisor in node.js',
     date: '2026-06-23',
     excerpt:
-      'A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail.',
+      'a simple experiment in building reliable systems - a supervisor that monitors worker processes and automatically restarts them when they fail.',
     cover: '/Self%20Healing%20Supervisor.png',
     tags: ['nodejs', 'reliability', 'ddia', 'process-supervision', 'distributed-systems'],
   },
   {
     slug: 'twitter-fanout',
-    title: 'Reproducing X fan-out problem in code',
+    title: 'reproducing x fan-out problem in code',
     date: '2026-07-11',
     excerpt:
-      'Simulating and comparing Push vs Pull fan-out strategies for delivering tweets to timelines, inspired by Chapter 11 of DDIA.',
+      'simulating and comparing push vs pull fan-out strategies for delivering tweets to timelines, inspired by chapter 11 of ddia.',
     cover: '/Twiter%20fanout.png',
     tags: ['ddia', 'fan-out', 'distributed-systems', 'twitter', 'nodejs'],
   },
   {
     slug: 'openai-dots',
-    title: "I broke down OpenAI's new Dots",
+    title: "i broke down openai's new dots",
     date: '2026-10-03',
     excerpt:
-      "Breaking down what actually sits underneath OpenAI's always-on Dots — a persistent agent with memory, a cloud computer, and connected apps.",
+      "breaking down what actually sits underneath openai's always-on dots - a persistent agent with memory, a cloud computer, and connected apps.",
     cover: '/dots-article-thumbnail.png',
     tags: ['ai', 'agents', 'openai', 'learning'],
   },

@@ -6,51 +6,51 @@ const SITE_URL = 'https://subhraneel2005.github.io'
 const blogPosts = [
   {
     slug: 'practising-dsa',
-    title: 'Learning and practicing',
+    title: 'learning and practicing',
     excerpt: 'my baby steps in the world of data structures and algorithms',
     cover: 'https://subhraneel.vercel.app/_next/image?url=%2Fimages%2Fblog0.png&w=3840&q=75',
   },
   {
     slug: 'trying-to-be-better',
-    title: 'Trying to be better',
+    title: 'trying to be better',
     excerpt: 'just me trying to be better at what i do',
     cover: 'https://subhraneel.vercel.app/_next/image?url=%2Fimages%2Fblog1.png&w=3840&q=75',
   },
   {
     slug: 'whos-this-guy',
-    title: 'Who is this guy?',
+    title: 'who is this guy?',
     excerpt: 'here ive yapped about myself',
     cover: '/images/blog2.png',
   },
   {
     slug: 'built-my-own-claude-code',
-    title: "I Built a Mini Claude Code from Scratch. Here's What I Learned",
+    title: "i built a mini claude code from scratch. here's what i learned",
     excerpt: 'reverse engineering claude code and building my own coding agent from scratch',
     cover: '/images/blog4.png',
   },
   {
     slug: 'ai-memory-architectures',
-    title: 'What i learned about ai memory after reading about llm wiki, hermes, and mem0',
-    excerpt: 'Exploring AI memory systems — from Karpathy\'s LLM wiki to Hermes agent and Mem0\'s analysis of how different frameworks handle long-term memory.',
+    title: 'what i learned about ai memory after reading about llm wiki, hermes, and mem0',
+    excerpt: 'exploring ai memory systems - from karpathy\'s llm wiki to hermes agent and mem0\'s analysis of how different frameworks handle long-term memory.',
     cover: '/ai%20memory.png',
   },
   {
     slug: 'self-healing-supervisor',
-    title: 'Building a Self-Healing Supervisor in Node.js',
-    excerpt: 'A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail.',
+    title: 'building a self-healing supervisor in node.js',
+    excerpt: 'a simple experiment in building reliable systems - a supervisor that monitors worker processes and automatically restarts them when they fail.',
     cover: '/Self%20Healing%20Supervisor.png',
   },
   {
     slug: 'twitter-fanout',
-    title: 'Reproducing X fan-out problem in code',
-    excerpt: 'Simulating and comparing Push vs Pull fan-out strategies for delivering tweets to timelines, inspired by Chapter 11 of DDIA.',
+    title: 'reproducing x fan-out problem in code',
+    excerpt: 'simulating and comparing push vs pull fan-out strategies for delivering tweets to timelines, inspired by chapter 11 of ddia.',
     cover: '/Twiter%20fanout.png',
   },
   {
     slug: 'openai-dots',
-    title: "I broke down OpenAI's new Dots",
+    title: "i broke down openai's new dots",
     excerpt:
-      "Breaking down what actually sits underneath OpenAI's always-on Dots — a persistent agent with memory, a cloud computer, and connected apps.",
+      "breaking down what actually sits underneath openai's always-on dots - a persistent agent with memory, a cloud computer, and connected apps.",
     cover: '/dots-article-thumbnail.png',
   },
 ]
@@ -58,58 +58,58 @@ const blogPosts = [
 const workProjects = [
   {
     slug: 'dummy',
-    title: 'Dummy — Local-first AI Desktop Assistant',
+    title: 'dummy - local-first ai desktop assistant',
     description:
-      'A local-first desktop AI assistant for macOS, Linux & Windows — push-to-talk dictation, circle-capture screenshots, and a tool-using chat that drives a real browser, all running on your own machine with your own API keys.',
+      'a local-first desktop ai assistant for macos, linux & windows - push-to-talk dictation, circle-capture screenshots, and a tool-using chat that drives a real browser, all running on your own machine with your own api keys.',
     image: '/dummy-thumbnail.png',
   },
   {
     slug: 'fuck-my-resume',
-    title: 'Fuck My Resume — 1,000+ users, 22K page views',
+    title: 'fuck my resume - 1,000+ users, 22k page views',
     description:
-      'An AI resume tailoring platform that turns a boring PDF into a job-tailored resume, then helps you land the role with cold outreach, a voice mock interviewer, and a public leaderboard.',
+      'an ai resume tailoring platform that turns a boring pdf into a job-tailored resume, then helps you land the role with cold outreach, a voice mock interviewer, and a public leaderboard.',
     image: '/fmr-thumbnail.png',
   },
   {
     slug: 'ai-terminal-coding-agent',
-    title: 'AI Terminal Coding Agent',
+    title: 'ai terminal coding agent',
     description:
-      'Built a CLI-based AI coding agent capable of autonomous tool usage for navigating and modifying codebases.',
+      'built a cli-based ai coding agent capable of autonomous tool usage for navigating and modifying codebases.',
     image: '/ai-coding-agent.png',
   },
   {
     slug: 'study-toolkit',
-    title: 'Agentic AI Study Platform',
+    title: 'agentic ai study platform',
     description:
-      'Built an open-source, student-first productivity platform to help students manage real academic workflows.',
+      'built an open-source, student-first productivity platform to help students manage real academic workflows.',
     image: '/study-toolkit.png',
   },
   {
     slug: 'ai-edumark',
-    title: 'AI EduMark',
+    title: 'ai edumark',
     description:
-      'AI answer-sheet scanning and marks-card automation platform built at Zenera Labs — a Turborepo monorepo that rasterizes scans, preprocesses pages, and extracts candidate marks with an OpenAI vision model for human review.',
+      'ai answer-sheet scanning and marks-card automation platform built at zenera labs - a turborepo monorepo that rasterizes scans, preprocesses pages, and extracts candidate marks with an openai vision model for human review.',
     image: '/projects/ai-edumark.png',
   },
   {
     slug: 'deep-research-multi-agent',
-    title: 'Deep Research Multi-Agent System',
+    title: 'deep research multi-agent system',
     description:
-      'A LangGraph multi-agent deep research pipeline built at Zenera Labs that decomposes questions, gathers and quality-scores evidence, critiques its own findings, and synthesizes citation-traceable reports streamed over SSE to a Next.js UI.',
+      'a langgraph multi-agent deep research pipeline built at zenera labs that decomposes questions, gathers and quality-scores evidence, critiques its own findings, and synthesizes citation-traceable reports streamed over sse to a next.js ui.',
     image: '/projects/deep-research.png',
   },
   {
     slug: 'healthos-claims-rag',
-    title: 'HealthOS — Claims Intelligence RAG',
+    title: 'healthos - claims intelligence rag',
     description:
-      'Claims intelligence service built at Zenera Labs — a deterministic claim validator plus a RAG interpreter that turns payer policies and denial letters into evidence-cited, confidence-scored findings.',
+      'claims intelligence service built at zenera labs - a deterministic claim validator plus a rag interpreter that turns payer policies and denial letters into evidence-cited, confidence-scored findings.',
     image: '/projects/healthos.png',
   },
   {
     slug: 'weapon-detection',
-    title: 'Offline AI Weapon Detection System',
+    title: 'offline ai weapon detection system',
     description:
-      'A fully offline, real-time weapon detection system built at Zenera Labs for CCTV feeds and mobile monitoring — edge-first YOLOv8 inference over RTSP, real-time WebSocket alerts, and an Expo operator app, with no cloud dependency.',
+      'a fully offline, real-time weapon detection system built at zenera labs for cctv feeds and mobile monitoring - edge-first yolov8 inference over rtsp, real-time websocket alerts, and an expo operator app, with no cloud dependency.',
     image: '/projects/weapon-detection.png',
   },
 ]
@@ -146,11 +146,11 @@ function renderPage({
   const alt = escapeHtml(imageAlt || title)
 
   return `<!DOCTYPE html>
-<html lang="en" class="dark" style="color-scheme: dark;">
+<html lang="en" style="color-scheme: light;">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#171717" />
+<meta name="theme-color" content="#F7F7F3" />
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}" />
 <link rel="canonical" href="${url}" />
@@ -161,7 +161,7 @@ ${dimensions}
 <meta property="og:image:alt" content="${alt}" />
 <meta property="og:url" content="${url}" />
 <meta property="og:type" content="${type}" />
-<meta property="og:site_name" content="Subhraneel Goswami" />
+<meta property="og:site_name" content="subhraneel goswami" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${escapeHtml(title)}" />
 <meta name="twitter:description" content="${escapeHtml(description)}" />
@@ -181,12 +181,12 @@ for (const post of blogPosts) {
   const postUrl = `${SITE_URL}/blogs/${post.slug}`
 
   const html = `<!DOCTYPE html>
-<html lang="en" class="dark" style="color-scheme: dark;">
+<html lang="en" style="color-scheme: light;">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#171717" />
-<title>${escapeHtml(post.title)} — Subhraneel Goswami</title>
+<meta name="theme-color" content="#F7F7F3" />
+<title>${escapeHtml(post.title)} - subhraneel goswami</title>
 <meta property="og:title" content="${escapeHtml(post.title)}" />
 <meta property="og:description" content="${escapeHtml(post.excerpt)}" />
 <meta property="og:image" content="${imageUrl}" />
@@ -209,16 +209,16 @@ ${distIndex.match(/<script[^>]+src="\/assets\/index-[^"]+"[^>]*><\/script>/)?.[0
 }
 
 const worksDescription =
-  'Selected projects and case studies by Subhraneel Goswami — AI and backend engineering work shipped solo and with startups.'
+  'selected projects and case studies by subhraneel goswami - ai and backend engineering work shipped solo and with startups.'
 const worksImage = `${SITE_URL}/works-opengraph.png`
 
 const worksHtml = renderPage({
-  title: 'Works — Subhraneel Goswami',
+  title: 'works - subhraneel goswami',
   description: worksDescription,
   image: worksImage,
   imageWidth: 1600,
   imageHeight: 900,
-  imageAlt: "Subhraneel Goswami's works ranked on a tier list — the goat.",
+  imageAlt: "subhraneel goswami's works ranked on a tier list - the goat.",
   url: `${SITE_URL}/works`,
   type: 'website',
 })
@@ -232,7 +232,7 @@ for (const project of workProjects) {
   const projectUrl = `${SITE_URL}/works/${project.slug}`
 
   const html = renderPage({
-    title: `${project.title} — Subhraneel Goswami`,
+    title: `${project.title} - subhraneel goswami`,
     description: project.description,
     image: imageUrl,
     imageAlt: `${project.title} preview`,

@@ -10,31 +10,33 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
 const tagColors: Record<string, string> = {
-  dsa: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
-  'binary-search': 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
-  consistency: 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
-  learning: 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
-  discipline: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
-  aboutme: 'bg-pink-100 text-pink-800 dark:bg-pink-1000/20 dark:text-pink-600',
-  whoami: 'bg-pink-100 text-pink-800 dark:bg-pink-1000/20 dark:text-pink-600',
-  work: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
-  'hire me': 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
-  'coding-agent': 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
-  typescript: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
-  ai: 'bg-purple-100 text-purple-800 dark:bg-purple-1000/20 dark:text-purple-600',
-  cli: 'bg-gray-100 text-gray-800 dark:bg-gray-1000/20 dark:text-gray-600',
-  sidequests: 'bg-amber-100 text-amber-800 dark:bg-amber-1000/20 dark:text-amber-600',
-  agents: 'bg-green-100 text-green-800 dark:bg-green-1000/20 dark:text-green-600',
-  openai: 'bg-blue-100 text-blue-800 dark:bg-blue-1000/20 dark:text-blue-600',
+  dsa: 'bg-blue-100 text-blue-800',
+  'binary-search': 'bg-blue-100 text-blue-800',
+  consistency: 'bg-green-100 text-green-800',
+  learning: 'bg-purple-100 text-purple-800',
+  discipline: 'bg-amber-100 text-amber-800',
+  aboutme: 'bg-pink-100 text-pink-800',
+  whoami: 'bg-pink-100 text-pink-800',
+  work: 'bg-amber-100 text-amber-800',
+  'hire me': 'bg-green-100 text-green-800',
+  'coding-agent': 'bg-purple-100 text-purple-800',
+  typescript: 'bg-blue-100 text-blue-800',
+  ai: 'bg-purple-100 text-purple-800',
+  cli: 'bg-gray-100 text-gray-800',
+  sidequests: 'bg-amber-100 text-amber-800',
+  agents: 'bg-green-100 text-green-800',
+  openai: 'bg-blue-100 text-blue-800',
 }
 
 function dateStr(date: string) {
   const lang = typeof navigator !== 'undefined' ? navigator.language : 'en-US'
-  return new Date(date).toLocaleDateString(lang, {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
+  return new Date(date)
+    .toLocaleDateString(lang, {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    })
+    .toLowerCase()
 }
 
 function LoadingState() {
@@ -87,7 +89,7 @@ export default function BlogPost() {
   return (
     <>
       <Helmet>
-        <title>{post.title} — Subhraneel Goswami</title>
+        <title>{post.title} - subhraneel goswami</title>
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:image" content={imageUrl} />
@@ -101,7 +103,7 @@ export default function BlogPost() {
         <Link to="/blogs" className="inline-block mb-10">
           <Button variant="ghost" size="sm">
             <ArrowLeft className="size-3.5" aria-hidden="true" />
-            Back to blog
+            back to blog
           </Button>
         </Link>
 
@@ -121,7 +123,7 @@ export default function BlogPost() {
             {post.tags.map((tag) => {
               const color =
                 tagColors[tag] ??
-                'bg-gray-100 text-gray-800 dark:bg-gray-1000/20 dark:text-gray-600'
+                'bg-gray-100 text-gray-800'
               return (
                 <Badge
                   key={tag}
@@ -159,7 +161,7 @@ export default function BlogPost() {
           <Link to="/blogs">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="size-3.5" aria-hidden="true" />
-              Back to blog
+              back to blog
             </Button>
           </Link>
         </div>

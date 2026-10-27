@@ -1,63 +1,314 @@
-# Subhraneel Goswami — Backend & AI Engineer
+# subhraneel goswami - backend & ai engineer
 
-> Subhraneel Goswami is a backend and AI engineer building production LLM systems, AI agents, RAG pipelines, real-time edge inference, and local-first developer tools. Currently an AI Engineer at Zenera Labs (Bengaluru) and a BCA graduate (2026).
+> subhraneel goswami is a backend and ai engineer who builds production llm systems, ai agents, retrieval-augmented generation pipelines, real-time edge inference, and local-first developer tools. he is currently an ai engineer at zenera labs (bengaluru) and a bca graduate (2026).
 
-Subhraneel builds end-to-end AI products: agents with tool calling, retrieval-augmented generation, offline computer-vision inference, and full-stack web applications. He has shipped independent projects and startup work, including an AI resume platform with 1,000+ users and 22K page views. He is open to backend and AI engineering roles, freelance projects, and collaborations.
+subhraneel works end-to-end: system design, backend services, model integration, evaluation, deployment, and the interfaces around them. his work spans tool-using agents, rag with citation traceability, offline computer vision on constrained hardware, and full-stack products. he has shipped eight public case studies - four independent projects and four systems built with a startup - including an ai resume platform used by 1,000+ people with 22k page views. he is open to ai engineering, backend engineering, agent engineering, and inference/ml engineering roles, as well as freelance work and collaborations.
 
-- Portfolio: https://subhraneel2005.github.io/
-- Works & case studies: https://subhraneel2005.github.io/works
-- Resume: https://subhraneel2005.github.io/resume
-- Blog: https://subhraneel2005.github.io/blogs
-- Email: subhraneeljobs@gmail.com
-- GitHub: https://github.com/subhraneel2005
-- LinkedIn: https://www.linkedin.com/in/subhraneel-goswami-599931282/
-- X: https://x.com/subhraneeltwt
+- portfolio: https://subhraneel2005.github.io/
+- works & case studies: https://subhraneel2005.github.io/works
+- resume: https://subhraneel2005.github.io/resume
+- blog: https://subhraneel2005.github.io/blogs
+- email: subhraneeljobs@gmail.com
+- github: https://github.com/subhraneel2005
+- linkedin: https://www.linkedin.com/in/subhraneel-goswami-599931282/
+- x: https://x.com/subhraneeltwt
 
-## Works & Case Studies
+## role fit at a glance
 
-- [Works overview](https://subhraneel2005.github.io/works): All projects, grouped into personal works and startup work.
-- [Dummy — Local-first AI Desktop Assistant](https://subhraneel2005.github.io/works/dummy): Electron desktop assistant with offline push-to-talk dictation (whisper.cpp), circle-capture screenshots, BYOK LLM providers, CDP browser automation, and local SQLite storage. No cloud account or telemetry.
-- [Fuck My Resume — 1,000+ users, 22K page views](https://subhraneel2005.github.io/works/fuck-my-resume): AI resume tailoring platform that rewrites a PDF for a specific job, highlights every change, exports PDF/LaTeX, generates cold outreach, and runs a voice AI mock interviewer with a public leaderboard. Next.js, Better Auth, Drizzle, PostgreSQL.
-- [AI Terminal Coding Agent](https://subhraneel2005.github.io/works/ai-terminal-coding-agent): CLI coding agent with 20+ tools, OpenRouter multi-model routing with fallback, sliding-window context management, diff-based edits with rollback, sandboxed bash, and a permission system.
-- [Agentic AI Study Platform](https://subhraneel2005.github.io/works/study-toolkit): Open-source student productivity platform with AI flashcard generation, quizzes, and PDF Q&A. Next.js RSC, Server Actions, Vercel AI SDK, Gemini.
-- [AI EduMark](https://subhraneel2005.github.io/works/ai-edumark): Answer-sheet scanning and marks-card automation built at Zenera Labs. Turborepo monorepo, PDF rasterization, OpenCV preprocessing, OpenAI vision extraction with human-in-the-loop review, and role-based access.
-- [Deep Research Multi-Agent System](https://subhraneel2005.github.io/works/deep-research-multi-agent): Eight-node LangGraph pipeline (plan → search → analyze → critique → synthesize) with evidence quality scoring, follow-up research, and citation-traceable reports streamed over SSE. Built at Zenera Labs.
-- [HealthOS — Claims Intelligence RAG](https://subhraneel2005.github.io/works/healthos-claims-rag): Claims intelligence service built at Zenera Labs — a deterministic claim validator plus a RAG interpreter with hybrid retrieval (BM25 + semantic), denial-reason taxonomy, and confidence-labeled, evidence-cited findings.
-- [Offline AI Weapon Detection System](https://subhraneel2005.github.io/works/weapon-detection): Fully offline, real-time YOLOv8/ONNX weapon detection for CCTV and mobile monitoring, with async RTSP ingestion, WebSocket alerts, Docker deployment, and an Expo operator app. Built at Zenera Labs.
+this section maps published evidence to the responsibilities of common engineering roles. each claim below is backed by a case study in the next section.
 
-## Writing
+- **ai engineer (llm applications):** shipped an ai resume platform with 1,000+ users; built a local-first assistant with tool calling and browser automation; built a study platform with streaming llm features; designed a multi-agent research pipeline; designed a rag claims interpreter with confidence routing.
+- **agent engineering:** a desktop agent that drives chromium over cdp with approval-gated writes; a cli coding agent with 20+ tools, multi-model fallback, and rollback; an eight-node langgraph research pipeline with a critique loop; a voice interview loop combining stt, an llm, and tts.
+- **backend engineering:** 13 rest endpoints plus a websocket alert feed; four integrated services behind one facade; background workers and job orchestration; auth, rbac, and ownership-checked reads; docker compose deployments; api contract tests.
+- **inference / ml engineering:** yolov8 → onnx (opset 17) deployment on edge hardware; async rtsp ingestion with capped inference concurrency; a retraining pipeline with mixup, copy-paste, erasing, and hard-negative mining; onnx/pytorch parity at iou ≈ 0.98; classical cv preprocessing with opencv.
+- **rag and retrieval:** hybrid bm25 + semantic retrieval with reciprocal rank fusion and mmr deduplication; evidence quality scoring; claim-level citation traceability; confidence labels with human-review routing.
+- **full-stack product engineering:** next.js app router/rsc, react, expo, tailwind, server actions, streaming uis, and developer-facing clis.
+- **ownership and scale:** end-to-end ownership of an offline real-time inference system at zenera labs; a live product with 1,000+ users and 22k page views; open-source projects with public source.
 
-- [Learning and practicing](https://subhraneel2005.github.io/blogs/practising-dsa): Early steps in data structures and algorithms.
-- [Trying to be better](https://subhraneel2005.github.io/blogs/trying-to-be-better): Notes on self-improvement and craft.
-- [Who is this guy?](https://subhraneel2005.github.io/blogs/whos-this-guy): Personal introduction.
-- [I Built a Mini Claude Code from Scratch. Here's What I Learned](https://subhraneel2005.github.io/blogs/built-my-own-claude-code): Reverse-engineering Claude Code and building a coding agent from scratch.
-- [What I learned about AI memory after reading about LLM Wiki, Hermes, and Mem0](https://subhraneel2005.github.io/blogs/ai-memory-architectures): Comparing long-term memory approaches across agent frameworks.
-- [Building a Self-Healing Supervisor in Node.js](https://subhraneel2005.github.io/blogs/self-healing-supervisor): A supervisor that monitors and restarts failing worker processes.
-- [Reproducing X's fan-out problem in code](https://subhraneel2005.github.io/blogs/twitter-fanout): Simulating push vs pull fan-out for timeline delivery, inspired by DDIA.
-- [I broke down OpenAI's new Dots](https://subhraneel2005.github.io/blogs/openai-dots): Inside OpenAI's always-on Dots — persistent memory, a cloud computer, and connected apps.
+## works & case studies
 
-## Experience
+quick index (one line each; detailed breakdowns follow):
 
-- **AI Engineer — Zenera Labs** (Aug 2026 – Present, Bengaluru, Remote): Applied ML and a fully offline, real-time edge AI detection system for CCTV feeds and mobile monitoring; YOLOv8/ONNX, OpenCV, FastAPI, WebSockets, SQLite, Docker, Expo.
-- **Backend & Applied AI Intern — Kasukabe Labs** (Oct 2025 – Jan 2026, Kolkata, Remote): End-to-end text-to-video pipeline with LLMs, STT, TTS, FFmpeg and async processing; FastAPI services; retrieval and prompt pipelines.
-- **Full Stack Engineering Intern — Jobsforce.ai** (Mar 2025 – Sep 2025, Remote): Chrome extension (React, TypeScript, Plasmo, Node.js, PostgreSQL) and an end-to-end AI mock interviewer with LLM integrations.
+- [dummy - local-first ai desktop assistant](https://subhraneel2005.github.io/works/dummy): electron assistant with offline dictation, circle capture, byok llm providers, and a browser-driving tool agent.
+- [fuck my resume - 1,000+ users, 22k page views](https://subhraneel2005.github.io/works/fuck-my-resume): ai resume tailoring with auditable changes, pdf/latex export, cold outreach, and a voice mock interviewer.
+- [ai terminal coding agent](https://subhraneel2005.github.io/works/ai-terminal-coding-agent): cli coding agent with 20+ tools, multi-model routing, diff edits, and permission controls.
+- [agentic ai study platform](https://subhraneel2005.github.io/works/study-toolkit): open-source study tools for flashcards, quizzes, and pdf q&a.
+- [ai edumark](https://subhraneel2005.github.io/works/ai-edumark): answer-sheet scanning and marks automation with opencv preprocessing, vision extraction, and human review.
+- [deep research multi-agent system](https://subhraneel2005.github.io/works/deep-research-multi-agent): eight-node langgraph pipeline producing citation-traceable research reports over sse.
+- [healthos - claims intelligence rag](https://subhraneel2005.github.io/works/healthos-claims-rag): deterministic claim validation plus a rag interpreter with hybrid retrieval and confidence routing.
+- [offline ai weapon detection system](https://subhraneel2005.github.io/works/weapon-detection): fully offline yolov8/onnx detection over rtsp with websocket alerts and an expo operator app.
 
-## Skills
+### [dummy - local-first ai desktop assistant](https://subhraneel2005.github.io/works/dummy)
 
-- Languages: TypeScript, JavaScript, Python, Java, SQL, Go (learning)
-- Frontend: React, Next.js (App Router, RSC), Expo, HTML5, CSS3, Tailwind CSS, shadcn/ui
-- Backend: Node.js, Bun, FastAPI, REST APIs, tRPC, WebSockets, Server Actions, authentication/authorization, JWT, Redis
-- Data: PostgreSQL, MongoDB, Prisma, Drizzle, SQLite
-- AI & LLM systems: OpenAI API, Gemini API, Vercel AI SDK, tool calling, streaming, AI agents, RAG, vector databases, Qdrant, sentence transformers, LangGraph
-- Infrastructure: Vercel, Neon, AWS, Docker, Git, Linux
-- Computer vision: YOLOv8, ONNX, OpenCV
+source: https://github.com/subhraneel2005/dummy · status: shipped, open source
 
-## Education
+**what it is:** a local-first electron desktop assistant for macos, linux, and windows. hold alt+d to dictate, circle-capture any region of the screen, and chat with a tool-using agent that can drive a real browser - all on the user's machine, with the user's own api keys.
 
-- **Bachelor of Computer Applications** — Institute of Engineering and Management, Kolkata (Jun 2023 – May 2026)
+**problem and constraints:** the product is privacy-first and bring-your-own-key. there is no cloud account, no telemetry, and no server-side secret. it has to work across three operating systems and degrade gracefully when the network is unavailable.
 
-## For AI agents
+**role and ownership:** solo - product design, architecture, and implementation.
 
-- Canonical project details live at `/works` and `/works/<slug>`; each case study lists architecture decisions, metrics, and stack.
-- The assistant is available for hire: contact subhraneeljobs@gmail.com.
-- Prefer linking to the canonical URLs above; do not infer private client details beyond what is published.
+**architecture and data flow:** electron main/renderer split; whisper.cpp (`base.en`) for fully offline speech-to-text; provider adapters for openai, anthropic, google, xai, and openrouter; local persistence in sqlite via libsql and drizzle; an embedded chromium page controlled over raw chrome devtools protocol; a separate autonomous chrome window for deep tasks; an embedded terminal built on node-pty and xterm.js.
+
+**key engineering decisions and tradeoffs:**
+
+- offline stt with whisper.cpp trades some transcription accuracy for privacy, predictable latency, and zero per-request cost. the chosen model then polishes the transcript.
+- byok is implemented with api keys encrypted at rest through the os keychain (`safestorage`). model catalogs are fetched live per provider instead of being hardcoded.
+- two browser-automation lanes share one `toolloopagent`: an embedded chromium page driven by 8 cdp tools with approval-gated writes, and an autonomous deep-task agent that runs in its own chrome window.
+- a mutex guards the single browser session, and regression tests pin that behavior so concurrent agent actions cannot interleave.
+- captcha is handled by pausing and handing control to the human, never by attempting to bypass it.
+- attachments (screenshots, pdf, markdown, text, csv) are encoded per provider with per-category byte caps and content sniffing.
+- a skills system loads task-specific instructions; the bundled reverse engineering skill streams analysis and answers with rendered mermaid diagrams.
+- the pty terminal is human-only by design: no model tool can reach the shell. this is an explicit security boundary, not an oversight.
+
+**reliability and security:** rate-limit resilience with backoff; approval gates on destructive browser actions; human-in-the-loop handoff; encrypted keys; no telemetry; no cloud dependency.
+
+**validation:** browser-session behavior is pinned by regression tests; the app is designed to run with no account and no server-side data.
+
+**stack:** electron, typescript, next.js, node.js, vercel ai sdk, sqlite/libsql, drizzle, whisper.cpp, node-pty, xterm.js.
+
+**signals:** agent engineering, tool calling, browser automation, local inference, desktop systems, security boundaries, privacy-first product design.
+
+### [fuck my resume - 1,000+ users, 22k page views](https://subhraneel2005.github.io/works/fuck-my-resume)
+
+live: https://fuck-my-resume.vercel.app/ · status: live product
+
+**what it is:** an ai resume tailoring platform. a user uploads a pdf resume and a target job description; the system rewrites the resume for that exact role, color-codes every ai change for auditability, and exports a finished document. it also generates cold outreach, runs a voice mock interview, and maintains a public leaderboard.
+
+**traction:** 1,000+ users, 22k page views, 18k+ impressions, and 300+ likes on the x launch post.
+
+**problem and constraints:** generic ai rewrites are opaque and easy to distrust. the product had to make every change visible, keep ai costs on the user's own key, render a clean pdf without a server-side latex toolchain, and support voice interaction without forcing paid infrastructure.
+
+**role and ownership:** solo - product, architecture, backend, frontend, and launch.
+
+**architecture and data flow:** next.js application with better auth (google and github oauth) on postgres/neon through drizzle orm. resume parsing extracts profile and contact links from the uploaded pdf. an llm produces a structured, role-specific rewrite with per-change annotations. the client renders the result to pdf in the browser with `@react-pdf/renderer` and can also export latex (`.tex`). cold outreach generation and the interview flow reuse the tailored resume as context.
+
+**key engineering decisions and tradeoffs:**
+
+- change auditing is a first-class product requirement: added and rewritten bullets and new skills are color-coded so users can inspect what the model did before downloading.
+- pdf rendering happens entirely in the browser, removing a server-side latex dependency and its operational cost.
+- linkedin and github urls are parsed directly from the uploaded pdf rather than asking users to re-enter them.
+- cold outreach emails and dms are generated with the tailored resume in context, not from a generic template.
+- the voice mock interviewer uses seeded, minecraft-style interview configurations (difficulty, duration, deterministic questions), a hold-to-talk stt → llm → tts loop, feedback scored out of 10, and saved transcripts.
+- voice is free by default through in-browser transformers.js (whisper-tiny for stt and kokoro for tts) and premium through openai. because `@ai-sdk/google` exposes no stt, google keys fall back to the local browser voice.
+- byok: openai or google keys are encrypted server-side, and every ai call is billed to the user. there are no server-side model secrets and no subscription wall.
+- the public leaderboard ranks completed mock interviews by average score, then by interview count.
+
+**reliability and security:** oauth-based auth; encrypted user keys; per-user ai billing; server-side secrets avoided by design; postgres/neon with drizzle migrations.
+
+**stack:** next.js, typescript, tailwind css, better auth, drizzle, postgresql/neon, vercel ai sdk, `@react-pdf/renderer`, transformers.js (whisper-tiny, kokoro), openai.
+
+**signals:** production llm product, prompt/context design, pdf generation, auth and data modeling, voice ai pipelines, cost ownership, product launch and growth.
+
+### [ai terminal coding agent](https://subhraneel2005.github.io/works/ai-terminal-coding-agent)
+
+source: https://github.com/subhraneel2005/sidequests · status: open source
+
+**what it is:** a cli-based ai coding agent that autonomously navigates, reads, and modifies codebases using tool calling.
+
+**problem and constraints:** a coding agent has to operate on real repositories with real failure modes: context limits, model outages, partial writes, and dangerous operations. the design goal was a small, understandable agent loop with explicit safety controls rather than a black box.
+
+**role and ownership:** solo - architecture and implementation.
+
+**architecture and data flow:** a provider abstraction routes requests through openrouter to gemini, claude, or gpt models. a session manager owns conversation state and a sliding context window. a tool registry exposes file, search, shell, and project-structure operations. the agent loop plans, calls tools, observes results, and repeats until the task completes or a limit is reached.
+
+**key engineering decisions and tradeoffs:**
+
+- 20+ tools cover file reading, editing, grep, glob, bash, and structured project-tree discovery.
+- openrouter provides multi-model routing with automatic fallback across gemini, claude, and gpt when a provider is unavailable or rate-limited.
+- context is managed within a sliding window of roughly 100,000 tokens to stay under model limits without losing recent task state.
+- file edits are diff-based and line-precise, with automatic backup and restore if an edit fails midway.
+- bash execution is sandboxed; write, delete, and shell operations are protected by a permission allowlist.
+- a plugin-like configuration schema supports user-defined custom tools.
+- error recovery retries api failures, rolls back partial writes, and handles unexpected tool output instead of crashing the session.
+- the code separates the tool interface, the llm provider abstraction, and session management so each can evolve independently.
+
+**stack:** typescript, node.js, openrouter, google gemini, claude, gpt, tool calling.
+
+**signals:** agent engineering, tool design, context management, reliability and rollback, permissions and sandboxing, provider abstraction.
+
+### [agentic ai study platform](https://subhraneel2005.github.io/works/study-toolkit)
+
+source: https://github.com/subhraneel2005/study-toolkit · live: https://study-toolkit.vercel.app · status: open source
+
+**what it is:** an open-source, student-first productivity platform for real academic workflows: ai flashcard generation, quiz creation, and pdf question answering.
+
+**problem and constraints:** students need fast, low-friction study tools, not another dashboard. the product had to keep client javascript small, stream ai responses, and run on a simple deployment.
+
+**role and ownership:** solo - product and implementation.
+
+**architecture and data flow:** next.js with react server components and server actions for data fetching and mutations. the vercel ai sdk streams gemini responses into flashcards, quizzes, and document chat. pdf content is used as context for question answering.
+
+**key engineering decisions and tradeoffs:**
+
+- react server components and server actions minimize client-side javascript and keep page loads fast.
+- streaming responses make ai interactions feel immediate instead of blocking on a full generation.
+- the tool set is intentionally narrow and student-focused: flashcards, quizzes, and document q&a.
+
+**stack:** next.js, typescript rsc, server actions, vercel ai sdk, gemini.
+
+**signals:** llm product engineering, streaming ux, rsc/server actions, open-source delivery.
+
+### [ai edumark](https://subhraneel2005.github.io/works/ai-edumark)
+
+status: built at zenera labs
+
+**what it is:** an ai answer-sheet scanning and marks-card automation platform. schools upload scanned answer booklets and question papers; the system preprocesses pages, extracts per-question marks with a vision model, and routes uncertain results to human reviewers before releasing marksheets.
+
+**problem and constraints:** scanned booklets are noisy: rotation, perspective skew, blur, uneven contrast, and inconsistent resolution. the system must not fabricate marks, must keep humans in control of ambiguous cases, and must enforce strict role-based access for staff and students.
+
+**role and ownership:** engineering across the monorepo: web app, background workers, data model, review workflow, and access control.
+
+**architecture and data flow:** a turborepo monorepo containing a next.js 16 web app plus two background workers (image preprocessing and ai evaluation) sharing drizzle/neon postgres, better auth, and a shared ui package. a single pdf upload is rasterized into per-page pngs with `pdf-to-img` and stored per organization and per sheet.
+
+**key engineering decisions and tradeoffs:**
+
+- the image worker applies exif auto-rotation, opencv.js perspective correction (canny edge detection → quadrilateral detection → warp), denoising, and contrast normalization.
+- blur and resolution quality checks flag unusable scans as `needs_review` instead of sending them to the model.
+- the ai evaluation worker calls an openai vision model through the vercel ai sdk with a constrained zod schema, returning structured per-question marks and confidence.
+- a no-fabrication boundary returns `null` plus `needsreview` when the model is uncertain, rather than guessing.
+- the human review ui shows reviewers the exact preprocessed images the model saw, lets them edit candidate marks, and locks a sheet before release.
+- question-paper upload and ai extraction bootstrap exams; teachers review and publish drafts; students join through exam links.
+- role-based access (owner, admin, teacher, student) uses better auth organizations and custom rbac. students only see released marksheets, and reads are ownership-checked.
+
+**reliability and security:** background workers isolate expensive processing; quality gates prevent bad input from reaching the model; human-in-the-loop finalization; organization-scoped data; ownership-checked reads.
+
+**stack:** next.js 16, typescript, turborepo, postgresql/neon, drizzle, better auth, opencv.js, `pdf-to-img`, openai vision, vercel ai sdk, zod.
+
+**signals:** applied computer vision, document ai, background job architecture, structured llm output, human-in-the-loop design, rbac, monorepo engineering.
+
+### [deep research multi-agent system](https://subhraneel2005.github.io/works/deep-research-multi-agent)
+
+status: built at zenera labs
+
+**what it is:** a langgraph multi-agent deep research pipeline that decomposes a question, gathers and quality-scores evidence, critiques its own findings, performs targeted follow-up research, and synthesizes a citation-traceable report streamed to a next.js ui.
+
+**problem and constraints:** single-shot research answers hallucinate, cite weakly, and hide their reasoning. the system needed explicit stages, auditable evidence, and a way to recover from gaps discovered late in the process.
+
+**role and ownership:** pipeline and backend design, agent graph, evidence modeling, streaming api, and frontend integration.
+
+**architecture and data flow:** an eight-node langgraph pipeline: intent extraction → planning → task generation → search/fetch → analysis → critique → follow-up search → synthesis. fastapi exposes synchronous and sse streaming endpoints. a next.js frontend renders live pipeline progress across report, intent, planning, tasks, sources, evidence, analysis, and critique tabs.
+
+**key engineering decisions and tradeoffs:**
+
+- the evidencestore normalizes, deduplicates, and quality-scores every source with a weighted composite: relevance 35%, freshness 25%, author 20%, content 20%.
+- search-and-fetch uses exa for discovery and firecrawl for full-page content, separating finding sources from reading them.
+- follow-up search appends new evidence without overwriting prior results, preserving the audit trail.
+- a dedicated critique agent checks for unsupported claims, missing evidence, weak sources, contradictions, and research gaps, then loops back for targeted follow-up research.
+- synthesis produces a structured report where every claim links to specific evidence ids and source urls, enabling claim-level traceability.
+- the sse endpoint streams stage-by-stage progress so the ui reflects real pipeline state rather than a spinner.
+
+**validation:** 70 pytest tests run fully offline in about 5 seconds with mocked llm and api clients, covering the pipeline and its contracts.
+
+**stack:** python, langgraph, fastapi, pydantic, next.js, react, sse, exa, firecrawl.
+
+**signals:** multi-agent orchestration, agentic critique loops, evidence-based rag, streaming apis, testable ai systems, backend/frontend integration.
+
+### [healthos - claims intelligence rag](https://subhraneel2005.github.io/works/healthos-claims-rag)
+
+status: built at zenera labs
+
+**what it is:** a claims intelligence service combining a deterministic claim validator with a rag interpreter that turns payer policies and denial letters into evidence-cited, confidence-scored findings.
+
+**problem and constraints:** healthcare claims are governed by payer-specific rules, coding requirements, and filing deadlines. answers must be traceable to source documents, and uncertain cases must go to a human instead of being presented as fact.
+
+**role and ownership:** claims intelligence lead - authored the denial-reason taxonomy, the payer claim-requirements knowledge base, and the end-to-end rag architecture; integrated four services behind one facade.
+
+**architecture and data flow:** two tracks. track a is a rule engine that loads claim-type × payer requirements and returns a readiness score, violations, warnings, and missing-document reports before submission. track b is a rag interpreter that ingests documents, performs hybrid retrieval, and calls the shared ai gateway to interpret denials. a document-intelligence ingestion adapter and a claim-risk snapshot client connect the surrounding services.
+
+**key engineering decisions and tradeoffs:**
+
+- the validator is deliberately deterministic; llm reasoning is reserved for interpretation, where policy text is ambiguous.
+- hybrid retrieval combines bm25 and semantic search with reciprocal rank fusion and mmr deduplication to avoid redundant evidence.
+- every answer cites its source documents and carries a confidence label: found, not found, potentially applicable, or requires human confirmation.
+- results below a confidence threshold are routed to a human review queue instead of being surfaced as definitive.
+- the denial taxonomy (v1.0) has 7 categories with l1/l2/l3 reasons. the requirements knowledge base covers 6 claim types × 6 payers, including coding rules, filing deadlines, and payer-specific rules.
+- four services (ai-gateway, claims-rag, document-intelligence, claim-risk) sit behind one integration facade, keeping callers decoupled from internal service boundaries.
+
+**validation:** verified end-to-end with a live integrated-flow demo covering process → ingest → interpret → validate → risk assessment.
+
+**stack:** python, fastapi, rag, hybrid retrieval, bm25, semantic search, rrf, mmr, postgresql, pydantic, vector databases.
+
+**signals:** rag architecture, retrieval quality, evidence citations, confidence calibration, healthcare domain modeling, service integration, human-in-the-loop safety.
+
+### [offline ai weapon detection system](https://subhraneel2005.github.io/works/weapon-detection)
+
+status: built at zenera labs
+
+**what it is:** a fully offline, real-time weapon detection system for cctv feeds and mobile monitoring. edge-first yolov8 inference runs over rtsp, raises real-time alarms over websockets, and is operated from an expo mobile app - with no cloud dependency.
+
+**problem and constraints:** the deployment environment has no reliable cloud connectivity, so inference, storage, alerting, and monitoring must all run locally. the system must handle multiple cameras concurrently, stay responsive under load, and let operators tune sensitivity without restarting services.
+
+**role and ownership:** end-to-end ownership covering model inference, video ingestion, backend services, local deployment, and mobile integration.
+
+**architecture and data flow:** per-camera async rtsp ingestion feeds an edge inference stage with capped concurrency. a fastapi backend exposes 13 rest endpoints, a websocket alert feed, snapshot capture, and a detection log. an expo/react native operator app provides live per-camera feeds, alerts with snapshots, logs, and settings over the lan. docker compose bundles the backend with a mediamtx rtsp relay for local test feeds.
+
+**key engineering decisions and tradeoffs:**
+
+- yolov8 is exported to onnx (opset 17) for portable, offline inference on edge hardware.
+- per-camera ingestion is asynchronous with a hard cap on inference concurrency, preventing one noisy stream from starving the others.
+- sensitivity thresholds and alert cooldowns are tunable live through the api, without service restarts.
+- alerts are acknowledged and audited through the mobile operator app, creating an operational trail.
+- retraining runs in colab for 150 epochs with mixup, copy-paste, erasing, and hard-negative mining. the onnx export is validated against pytorch at iou ≈ 0.98 before deployment.
+
+**validation:** 15 api contract tests cover the endpoint surface; onnx/pytorch parity is checked at iou ≈ 0.98.
+
+**stack:** python, yolov8, onnx, opencv, fastapi, websockets, sqlite, docker, mediamtx, expo/react native.
+
+**signals:** inference engineering, model export and parity, edge deployment, real-time video, concurrency control, backend apis, mobile operations, end-to-end ownership.
+
+## cross-project engineering signals
+
+- **production llm systems:** 1,000+ users on a live ai product; streaming, structured output, and cost ownership.
+- **agent engineering:** tool calling, multi-step planning, browser automation, critique loops, permission boundaries, and rollback.
+- **rag and retrieval:** hybrid search, rank fusion, deduplication, evidence scoring, citation traceability, and confidence routing.
+- **inference and ml:** yolov8 → onnx, opencv preprocessing, retraining pipelines, hard-negative mining, and parity validation.
+- **backend and distributed systems:** rest and websocket services, background workers, async job orchestration, service facades, sqlite/postgres, docker.
+- **security and privacy:** byok with os-keychain encryption, rbac and ownership checks, sandboxed execution, no-telemetry local-first design.
+- **quality engineering:** api contract tests, offline pipeline tests, regression tests for concurrency, and explicit human-review paths.
+- **product engineering:** next.js rsc, react, expo, tailwind, clis, pdf generation, and developer-facing tools.
+
+## writing
+
+- [learning and practicing](https://subhraneel2005.github.io/blogs/practising-dsa): early steps in data structures and algorithms.
+- [trying to be better](https://subhraneel2005.github.io/blogs/trying-to-be-better): notes on self-improvement and craft.
+- [who is this guy?](https://subhraneel2005.github.io/blogs/whos-this-guy): personal introduction.
+- [i built a mini claude code from scratch. here's what i learned](https://subhraneel2005.github.io/blogs/built-my-own-claude-code): reverse-engineering claude code and building a coding agent from scratch.
+- [what i learned about ai memory after reading about llm wiki, hermes, and mem0](https://subhraneel2005.github.io/blogs/ai-memory-architectures): comparing long-term memory approaches across agent frameworks.
+- [building a self-healing supervisor in node.js](https://subhraneel2005.github.io/blogs/self-healing-supervisor): a supervisor that monitors and restarts failing worker processes.
+- [reproducing x's fan-out problem in code](https://subhraneel2005.github.io/blogs/twitter-fanout): simulating push vs pull fan-out for timeline delivery, inspired by ddia.
+- [i broke down openai's new dots](https://subhraneel2005.github.io/blogs/openai-dots): inside openai's always-on dots - persistent memory, a cloud computer, and connected apps.
+
+## experience
+
+- **ai engineer - zenera labs** (aug 2026 - present, bengaluru, remote): applied ml and a fully offline, real-time edge detection system. developed and evaluated a breast cancer classification model in python and scikit-learn across precision, recall, f1, and confusion matrix. took end-to-end ownership of the weapon detection system: model inference, video ingestion, backend services, local deployment, and mobile integration. built an edge-first pipeline with yolov8, onnx/ncnn, opencv, fastapi, websockets, sqlite, docker, and expo.
+- **backend & applied ai intern - kasukabe labs** (oct 2025 - jan 2026, kolkata, remote): built an end-to-end text-to-narrated-video pipeline using llms, speech-to-text, text-to-speech, ffmpeg, and asynchronous processing. developed production fastapi apis for ai workflow orchestration, media generation, and file processing. implemented retrieval workflows and prompt pipelines, integrated multiple ai models, improved reliability and observability, and documented decisions. also built the infinite-canvas interface in next.js for visualizing ai service nodes, workflow graphs, and persistent chat with state persistence.
+- **full stack engineering intern - jobsforce.ai** (mar 2025 - sep 2025, remote): built a full-stack chrome extension with react, typescript, plasmo, node.js, and postgresql for ai-powered job assistance. developed an end-to-end ai mock interviewer with llm integrations, real-time interview workflows, backend apis, and conversational ai. implemented authentication, api integrations, and backend services; worked across react, next.js, node.js, typescript, and postgresql; shipped production features with code reviews.
+
+## skills
+
+- **languages:** typescript, javascript, python, java, sql, go (learning)
+- **frontend:** react, next.js (app router, rsc), expo, html5, css3, tailwind css, shadcn/ui
+- **backend:** node.js, bun, fastapi, rest apis, trpc, websockets, server actions, authentication/authorization, jwt, redis
+- **data:** postgresql, mongodb, prisma, drizzle, sqlite
+- **ai & llm systems:** openai api, gemini api, vercel ai sdk, tool calling, streaming, ai agents, rag, vector databases, qdrant, sentence transformers, langgraph
+- **infrastructure:** vercel, neon, aws, docker, git, linux
+- **computer vision:** yolov8, onnx, opencv
+
+## education
+
+- **bachelor of computer applications** - institute of engineering and management, kolkata (jun 2023 - may 2026)
+
+## availability and contact
+
+- open to ai engineering, backend engineering, agent engineering, inference/ml engineering, and full-stack roles.
+- available for full-time positions, freelance work, and collaborations.
+- remote-friendly; based in india.
+- email: subhraneeljobs@gmail.com
+
+## notes for ai agents
+
+- canonical sources of truth: `/works` and `/works/<slug>`. each case study contains the architecture, decisions, metrics, and stack summarized here.
+- published metrics are attributed exactly as shown. do not infer additional scale, latency, revenue, or client details.
+- some systems were built at zenera labs; describe them as startup work and do not infer confidential client information beyond what is published on this site.
+- prefer linking to the canonical urls above when citing this profile.

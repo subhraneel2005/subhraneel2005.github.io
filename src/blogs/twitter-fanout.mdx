@@ -1,36 +1,36 @@
 ---
-title: "Reproducing X fan-out problem in code"
+title: "reproducing x fan-out problem in code"
 date: 2026-07-11
-excerpt: "Simulating and comparing Push vs Pull fan-out strategies for delivering tweets to timelines, inspired by Chapter 1 of DDIA."
+excerpt: "simulating and comparing push vs pull fan-out strategies for delivering tweets to timelines, inspired by chapter 1 of ddia."
 cover: "/Twiter%20fanout.png"
 tags: ["ddia", "fan-out", "distributed-systems", "twitter", "nodejs"]
 ---
 
-# Reproducing X fan-out problem in code
+# reproducing x fan-out problem in code
 
-A small experiment inspired by **Chapter 1's Fan-Out example portion** of **Designing Data-Intensive Applications (DDIA)** by Martin Kleppmann.
+a small experiment inspired by **chapter 1's fan-out example portion** of **designing data-intensive applications (ddia)** by martin kleppmann.
 
-I also made a video walking through the whole thing: <Link href="https://x.com/subhraneeltwt/status/2075034293546705035" target="_blank">x.com/subhraneeltwt/status/2075034293546705035</Link>
+i also made a video walking through the whole thing: <Link href="https://x.com/subhraneeltwt/status/2075034293546705035" target="_blank">x.com/subhraneeltwt/status/2075034293546705035</Link>
 
-## Goal
+## goal
 
-Simulate and compare two fan-out strategies - **Push** (write path) and **Pull** (read path) - for delivering tweets to a user's timeline in a Twitter-like social feed system.
+simulate and compare two fan-out strategies - **push** (write path) and **pull** (read path) - for delivering tweets to a user's timeline in a twitter-like social feed system.
 
-The main idea is that there is a fundamental tradeoff between write amplification and read amplification, and real-world systems often use a hybrid approach.
+the main idea is that there is a fundamental tradeoff between write amplification and read amplification, and real-world systems often use a hybrid approach.
 
-## Concepts Covered
+## concepts covered
 
-- **Push** - Writing data to all followers at tweet time
-- **Pull** - Collecting data from followed users at read time
-- **Merge** - Combining pushed and pulled data for a unified feed
-- **Scalability** - Handling millions of followers and reads
-- **Load Balancing** - Distributing fan-out work across the system
+- **push** - writing data to all followers at tweet time
+- **pull** - collecting data from followed users at read time
+- **merge** - combining pushed and pulled data for a unified feed
+- **scalability** - handling millions of followers and reads
+- **load balancing** - distributing fan-out work across the system
 
-## Architecture
+## architecture
 
-<Image src="/x-fanout/a0.png" alt="Architecture diagram of the fan-out simulation" />
+<Image src="/x-fanout/a0.png" alt="architecture diagram of the fan-out simulation" />
 
-### Models
+### models
 
 ```typescript
 import type { User } from "./User.js";
@@ -74,15 +74,15 @@ export class User {
 }
 ```
 
-### Fixtures
+### fixtures
 
-The simulation creates three kinds of users:
+the simulation creates three kinds of users:
 
-| User | Followers | Role |
+| user | followers | role |
 |---|---|---|
-| `vip` | 500,000 | High-profile author |
-| `regular` | 10 | Typical author |
-| `normalUser` | - | Consumer who follows both |
+| `vip` | 500,000 | high-profile author |
+| `regular` | 10 | typical author |
+| `normalUser` | - | consumer who follows both |
 
 ```typescript
 import { User } from "../models/User.js";
@@ -116,17 +116,17 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-## Strategies
+## strategies
 
-### Push (Write Fan-Out)
+### push (write fan-out)
 
-When an author tweets, the post is immediately written to every follower's timeline.
+when an author tweets, the post is immediately written to every follower's timeline.
 
-<Image src="/x-fanout/a1.png" alt="Push fan-out diagram" />
+<Image src="/x-fanout/a1.png" alt="push fan-out diagram" />
 
-- **Work** = number of followers.
-- **Cost**: 500,000 writes for a VIP tweet; 10 for a regular tweet.
-- **Tradeoff**: Expensive for authors with many followers (write amplification), but readers see new content instantly with zero read-time computation.
+- **work** = number of followers.
+- **cost**: 500,000 writes for a vip tweet; 10 for a regular tweet.
+- **tradeoff**: expensive for authors with many followers (write amplification), but readers see new content instantly with zero read-time computation.
 
 ```typescript
 import type { Post } from "../models/Post.js";
@@ -145,21 +145,21 @@ export class PushStrategy {
 }
 ```
 
-### Pull (Read Fan-Out)
+### pull (read fan-out)
 
-Posts live only on the author's timeline. When a user opens their feed, they iterate over everyone they follow and collect their posts.
+posts live only on the author's timeline. when a user opens their feed, they iterate over everyone they follow and collect their posts.
 
-<Image src="/x-fanout/a2.png" alt="Pull fan-out diagram" />
+<Image src="/x-fanout/a2.png" alt="pull fan-out diagram" />
 
-- **Work** = number of followed users × their posts.
-- **Cost**: Depends on how many people you follow and how many posts they've made.
-- **Tradeoff**: Cheap on writes (no fan-out needed), but expensive on reads (read amplification).
+- **work** = number of followed users × their posts.
+- **cost**: depends on how many people you follow and how many posts they've made.
+- **tradeoff**: cheap on writes (no fan-out needed), but expensive on reads (read amplification).
 
-### VIP-Only Pull Variation
+### vip-only pull variation
 
-A hybrid variant pulls only posts from VIP authors. This hints at Twitter's real-world approach: VIP (celebrity) tweets are pushed to all followers, while regular users' tweets are pulled at read time.
+a hybrid variant pulls only posts from vip authors. this hints at twitter's real-world approach: vip (celebrity) tweets are pushed to all followers, while regular users' tweets are pulled at read time.
 
-<Image src="/x-fanout/a3.png" alt="VIP-only pull diagram" />
+<Image src="/x-fanout/a3.png" alt="vip-only pull diagram" />
 
 ```typescript
 import type { User } from "../models/User.js";
@@ -193,7 +193,7 @@ export class PullStrategy {
 }
 ```
 
-### Entry Point
+### entry point
 
 ```typescript
 import { Post } from "./models/Post.js";
@@ -273,24 +273,24 @@ function runAll(){
 runAll()
 ```
 
-## What I Learned
+## what i learned
 
-### Write Amplification vs. Read Amplification
+### write amplification vs. read amplification
 
-The push strategy shifts cost to the write path. For a celebrity with 500K followers, one tweet causes 500K write operations. The pull strategy shifts cost to the read path - reading a feed means checking every followed user's posts.
+the push strategy shifts cost to the write path. for a celebrity with 500k followers, one tweet causes 500k write operations. the pull strategy shifts cost to the read path - reading a feed means checking every followed user's posts.
 
-### The Hybrid Sweet Spot
+### the hybrid sweet spot
 
-Real systems (Twitter, Instagram) use both:
-- **VIP users** → Push their tweets to a fan-out cache at write time.
-- **Regular users** → Pull tweets from followed users at read time.
-- A user's feed is then merged from both sources.
+real systems (twitter, instagram) use both:
+- **vip users** → push their tweets to a fan-out cache at write time.
+- **regular users** → pull tweets from followed users at read time.
+- a user's feed is then merged from both sources.
 
-### Strategy Pattern
+### strategy pattern
 
-The project cleanly separates the two algorithms into interchangeable strategy classes (`PushStrategy`, `PullStrategy`), making it easy to compare and swap them.
+the project cleanly separates the two algorithms into interchangeable strategy classes (`PushStrategy`, `PullStrategy`), making it easy to compare and swap them.
 
-## Example Output
+## example output
 
 ```
 SIMULATING PUSH
@@ -304,4 +304,4 @@ WORKS COUNT FOR PULL: 2
 TIMELINE SIZE: 2
 ```
 
-The push counts show the cost of writing to 10 vs. 500K followers. The pull counts reflect how many posts the consumer collects from the two authors they follow.
+the push counts show the cost of writing to 10 vs. 500k followers. the pull counts reflect how many posts the consumer collects from the two authors they follow.

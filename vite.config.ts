@@ -21,6 +21,7 @@ export default defineConfig(({mode}) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
+        'geist/font/sans': path.resolve(__dirname, './src/geist-font.ts'),
       },
     },
     server: {

@@ -1,60 +1,60 @@
 ---
-title: "Building a Self-Healing Supervisor in Node.js"
+title: "building a self-healing supervisor in node.js"
 date: 2026-06-23
-excerpt: "A simple experiment in building reliable systems — a supervisor that monitors worker processes and automatically restarts them when they fail."
+excerpt: "a simple experiment in building reliable systems - a supervisor that monitors worker processes and automatically restarts them when they fail."
 cover: "/Self%20Healing%20Supervisor.png"
 tags: ["nodejs", "reliability", "ddia", "process-supervision", "distributed-systems"]
 ---
 
-# Building a Self-Healing Supervisor in Node.js
+# building a self-healing supervisor in node.js
 
-Recently, while reading the Reliability chapter from *Designing Data-Intensive Applications* (DDIA) by Martin Kleppmann, I built a small experiment to better understand one of the core ideas of reliable systems:
+recently, while reading the reliability chapter from *designing data-intensive applications* (ddia) by martin kleppmann, i built a small experiment to better understand one of the core ideas of reliable systems:
 
-> Failures are inevitable. Systems should be designed to detect them and recover automatically.
+> failures are inevitable. systems should be designed to detect them and recover automatically.
 
-This experiment is a simple **self-healing supervisor**.
+this experiment is a simple **self-healing supervisor**.
 
-![Image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/s5uhk9ydy46d7inq0z12.png)
+![image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/s5uhk9ydy46d7inq0z12.png)
 
-The idea is straightforward: a supervisor process monitors worker processes and automatically restarts them whenever they become unhealthy.
+the idea is straightforward: a supervisor process monitors worker processes and automatically restarts them whenever they become unhealthy.
 
-In production systems, these workers could be microservices, containers, or background jobs. For this experiment, they're implemented as basic Node.js child processes.
+in production systems, these workers could be microservices, containers, or background jobs. for this experiment, they're implemented as basic node.js child processes.
 
-## How It Works
+## how it works
 
-The supervisor is intentionally kept simple.
+the supervisor is intentionally kept simple.
 
-It spawns a worker process and continuously monitors it. If the worker crashes or becomes unresponsive, the supervisor kills it and starts a new one.
+it spawns a worker process and continuously monitors it. if the worker crashes or becomes unresponsive, the supervisor kills it and starts a new one.
 
-Rather than trying to prevent failures entirely, the system assumes they will happen and focuses on recovery.
+rather than trying to prevent failures entirely, the system assumes they will happen and focuses on recovery.
 
-## Worker Types
+## worker types
 
-To simulate different real-world failure scenarios, the worker randomly starts in one of three modes:
+to simulate different real-world failure scenarios, the worker randomly starts in one of three modes:
 
-### Normal Worker
+### normal worker
 
-A healthy worker that:
+a healthy worker that:
 
-* Sends heartbeat messages every 3 seconds.
-* Performs its task.
-* Exits successfully after completion.
+* sends heartbeat messages every 3 seconds.
+* performs its task.
+* exits successfully after completion.
 
-### Hung Worker
+### hung worker
 
-A worker that appears healthy initially but later becomes unresponsive.
+a worker that appears healthy initially but later becomes unresponsive.
 
-It sends a few heartbeat messages and then stops sending them entirely by entering an infinite loop. Since no further heartbeats are received, the supervisor detects the worker as unhealthy, terminates it, and starts a replacement.
+it sends a few heartbeat messages and then stops sending them entirely by entering an infinite loop. since no further heartbeats are received, the supervisor detects the worker as unhealthy, terminates it, and starts a replacement.
 
-### Crashed Worker
+### crashed worker
 
-A worker that intentionally crashes itself.
+a worker that intentionally crashes itself.
 
-After sending a few heartbeats, it throws an error and exits with a non-zero exit code. The supervisor detects the failure and automatically restarts it.
+after sending a few heartbeats, it throws an error and exits with a non-zero exit code. the supervisor detects the failure and automatically restarts it.
 
-## Heartbeat-Based Liveness Detection
+## heartbeat-based liveness detection
 
-Workers periodically send JSON heartbeat messages:
+workers periodically send json heartbeat messages:
 
 ```json
 {
@@ -63,43 +63,43 @@ Workers periodically send JSON heartbeat messages:
 }
 ```
 
-The supervisor tracks these heartbeats to determine whether a worker is alive.
+the supervisor tracks these heartbeats to determine whether a worker is alive.
 
-If no heartbeat is received for 10 seconds, the worker is considered unhealthy and is terminated. This mechanism allows the supervisor to detect not only crashes but also hung processes that are still running but no longer making progress.
+if no heartbeat is received for 10 seconds, the worker is considered unhealthy and is terminated. this mechanism allows the supervisor to detect not only crashes but also hung processes that are still running but no longer making progress.
 
-![Image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/x0y0ou6l9pqc5ez5cz0g.png)
+![image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/x0y0ou6l9pqc5ez5cz0g.png)
 
-## Retry and Recovery
+## retry and recovery
 
-The supervisor includes a simple retry mechanism:
+the supervisor includes a simple retry mechanism:
 
-* Waits 1 second before restarting a failed worker.
-* Limits recovery attempts to 10 consecutive failures.
-* Resets the retry counter whenever a worker exits successfully.
+* waits 1 second before restarting a failed worker.
+* limits recovery attempts to 10 consecutive failures.
+* resets the retry counter whenever a worker exits successfully.
 
-This prevents endless restart loops while still allowing recovery from transient failures.
+this prevents endless restart loops while still allowing recovery from transient failures.
 
-![Image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/kyei21d48zaiious1l97.png)
+![image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/kyei21d48zaiious1l97.png)
 
-## What I Learned
+## what i learned
 
-This experiment reinforced a key reliability principle from DDIA:
+this experiment reinforced a key reliability principle from ddia:
 
-A system does not need to eliminate every failure. Instead, it should be able to detect failures quickly and recover automatically.
+a system does not need to eliminate every failure. instead, it should be able to detect failures quickly and recover automatically.
 
-It also provided a practical understanding of:
+it also provided a practical understanding of:
 
-* OS processes and parent-child relationships
-* Process supervision
-* Heartbeat-based liveness detection
-* Failure recovery strategies
-* Restart limits and backoff mechanisms
+* os processes and parent-child relationships
+* process supervision
+* heartbeat-based liveness detection
+* failure recovery strategies
+* restart limits and backoff mechanisms
 
-The supervisor itself is intentionally "dumb". It only monitors health and restarts workers when necessary. Interestingly, that simplicity is often a strength. A small, predictable supervisor can be more reliable than a complex one.
+the supervisor itself is intentionally "dumb". it only monitors health and restarts workers when necessary. interestingly, that simplicity is often a strength. a small, predictable supervisor can be more reliable than a complex one.
 
-Thanks for reading :)
+thanks for reading :)
 
-Github Repo: <Link href="https://github.com/subhraneel2005/ddia-lab" target="_blank" alt="ddia-lab repository">subhraneel2005/ddia-lab</Link>
+github repo: <Link href="https://github.com/subhraneel2005/ddia-lab" target="_blank" alt="ddia-lab repository">subhraneel2005/ddia-lab</Link>
 
 <Link href="https://github.com/subhraneel2005/ddia-lab" target="_blank" alt="ddia-lab repository">
   <Image src="https://socialify.git.ci/subhraneel2005/ddia-lab/image" alt="ddia-lab repo social preview" />
